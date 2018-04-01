@@ -1,0 +1,8 @@
+<h1><%= @recipe.name %></h1>
+
+<label>Hops</label>
+<% @recipe.hops.each do |hop| %>
+    <ul>
+      <li><%= hop.name %></li>
+    </ul>
+<% end %>

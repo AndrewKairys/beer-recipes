@@ -3,6 +3,6 @@ Rails.application.routes.draw do
 
   root to: "recipes#index"
 
-  resources :fermentables, :hops, :recipes, :recipe_ingredients, :yeasts
+  resources :fermentables, :hops, :recipes, :recipe_fermentables, :recipe_hops, :recipe_yeasts, :yeasts
 
 end
