@@ -1,0 +1,2 @@
+class FermentablesController < ApplicationController
+end

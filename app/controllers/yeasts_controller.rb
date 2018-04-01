@@ -1,0 +1,2 @@
+class YeastsController < ApplicationController
+end

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  amount: 1
+  pound_per_gallon: 9.99
+  lovibond: 9.99
+  diastatic_power: 1
+
+two:
+  name: MyString
+  amount: 1
+  pound_per_gallon: 9.99
+  lovibond: 9.99
+  diastatic_power: 1
