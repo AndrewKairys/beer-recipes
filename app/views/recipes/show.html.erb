@@ -1,8 +1,28 @@
 <h1><%= @recipe.name %></h1>
 
+<h3>Created By: <%= @recipe.user.name %></h3>
+
 <label>Hops</label>
 <% @recipe.hops.each do |hop| %>
     <ul>
       <li><%= hop.name %></li>
+    </ul>
+<% end %>
+
+<br>
+
+<label>Fermentables</label>
+<% @recipe.fermentables.each do |fermentable| %>
+    <ul>
+      <li><%= fermentable.name %></li>
+    </ul>
+<% end %>
+
+<br>
+
+<label>Yeast</label>
+<% @recipe.yeasts.each do |yeast| %>
+    <ul>
+      <li><%= yeast.brand %></li>
     </ul>
 <% end %>

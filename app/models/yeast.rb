@@ -1,4 +1,4 @@
 class Yeast < ApplicationRecord
-  has_many :recipe_ingredients
-  has_many :recipes, through: recipe_ingredients
+  has_many :recipe_yeasts
+  has_many :recipes, through: :recipe_yeasts
 end
