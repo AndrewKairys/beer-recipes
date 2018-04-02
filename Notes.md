@@ -52,3 +52,21 @@ Migrations
     -hop_id
     -fermentable_id
     -yeast_id
+
+1. Create form for making a new recipe
+    -Creates a new recipe
+      -Auto user_id
+    -Route: will want nested eventually
+      -Get '/recipes/new' new_recipe_path
+      -Post '/recipes'
+    -Has form for fermentables, hops, and yeasts
+      -First or Create new fermentables, hops, and yeasts
+      -Drop down with options would be nice
+      -Automatically creates and assigns ingredients as recipe_fermentables, recipe_hops, recipe_yeasts.
+    -Has submit button
+
+2. Validations
+
+3. User Show page with all their recipes
+
+4. OmniAuth
