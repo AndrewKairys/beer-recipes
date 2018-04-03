@@ -56,7 +56,7 @@ Migrations
 1. Create form for making a new recipe
     -Creates a new recipe
       -Auto user_id
-    -Route: will want nested eventually
+    -Route:
       -Get '/recipes/new' new_recipe_path
       -Post '/recipes'
     -Has form for fermentables, hops, and yeasts

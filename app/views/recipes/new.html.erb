@@ -1,10 +1,52 @@
 <h1>New Recipe</h1>
 
+
+
 <%= form_for @recipe do |f| %>
+  <% if @recipe.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@recipe.errors.count, "error") %>
+        prohibited this post from being saved:
+      </h2>
+
+      <ul>
+      <% @recipe.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <%= f.label "Name:" %>
   <%= f.text_field :name %><br>
-  <%= f.label "Boil Time:" %>
-  <%= f.text_field :boil_time %>
+  <%= f.label "Boil Time (min):" %>
+  <%= f.number_field :boil_time %><br></br>
+
+  <%= f.label "Fermentables:" %>
+  <%= f.collection_check_boxes :fermentable_ids, Fermentable.all, :id, :name %><br>
+
+  <%= f.fields_for :fermentables do |fermentable_builder| %>
+    <%= fermentable_builder.label "New Fermentable Name:" %>
+    <%= fermentable_builder.text_field :name %>
+  <% end %><br>
+
+  <%= f.label "Hops:" %>
+  <%= f.collection_check_boxes :hop_ids, Hop.all, :id, :name %><br>
+
+  <%= f.fields_for :hops do |hops_builder| %>
+    <%= hops_builder.label "New Hop Name:" %>
+    <%= hops_builder.text_field :name %>
+  <% end %><br>
+
+
+  <%= f.label "Yeasts:" %>
+  <%= f.collection_check_boxes :yeast_ids, Yeast.all, :id, :variety %><br>
+
+  <%= f.fields_for :yeasts do |yeast_builder| %>
+    <%= yeast_builder.label "New Yeast Variety:" %>
+    <%= yeast_builder.text_field :variety %>
+  <% end %><br>
 
   <br></br>
   <%= f.submit %>
