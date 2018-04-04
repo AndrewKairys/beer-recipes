@@ -1,7 +1,5 @@
 <h1>New Recipe</h1>
 
-
-
 <%= form_for @recipe do |f| %>
   <% if @recipe.errors.any? %>
     <div id="error_explanation">
@@ -22,31 +20,49 @@
   <%= f.text_field :name %><br>
   <%= f.label "Boil Time (min):" %>
   <%= f.number_field :boil_time %><br></br>
+  <section>
+    <h3>Fermentables</h3>
+    <%= fields_for(@recipe_fermentable) do |rb| %>
+      <%= rb.label "Fermentables:" %>
+      <%= collection_select(:fermentables, :id, Fermentable.all.sort_by { |f| f.name }, :id, :name, {}, {:multiple => true} ) %>
+    <% end %><br>
 
-  <%= f.label "Fermentables:" %>
-  <%= f.collection_check_boxes :fermentable_ids, Fermentable.all, :id, :name %><br>
+    <%= f.fields_for :fermentables do |fermentable_builder| %>
+      <%= fermentable_builder.label "New Fermentable Name:" %>
+      <%= fermentable_builder.text_field :name %>
+    <% end %><br>
+  </section>
 
-  <%= f.fields_for :fermentables do |fermentable_builder| %>
-    <%= fermentable_builder.label "New Fermentable Name:" %>
-    <%= fermentable_builder.text_field :name %>
-  <% end %><br>
+  <section>
+    <h3>Hops</h3>
+    <%= fields_for(@recipe_hop) do |rh| %>
+      <%= rh.label "Hops:" %>
+      <%= collection_select(:hops, :id, Hop.all.sort_by { |f| f.name }, :id, :name, {}, {:multiple => true} ) %>
+    <% end %><br>
 
-  <%= f.label "Hops:" %>
-  <%= f.collection_check_boxes :hop_ids, Hop.all, :id, :name %><br>
+    <%= f.fields_for :hops do |hops_builder| %>
+      <%= hops_builder.label "New Hop Name:" %>
+      <%= hops_builder.text_field :name %>
+    <% end %><br>
+  </section>
 
-  <%= f.fields_for :hops do |hops_builder| %>
-    <%= hops_builder.label "New Hop Name:" %>
-    <%= hops_builder.text_field :name %>
-  <% end %><br>
+  <section>
+    <h3>Yeast</h3>
+    <%= f.label "Yeasts:" %>
+    <%= f.collection_check_boxes :yeast_ids, Yeast.all, :id, :variety %><br>
 
+    <%= fields_for(@recipe_yeast) do |ry| %>
+      <%= ry.label "Yeasts:" %>
+      <%= collection_select(:yeasts, :id, Yeast.all.sort_by { |f| f.variety }, :id, :variety, {}, {:multiple => true} ) %>
+    <% end %><br>
 
-  <%= f.label "Yeasts:" %>
-  <%= f.collection_check_boxes :yeast_ids, Yeast.all, :id, :variety %><br>
-
-  <%= f.fields_for :yeasts do |yeast_builder| %>
-    <%= yeast_builder.label "New Yeast Variety:" %>
-    <%= yeast_builder.text_field :variety %>
-  <% end %><br>
+    <%= f.fields_for :yeasts do |yeast_builder| %>
+      <%= yeast_builder.label "New Yeast Brand:" %>
+      <%= yeast_builder.text_field :brand %><br>
+      <%= yeast_builder.label "New Yeast Variety:" %>
+      <%= yeast_builder.text_field :variety %>
+    <% end %><br>
+  </section>
 
   <br></br>
   <%= f.submit %>

@@ -10,4 +10,6 @@ class Recipe < ApplicationRecord
   accepts_nested_attributes_for :fermentables, reject_if: lambda {|attributes| attributes['name'].blank?}
   accepts_nested_attributes_for :hops, reject_if: lambda {|attributes| attributes['name'].blank?}
   accepts_nested_attributes_for :yeasts, reject_if: lambda {|attributes| attributes['variety'].blank?}
+
+  validates :name, presence: true
 end

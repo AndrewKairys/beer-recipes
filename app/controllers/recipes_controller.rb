@@ -14,15 +14,20 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
+
+    @recipe_fermentable = @recipe.recipe_fermentables.build
+    @recipe_hop = @recipe.recipe_hops.build
+    @recipe_yeast = @recipe.recipe_yeasts.build
+
     @recipe.fermentables.build
     @recipe.hops.build
     @recipe.yeasts.build
   end
 
   def create
-    recipe = Recipe.new(recipe_params)
-    recipe.user = current_user
-    if recipe.save
+    @recipe = Recipe.new(recipe_params)
+    @recipe.user = current_user
+    if @recipe.save
       redirect_to recipes_path
     else
       render new_recipe_path
