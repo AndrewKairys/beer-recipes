@@ -29,7 +29,7 @@ class RecipesController < ApplicationController
     @recipe.user = current_user
 
     if @recipe.save
-      redirect_to recipes_path
+      redirect_to recipe_path(@recipe)
     else
       redirect_to new_recipe_path #This won't render errors
     end

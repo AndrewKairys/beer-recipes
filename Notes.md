@@ -53,22 +53,28 @@ Migrations
     -fermentable_id
     -yeast_id
 
-1. Create form for making a new recipe
-    -Creates a new recipe
-      -Auto user_id
-    -Route:
-      -Get '/recipes/new' new_recipe_path
-      -Post '/recipes'
-    -Has form for fermentables, hops, and yeasts
-      -First or Create new fermentables, hops, and yeasts
-      -Drop down with options would be nice
-      -Automatically creates and assigns ingredients as recipe_fermentables, recipe_hops, recipe_yeasts.
-    -Has submit button
+1. [] Create form for making a new recipe
+     [X]-Creates a new recipe
+        -Auto user_id ***Manually sets it in conrtoller right now***
+     [X]-Route:
+        -Get '/recipes/new' new_recipe_path
+        -Post '/recipes'
+     [X]-Has form for fermentables, hops, and yeasts
+        -First or Create new fermentables, hops, and yeasts
+        -Drop down with options would be nice ***Will have to wait for JS to make this exactly how I want***
+        -Automatically creates and assigns ingredients as recipe_fermentables, recipe_hops, recipe_yeasts.
+     [X]-Has submit button
 
-1. (a) Edit page for recipe
+2. [] Edit page for recipe
 
-2. Validations
+3. [] Validations ***Mostly there. Need to check if I want to validated anything else***
+      [] -Need to display errors
 
-3. User Show page with all their recipes
+4. [X] User Show page with all their recipes
 
-4. OmniAuth
+5. [] OmniAuth
+
+6. [] Destroy method
+      [] -If a recipe is destroyed, all recipe ingredients must go as well.
+
+7. [] Authorization

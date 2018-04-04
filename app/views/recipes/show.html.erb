@@ -3,29 +3,33 @@
 <h3>Created By: <%= @recipe.user.name %></h3>
 
 <label>Fermentables</label>
-<% @recipe.fermentables.each do |fermentable| %>
+<% @recipe.recipe_fermentables.each do |recipe_fermentable| %>
     <ul>
-      <li><%= fermentable.name %></li>
+      <li><%= recipe_fermentable.fermentable.name %></li>
     </ul>
 <% end %>
 
 <br>
 
 <label>Hops</label>
-<% @recipe.hops.each do |hop| %>
+<% @recipe.recipe_hops.each do |recipe_hop| %>
     <ul>
-      <li><%= hop.name %></li>
+      <li><%= recipe_hop.hop.name %></li>
     </ul>
 <% end %>
 
 <br>
 
 <label>Yeast</label>
-<% @recipe.yeasts.each do |yeast| %>
+<% @recipe.recipe_yeasts.each do |recipe_yeast| %>
     <ul>
-      <li><%= yeast.brand %></li>
+      <li><%= recipe_yeast.yeast.brand %></li>
       <ul>
-        <li><%= yeast.variety %></li>
+        <li><%= recipe_yeast.yeast.variety %></li>
       </ul>
     </ul>
+<% end %>
+
+<% if @recipe.user == current_user %>
+  <p>edit</p>
 <% end %>

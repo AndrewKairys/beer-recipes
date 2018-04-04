@@ -5,4 +5,6 @@ Rails.application.routes.draw do
 
   resources :fermentables, :hops, :recipes, :recipe_fermentables, :recipe_hops, :recipe_yeasts, :yeasts
 
+  resources :users, :only => [:show]
+
 end
