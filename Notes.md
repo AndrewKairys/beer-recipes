@@ -65,7 +65,7 @@ Migrations
         -Automatically creates and assigns ingredients as recipe_fermentables, recipe_hops, recipe_yeasts.
      [X]-Has submit button
 
-2. [] Edit page for recipe
+2. [X] Edit page for recipe
 
 3. [] Validations ***Mostly there. Need to check if I want to validated anything else***
       [] -Need to display errors
@@ -78,3 +78,5 @@ Migrations
       [] -If a recipe is destroyed, all recipe ingredients must go as well.
 
 7. [] Authorization
+
+8. [] Use partials for recipe edit and new page

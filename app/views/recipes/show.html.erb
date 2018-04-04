@@ -31,5 +31,5 @@
 <% end %>
 
 <% if @recipe.user == current_user %>
-  <p>edit</p>
+  <%= link_to "Edit Recipe", edit_recipe_path(@recipe) %>
 <% end %>
