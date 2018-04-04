@@ -22,9 +22,10 @@
   <%= f.number_field :boil_time %><br></br>
   <section>
     <h3>Fermentables</h3>
+
     <%= fields_for(@recipe_fermentable) do |rb| %>
       <%= rb.label "Fermentables:" %>
-      <%= collection_select(:fermentables, :id, Fermentable.all.sort_by { |f| f.name }, :id, :name, {}, {:multiple => true} ) %>
+      <%= collection_select(:recipe, :fermentable_ids, Fermentable.all.sort_by { |f| f.name }, :id, :name, {}, {:multiple => true} ) %>
     <% end %><br>
 
     <%= f.fields_for :fermentables do |fermentable_builder| %>
@@ -37,7 +38,7 @@
     <h3>Hops</h3>
     <%= fields_for(@recipe_hop) do |rh| %>
       <%= rh.label "Hops:" %>
-      <%= collection_select(:hops, :id, Hop.all.sort_by { |f| f.name }, :id, :name, {}, {:multiple => true} ) %>
+      <%= collection_select(:recipe, :hop_ids, Hop.all.sort_by { |f| f.name }, :id, :name, {}, {:multiple => true} ) %>
     <% end %><br>
 
     <%= f.fields_for :hops do |hops_builder| %>
@@ -48,12 +49,9 @@
 
   <section>
     <h3>Yeast</h3>
-    <%= f.label "Yeasts:" %>
-    <%= f.collection_check_boxes :yeast_ids, Yeast.all, :id, :variety %><br>
-
     <%= fields_for(@recipe_yeast) do |ry| %>
       <%= ry.label "Yeasts:" %>
-      <%= collection_select(:yeasts, :id, Yeast.all.sort_by { |f| f.variety }, :id, :variety, {}, {:multiple => true} ) %>
+      <%= collection_select(:recipe, :yeast_ids, Yeast.all.sort_by { |f| f.variety }, :id, :variety, {}, {:multiple => true} ) %>
     <% end %><br>
 
     <%= f.fields_for :yeasts do |yeast_builder| %>

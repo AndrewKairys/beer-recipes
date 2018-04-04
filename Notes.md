@@ -65,7 +65,7 @@ Migrations
       -Automatically creates and assigns ingredients as recipe_fermentables, recipe_hops, recipe_yeasts.
     -Has submit button
 
-1.1 Edit page for recipe
+1. (a) Edit page for recipe
 
 2. Validations
 

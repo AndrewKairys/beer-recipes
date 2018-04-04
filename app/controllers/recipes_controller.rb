@@ -25,8 +25,10 @@ class RecipesController < ApplicationController
   end
 
   def create
+    # raise params.inspect
     @recipe = Recipe.new(recipe_params)
     @recipe.user = current_user
+    binding.pry
     if @recipe.save
       redirect_to recipes_path
     else
@@ -45,7 +47,7 @@ class RecipesController < ApplicationController
                                      :hop_ids => [],
                                      :hops_attributes => [:name],
                                      :yeast_ids => [],
-                                     :yeasts_attributes => [:variety]
+                                     :yeasts_attributes => [:brand, :variety]
                                    )
     end
 
