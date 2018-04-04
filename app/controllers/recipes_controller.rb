@@ -15,9 +15,9 @@ class RecipesController < ApplicationController
   def new
     @recipe = Recipe.new
 
-    @recipe_fermentable = @recipe.recipe_fermentables.build
-    @recipe_hop = @recipe.recipe_hops.build
-    @recipe_yeast = @recipe.recipe_yeasts.build
+    @hops = Hop.all
+    @yeasts = Yeast.all
+    @fermentables = Fermentable.all
 
     @recipe.fermentables.build
     @recipe.hops.build
@@ -25,14 +25,13 @@ class RecipesController < ApplicationController
   end
 
   def create
-    # raise params.inspect
     @recipe = Recipe.new(recipe_params)
     @recipe.user = current_user
-    binding.pry
+
     if @recipe.save
       redirect_to recipes_path
     else
-      render new_recipe_path
+      redirect_to new_recipe_path #This won't render errors
     end
 
   end

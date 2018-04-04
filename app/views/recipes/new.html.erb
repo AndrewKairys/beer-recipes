@@ -20,46 +20,47 @@
   <%= f.text_field :name %><br>
   <%= f.label "Boil Time (min):" %>
   <%= f.number_field :boil_time %><br></br>
+
   <section>
     <h3>Fermentables</h3>
 
-    <%= fields_for(@recipe_fermentable) do |rb| %>
-      <%= rb.label "Fermentables:" %>
-      <%= collection_select(:recipe, :fermentable_ids, Fermentable.all.sort_by { |f| f.name }, :id, :name, {}, {:multiple => true} ) %>
-    <% end %><br>
-
     <%= f.fields_for :fermentables do |fermentable_builder| %>
+      <%= fermentable_builder.label "Fermentables:" %>
+      <%= collection_select(:recipe, :fermentable_ids, @fermentables.sort_by { |f| f.name }, :id, :name, {}, {:multiple => true} ) %><br>
+
       <%= fermentable_builder.label "New Fermentable Name:" %>
       <%= fermentable_builder.text_field :name %>
     <% end %><br>
+
   </section>
 
   <section>
     <h3>Hops</h3>
-    <%= fields_for(@recipe_hop) do |rh| %>
-      <%= rh.label "Hops:" %>
-      <%= collection_select(:recipe, :hop_ids, Hop.all.sort_by { |f| f.name }, :id, :name, {}, {:multiple => true} ) %>
-    <% end %><br>
 
     <%= f.fields_for :hops do |hops_builder| %>
+      <%= hops_builder.label "Hops:" %>
+      <%= collection_select(:recipe, :hop_ids, @hops.sort_by { |f| f.name }, :id, :name, {}, {:multiple => true} ) %><br>
+
       <%= hops_builder.label "New Hop Name:" %>
       <%= hops_builder.text_field :name %>
     <% end %><br>
+
   </section>
 
   <section>
     <h3>Yeast</h3>
-    <%= fields_for(@recipe_yeast) do |ry| %>
-      <%= ry.label "Yeasts:" %>
-      <%= collection_select(:recipe, :yeast_ids, Yeast.all.sort_by { |f| f.variety }, :id, :variety, {}, {:multiple => true} ) %>
-    <% end %><br>
 
     <%= f.fields_for :yeasts do |yeast_builder| %>
+      <%= yeast_builder.label "Yeasts:" %>
+      <%= collection_select(:recipe, :yeast_ids, @yeasts.all.sort_by { |f| f.variety }, :id, :variety, {}, {:multiple => true} ) %><br>
+
       <%= yeast_builder.label "New Yeast Brand:" %>
       <%= yeast_builder.text_field :brand %><br>
+
       <%= yeast_builder.label "New Yeast Variety:" %>
       <%= yeast_builder.text_field :variety %>
     <% end %><br>
+
   </section>
 
   <br></br>
