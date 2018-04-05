@@ -57,6 +57,16 @@ class RecipesController < ApplicationController
     end
   end
 
+  def destroy
+    recipe = Recipe.find(params[:id])
+    recipe.recipe_fermentables.destroy_all
+    recipe.recipe_hops.destroy_all
+    recipe.recipe_yeasts.destroy_all
+    recipe.destroy
+
+    redirect_to user_path
+  end
+
   private
 
     def recipe_params

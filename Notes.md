@@ -74,8 +74,8 @@ Migrations
 
 5. [] OmniAuth
 
-6. [] Destroy method
-      [] -If a recipe is destroyed, all recipe ingredients must go as well.
+6. [X] Destroy method
+      [X] -If a recipe is destroyed, all recipe ingredients must go as well.
 
 7. [] Authorization
 
@@ -93,3 +93,4 @@ Migrations
           -Add this to new and edit forms
 
 Last [] Refactor
+          -Before action in controllers. Set up find method.
