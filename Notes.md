@@ -64,33 +64,24 @@ Migrations
         -Drop down with options would be nice ***Will have to wait for JS to make this exactly how I want***
         -Automatically creates and assigns ingredients as recipe_fermentables, recipe_hops, recipe_yeasts.
      [X]-Has submit button
-
 2. [X] Edit page for recipe
-
 3. [X] Validations
       [X] -Need to display errors
-
 4. [X] User Show page with all their recipes
-
-5. [] OmniAuth
-
+5. [X] OmniAuth
 6. [X] Destroy method
       [X] -If a recipe is destroyed, all recipe ingredients must go as well.
-
 7. [] Authorization
-
 8. [] Use partials for recipe edit and new page
-
-9. [] Change ingredient attributes to join table
+9. [X] Change ingredient attributes to join table
         -Fermentables - amount
         -Hops addition_time, amount
-
 10. [] CSS styling of all error messaages
         -Currently only recipe name has css (automatic div tag only created on name)
-
-11. [] Add style model
+11. [X] Add style model
         -Give style attribute to recipe
           -Add this to new and edit forms
-
-Last [] Refactor
+12. [] Get rid of inline css
+13. [] Bootstrap the styling
+Last. [] Refactor
           -Before action in controllers. Set up find method.

@@ -10,11 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180405174656) do
+ActiveRecord::Schema.define(version: 20180405215923) do
 
   create_table "fermentables", force: :cascade do |t|
     t.string "name"
-    t.integer "amount"
     t.decimal "pound_per_gallon"
     t.decimal "lovibond"
     t.integer "diastatic_power"
@@ -24,9 +23,7 @@ ActiveRecord::Schema.define(version: 20180405174656) do
 
   create_table "hops", force: :cascade do |t|
     t.string "name"
-    t.decimal "amount"
     t.integer "alpha_acids"
-    t.integer "addition_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -36,6 +33,7 @@ ActiveRecord::Schema.define(version: 20180405174656) do
     t.integer "fermentable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "amount"
   end
 
   create_table "recipe_hops", force: :cascade do |t|
@@ -43,6 +41,8 @@ ActiveRecord::Schema.define(version: 20180405174656) do
     t.integer "hop_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "amount"
+    t.integer "addition_time"
   end
 
   create_table "recipe_yeasts", force: :cascade do |t|
@@ -58,6 +58,13 @@ ActiveRecord::Schema.define(version: 20180405174656) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.integer "style_id"
+  end
+
+  create_table "styles", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

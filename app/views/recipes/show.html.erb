@@ -2,25 +2,24 @@
 
 <h3>Created By: <%= @recipe.user.name %></h3>
 
-<label>Fermentables</label>
+<h4>Style</h4>
+<%= @recipe.style.name %>
+
+<h4>Fermentables</h4>
 <% @recipe.recipe_fermentables.each do |recipe_fermentable| %>
     <ul>
       <li><%= recipe_fermentable.fermentable.name %></li>
     </ul>
 <% end %>
 
-<br>
-
-<label>Hops</label>
+<h4>Hops</h4>
 <% @recipe.recipe_hops.each do |recipe_hop| %>
     <ul>
       <li><%= recipe_hop.hop.name %></li>
     </ul>
 <% end %>
 
-<br>
-
-<label>Yeast</label>
+<h4>Yeast</h4>
 <% @recipe.recipe_yeasts.each do |recipe_yeast| %>
     <ul>
       <li><%= recipe_yeast.yeast.brand %></li>

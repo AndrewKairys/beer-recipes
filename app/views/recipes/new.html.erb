@@ -19,7 +19,15 @@
   <%= f.label "Name:" %>
   <%= f.text_field :name %><br>
   <%= f.label "Boil Time (min):" %>
-  <%= f.number_field :boil_time %><br></br>
+  <%= f.number_field :boil_time %><br>
+
+  <%= f.label "Style:" %>
+  <%= f.collection_select(:style_id, @styles.sort_by { |f| f.name }, :id, :name, include_blank: true) %><br>
+  
+  <%= f.fields_for current_user do |ff|%>
+    <%= ff.label "Brewhouse Efficiency Percentage:" %>
+    <%= ff.number_field :efficiency %><br>
+  <% end %>
 
   <section>
     <h3>Fermentables</h3>
@@ -29,7 +37,7 @@
         <%= b.label(class: "check_box") do %>
           <div class="col-xs-4">
             <%= b.check_box(class: "check_box") %>
-            <div style="text-decoration: underline; display: inline;">
+            <div style="font-weight: bold; display: inline;">
               <%= b.object.name %>
             </div>
             <label>| PPG:</label>

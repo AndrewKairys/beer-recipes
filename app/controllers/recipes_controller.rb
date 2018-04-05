@@ -14,6 +14,7 @@ class RecipesController < ApplicationController
     @hops = Hop.all
     @yeasts = Yeast.all
     @fermentables = Fermentable.all
+    @styles = Style.all
 
     @recipe.fermentables.build
     @recipe.hops.build
@@ -22,7 +23,10 @@ class RecipesController < ApplicationController
 
   def create
     @recipe = Recipe.new(recipe_params)
+    current_user.efficiency = params[:recipe][:user][:efficiency]
+    current_user.save
     @recipe.user = current_user
+    @recipe.style = Style.find(params[:recipe][:style_id])
 
     if @recipe.save
       redirect_to recipe_path(@recipe)
@@ -38,6 +42,7 @@ class RecipesController < ApplicationController
     @hops = Hop.all
     @yeasts = Yeast.all
     @fermentables = Fermentable.all
+    @styles = Style.all
 
     @recipe.fermentables.build
     @recipe.hops.build
@@ -68,6 +73,8 @@ class RecipesController < ApplicationController
     def recipe_params
       params.require(:recipe).permit(:name,
                                      :boil_time,
+                                     :user_id,
+                                     :style_id,
                                      :fermentable_ids => [],
                                      :fermentables_attributes => [:name, :pound_per_gallon, :lovibond, :diastatic_power],
                                      :hop_ids => [],
