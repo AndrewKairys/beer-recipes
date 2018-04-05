@@ -1,3 +1,4 @@
+#Maybe delete all these methods and routes or make it admin only.
 class FermentablesController < ApplicationController
   def show
     @fermentable = Fermentable.find(params[:id])
