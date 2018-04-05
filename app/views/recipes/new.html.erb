@@ -29,16 +29,31 @@
         <%= b.label(class: "check_box") do %>
           <div class="col-xs-4">
             <%= b.check_box(class: "check_box") %>
-            <%= b.object.name %>
+            <div style="text-decoration: underline; display: inline;">
+              <%= b.object.name %>
+            </div>
+            <label>| PPG:</label>
+            <%= b.object.pound_per_gallon %>
+            <label>| Lovibond:</label>
+            <%= b.object.lovibond %>
+            <label>| DP:</label>
+            <%= b.object.diastatic_power %>
           </div>
         <% end %>
       </div>
-    <% end %><br>
+    <% end %>
 
-    <label>New Fermentable Name:</label>
-    <input type="text" name="recipe[fermentables_attributes][][name]" >
+    <h4>Add a new fermentable to your recipe</h4>
+    <label>Name:</label>
+    <input type="text" name="recipe[fermentables_attributes][][name]">
+    <label>PPG:</label>
+    <input type="text" name="recipe[fermentables_attributes][][pound_per_gallon]">
+    <label>Lovibond:</label>
+    <input type="text" name="recipe[fermentables_attributes][][lovibond]">
+    <label>DP:</label>
+    <input type="text" name="recipe[fermentables_attributes][][diastatic_power]" >
 
-  </section>
+  </section><br>
 
   <section>
     <h3>Hops</h3>
@@ -52,10 +67,13 @@
           </div>
         <% end %>
       </div>
-    <% end %><br>
+    <% end %>
 
-    <label>New Hop Name:</label>
-    <input type="text" name="recipe[hops_attributes][][name]" >
+    <h4>Add a new hop variety to your recipe</h4>
+    <label>Name:</label>
+    <input type="text" name="recipe[hops_attributes][][name]">
+    <label>AA:</label>
+    <input type="text" name="recipe[hops_attributes][][alpha_acids]">
 
   </section>
 
@@ -73,11 +91,11 @@
       </div>
     <% end %><br>
 
-    <label>New Yeast Brand:</label>
-    <input type="text" name="recipe[yeasts_attributes][][brand]" ><br>
-
-    <label>New Yeast Name:</label>
-    <input type="text" name="recipe[yeasts_attributes][][variety]" >
+    <h4>Add new yeast to your recipe</h4>
+    <label>Brand:</label>
+    <input type="text" name="recipe[yeasts_attributes][][brand]">
+    <label>Variety:</label>
+    <input type="text" name="recipe[yeasts_attributes][][variety]">
 
   </section>
 

@@ -67,8 +67,8 @@ Migrations
 
 2. [X] Edit page for recipe
 
-3. [] Validations ***Mostly there. Need to check if I want to validated anything else***
-      [] -Need to display errors
+3. [X] Validations
+      [X] -Need to display errors
 
 4. [X] User Show page with all their recipes
 
@@ -80,3 +80,16 @@ Migrations
 7. [] Authorization
 
 8. [] Use partials for recipe edit and new page
+
+9. [] Change ingredient attributes to join table
+        -Fermentables - amount
+        -Hops addition_time, amount
+
+10. [] CSS styling of all error messaages
+        -Currently only recipe name has css (automatic div tag only created on name)
+
+11. [] Add style model
+        -Give style attribute to recipe
+          -Add this to new and edit forms
+
+Last [] Refactor

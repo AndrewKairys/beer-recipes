@@ -4,4 +4,5 @@ class Hop < ApplicationRecord
 
   validates :name, uniqueness: true
   validates :name, presence: true
+  validates :alpha_acids, presence: true
 end

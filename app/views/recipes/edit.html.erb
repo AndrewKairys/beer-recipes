@@ -1,4 +1,4 @@
-<h1>Edit Recipe</h1>
+<h1>Edit <%= @recipe.name %></h1>
 
 <%= form_for @recipe do |f| %>
   <% if @recipe.errors.any? %>
@@ -35,8 +35,15 @@
       </div>
     <% end %><br>
 
-    <label>New Fermentable Name:</label>
-    <input type="text" name="recipe[fermentables_attributes][][name]" >
+    <h4>Add a new fermentable to your recipe</h4>
+    <label>Name:</label>
+    <input type="text" name="recipe[fermentables_attributes][][name]">
+    <label>PPG:</label>
+    <input type="text" name="recipe[fermentables_attributes][][pound_per_gallon]">
+    <label>Lovibond:</label>
+    <input type="text" name="recipe[fermentables_attributes][][lovibond]">
+    <label>DP:</label>
+    <input type="text" name="recipe[fermentables_attributes][][diastatic_power]" >
 
   </section>
 
@@ -54,8 +61,11 @@
       </div>
     <% end %><br>
 
-    <label>New Hop Name:</label>
-    <input type="text" name="recipe[hops_attributes][][name]" >
+    <h4>Add a new hop variety to your recipe</h4>
+    <label>Name:</label>
+    <input type="text" name="recipe[hops_attributes][][name]">
+    <label>AA:</label>
+    <input type="text" name="recipe[hops_attributes][][alpha_acids]">
 
   </section>
 
@@ -67,16 +77,17 @@
         <%= b.label(class: "check_box") do %>
           <div class="col-xs-4">
             <%= b.check_box(class: "check_box") %>
+            <%= b.object.brand %> |
             <%= b.object.variety %>
           </div>
         <% end %>
       </div>
     <% end %><br>
 
-    <label>New Yeast Brand:</label>
-    <input type="text" name="recipe[yeasts_attributes][][brand]" ><br>
-
-    <label>New Yeast Name:</label>
+    <h4>Add new yeast to your recipe</h4>
+    <label>Brand:</label>
+    <input type="text" name="recipe[yeasts_attributes][][brand]" >
+    <label>Variety:</label>
     <input type="text" name="recipe[yeasts_attributes][][variety]" >
 
   </section>

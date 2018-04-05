@@ -1,0 +1,12 @@
+<%= @fermentable.name %>
+<%= @fermentable.lovibond %>
+
+<%= form_for @fermentable do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %><br>
+
+  <%= f.label :lovibond %>
+  <%= f.number_field :lovibond, class: :text_field, step: :any %><br>
+
+  <%= f.submit %>
+<% end %>

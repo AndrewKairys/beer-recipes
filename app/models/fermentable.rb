@@ -4,4 +4,7 @@ class Fermentable < ApplicationRecord
 
   validates :name, uniqueness: true
   validates :name, presence: true
+  validates :pound_per_gallon, presence: true
+  validates :lovibond, presence: true
+  validates :diastatic_power, presence: true
 end

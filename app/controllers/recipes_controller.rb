@@ -31,7 +31,7 @@ class RecipesController < ApplicationController
     if @recipe.save
       redirect_to recipe_path(@recipe)
     else
-      redirect_to new_recipe_path #This won't render errors
+      render 'recipes/new'
     end
 
   end
@@ -50,9 +50,11 @@ class RecipesController < ApplicationController
 
   def update
     @recipe = Recipe.find(params[:id])
-    @recipe.update(recipe_params)
-
-    redirect_to recipe_path(@recipe)
+    if @recipe.update(recipe_params)
+      redirect_to recipe_path(@recipe)
+    else
+      render 'recipes/edit'
+    end
   end
 
   private
@@ -61,9 +63,9 @@ class RecipesController < ApplicationController
       params.require(:recipe).permit(:name,
                                      :boil_time,
                                      :fermentable_ids => [],
-                                     :fermentables_attributes => [:name],
+                                     :fermentables_attributes => [:name, :pound_per_gallon, :lovibond, :diastatic_power],
                                      :hop_ids => [],
-                                     :hops_attributes => [:name],
+                                     :hops_attributes => [:name, :alpha_acids],
                                      :yeast_ids => [],
                                      :yeasts_attributes => [:brand, :variety]
                                    )
