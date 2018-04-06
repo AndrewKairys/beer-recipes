@@ -1,0 +1,11 @@
+<h1>All SMASH Beers</h1>
+
+<p>SMASH beers are made from one type of malt and one type of hop. Hence the name Single Malt And Single Hop.</p>
+
+<h4>Below is a list of all the recipes that are SMASH beers</h4>
+
+<ul>
+  <% @smash_beers.each do |recipe| %>
+    <li><%= link_to recipe.name, recipe_path(recipe) %></li>
+  <% end %>
+</ul>

@@ -4,6 +4,10 @@ class RecipesController < ApplicationController
     @recipes = Recipe.all
   end
 
+  def smash_beers
+    @smash_beers = Recipe.smash_beers
+  end
+
   def show
     @recipe = Recipe.find(params[:id])
   end
@@ -19,19 +23,19 @@ class RecipesController < ApplicationController
     @recipe.fermentables.build
     @recipe.hops.build
     @recipe.yeasts.build
+    @recipe.recipe_fermentables.build
   end
-
+  #must change setting user and efficiency
   def create
     @recipe = Recipe.new(recipe_params)
     current_user.efficiency = params[:recipe][:user][:efficiency]
     current_user.save
     @recipe.user = current_user
-    @recipe.style = Style.find(params[:recipe][:style_id])
 
     if @recipe.save
       redirect_to recipe_path(@recipe)
     else
-      render 'recipes/new'
+      render :new
     end
 
   end
@@ -43,6 +47,7 @@ class RecipesController < ApplicationController
     @yeasts = Yeast.all
     @fermentables = Fermentable.all
     @styles = Style.all
+    @recipe_fermentables = @recipe.recipe_fermentables
 
     @recipe.fermentables.build
     @recipe.hops.build
@@ -51,6 +56,9 @@ class RecipesController < ApplicationController
 
   def update
     @recipe = Recipe.find(params[:id])
+    current_user.efficiency = params[:recipe][:user][:efficiency]
+    current_user.save
+
     if @recipe.update(recipe_params)
       redirect_to recipe_path(@recipe)
     else
@@ -68,6 +76,8 @@ class RecipesController < ApplicationController
     redirect_to user_path
   end
 
+
+
   private
 
     def recipe_params
@@ -75,6 +85,7 @@ class RecipesController < ApplicationController
                                      :boil_time,
                                      :user_id,
                                      :style_id,
+                                     # :recipe_fermentables_attributes => [:amount, :fermentable_id],
                                      :fermentable_ids => [],
                                      :fermentables_attributes => [:name, :pound_per_gallon, :lovibond, :diastatic_power],
                                      :hop_ids => [],

@@ -32,7 +32,7 @@
   <section>
     <h3>Fermentables</h3>
 
-    <%= f.collection_check_boxes(:fermentable_ids, Fermentable.all, :id, :name) do |b| %>
+    <%= f.collection_check_boxes(:fermentable_ids, @fermentables, :id, :name) do |b| %>
       <div class="row">
         <%= b.label(class: "check_box") do %>
           <div class="col-xs-4">
@@ -58,7 +58,7 @@
   <section>
     <h3>Hops</h3>
 
-    <%= f.collection_check_boxes(:hop_ids, Hop.all, :id, :name) do |b| %>
+    <%= f.collection_check_boxes(:hop_ids, @hops, :id, :name) do |b| %>
       <div class="row">
         <%= b.label(class: "check_box") do %>
           <div class="col-xs-4">
@@ -80,7 +80,7 @@
   <section>
     <h3>Yeasts</h3>
 
-    <%= f.collection_check_boxes(:yeast_ids, Yeast.all, :id, :variety) do |b| %>
+    <%= f.collection_check_boxes(:yeast_ids, @yeasts, :id, :variety) do |b| %>
       <div class="row">
         <%= b.label(class: "check_box") do %>
           <div class="col-xs-4">

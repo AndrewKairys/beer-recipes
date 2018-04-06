@@ -8,7 +8,8 @@
 <h4>Fermentables</h4>
 <% @recipe.recipe_fermentables.each do |recipe_fermentable| %>
     <ul>
-      <li><%= recipe_fermentable.fermentable.name %></li>
+      <!-- Make a method to show 0 lbs if amount is nil -->
+      <li><%= recipe_fermentable.fermentable.name %> | <%= recipe_fermentable.amount %> lbs</li> 
     </ul>
 <% end %>
 
