@@ -1,7 +1,3 @@
-<h1>Welcome to your recipe page, <%= @user.name %></h1>
+<h1>Welcome to your home page, <%= @user.name %></h1>
 
-<ul>
-<% @recipes.each do |recipe| %>
-  <li><%= link_to recipe.name, recipe_path(recipe) %></li>
-<% end %>
-</ul>
+<p>Click <%= link_to "here", user_recipes_path(@user) %> to view all of your recipes</p>

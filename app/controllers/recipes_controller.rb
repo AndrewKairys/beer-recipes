@@ -1,6 +1,13 @@
 class RecipesController < ApplicationController
 
   def index
+    @recipes = current_user.recipes
+
+    @user = current_user
+    @recipe = Recipe.new
+  end
+
+  def all_recipes
     @recipes = Recipe.all
   end
 
@@ -33,7 +40,7 @@ class RecipesController < ApplicationController
     @recipe.user = current_user
 
     if @recipe.save
-      redirect_to recipe_path(@recipe)
+      redirect_to user_recipe_path(current_user, @recipe)
     else
       render :new
     end
@@ -41,6 +48,7 @@ class RecipesController < ApplicationController
   end
 
   def edit
+    # binding.pry
     @recipe = Recipe.find(params[:id])
 
     @hops = Hop.all
@@ -60,20 +68,26 @@ class RecipesController < ApplicationController
     current_user.save
 
     if @recipe.update(recipe_params)
-      redirect_to recipe_path(@recipe)
+      redirect_to user_recipe_path(@recipe)
     else
       render 'recipes/edit'
     end
   end
 
   def destroy
-    recipe = Recipe.find(params[:id])
-    recipe.recipe_fermentables.destroy_all
-    recipe.recipe_hops.destroy_all
-    recipe.recipe_yeasts.destroy_all
-    recipe.destroy
+    @recipe = Recipe.find(params[:id])
+    @recipe.recipe_fermentables.destroy_all
+    @recipe.recipe_hops.destroy_all
+    @recipe.recipe_yeasts.destroy_all
+    if @recipe.destroy
+      flash[:notice] = "Recipe destroyed successfully"
+    else
+      flash[:notice] = "Recipe could not be destroyed"
+    end
 
-    redirect_to user_path
+    @recipes = current_user.recipes
+
+    render :index
   end
 
 

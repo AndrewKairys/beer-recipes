@@ -4,4 +4,9 @@ class UsersController < ApplicationController
     @recipes = Recipe.where("user_id = ?", current_user)
     helpers.no_recipes?
   end
+
+  def recipes_index
+
+  end
+
 end
