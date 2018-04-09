@@ -30,14 +30,24 @@ class RecipesController < ApplicationController
     @recipe.fermentables.build
     @recipe.hops.build
     @recipe.yeasts.build
-    @recipe.recipe_fermentables.build
+
   end
-  #must change setting user and efficiency
+  #must change setting user
   def create
     @recipe = Recipe.new(recipe_params)
-    current_user.efficiency = params[:recipe][:user][:efficiency]
-    current_user.save
+
     @recipe.user = current_user
+    @recipe.add_amounts(params[:recipe][:fermentable_amounts], params[:recipe][:hop_amounts])
+
+    @hops = Hop.all
+    @yeasts = Yeast.all
+    @fermentables = Fermentable.all
+    @styles = Style.all
+
+    # @recipe.fermentables.build
+    # @recipe.hops.build
+    # @recipe.yeasts.build
+
 
     if @recipe.save
       redirect_to user_recipe_path(current_user, @recipe)
@@ -67,10 +77,15 @@ class RecipesController < ApplicationController
     current_user.efficiency = params[:recipe][:user][:efficiency]
     current_user.save
 
+    @hops = Hop.all
+    @yeasts = Yeast.all
+    @fermentables = Fermentable.all
+    @styles = Style.all
+
     if @recipe.update(recipe_params)
       redirect_to user_recipe_path(@recipe)
     else
-      render 'recipes/edit'
+      render :edit
     end
   end
 
@@ -79,6 +94,7 @@ class RecipesController < ApplicationController
     @recipe.recipe_fermentables.destroy_all
     @recipe.recipe_hops.destroy_all
     @recipe.recipe_yeasts.destroy_all
+
     if @recipe.destroy
       flash[:notice] = "Recipe destroyed successfully"
     else
@@ -99,7 +115,7 @@ class RecipesController < ApplicationController
                                      :boil_time,
                                      :user_id,
                                      :style_id,
-                                     # :recipe_fermentables_attributes => [:amount, :fermentable_id],
+                                     :efficiency,
                                      :fermentable_ids => [],
                                      :fermentables_attributes => [:name, :pound_per_gallon, :lovibond, :diastatic_power],
                                      :hop_ids => [],

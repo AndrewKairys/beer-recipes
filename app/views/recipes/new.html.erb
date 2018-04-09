@@ -5,7 +5,7 @@
     <div id="error_explanation">
       <h2>
         <%= pluralize(@recipe.errors.count, "error") %>
-        prohibited this post from being saved:
+        prohibited this recipe from being saved:
       </h2>
 
       <ul>
@@ -22,72 +22,76 @@
   <%= f.number_field :boil_time %><br>
 
   <%= f.label "Style:" %>
-  <%= f.collection_select(:style_id, Style.all.sort_by { |f| f.name }, :id, :name, include_blank: true) %><br>
+  <%= f.collection_select(:style_id, @styles.sort_by { |f| f.name }, :id, :name, include_blank: true) %><br>
 
-  <%= f.fields_for current_user do |ff|%>
-    <%= ff.label "Brewhouse Efficiency Percentage:" %>
-    <%= ff.number_field :efficiency %><br>
-  <% end %>
+  <%= f.label "Recipe Efficiency Percentage:" %>
+  <%= f.number_field :efficiency %><br>
+
 
   <section>
     <h3>Fermentables</h3>
-      <!-- <%# @fermentables.each do |fermentable| %>
-        <input type="checkbox" value="<%#= fermentable.id %>" name="recipe[recipe_fermentables_attributes][][fermentable_id]">
-        <%#= fermentable.name %> |
-        <label>Amount:</label>
-        <input type="number" name="recipe[recipe_fermentables_attributes][][amount]"><br>
-      <%# end %> -->
 
-      <%= f.collection_check_boxes(:fermentable_ids, Fermentable.all, :id, :name) do |b| %>
-        <div class="row">
-          <%= b.label(class: "check_box") do %>
-            <div class="col-xs-4">
-              <%= b.check_box(class: "check_box") %>
-              <%= b.object.name %>
-            </div>
-          <% end %>
-        </div>
-      <% end %><br>
+    <%= f.collection_check_boxes(:fermentable_ids, @fermentables, :id, :name) do |b| %>
+      <div class="row">
+        <%= b.label(class: "check_box") do %>
+          <div class="col-xs-4">
+            <%= b.check_box(class: "check_box") %>
+            <%= b.object.name %>
 
-    <!-- Change this to fields for -->
-    <h4>Add a new fermentable to your recipe</h4>
-    <label>Name:</label>
-    <input type="text" name="recipe[fermentables_attributes][][name]">
-    <label>PPG:</label>
-    <input type="text" name="recipe[fermentables_attributes][][pound_per_gallon]">
-    <label>Lovibond:</label>
-    <input type="text" name="recipe[fermentables_attributes][][lovibond]">
-    <label>DP:</label>
-    <input type="text" name="recipe[fermentables_attributes][][diastatic_power]" >
+            <label>Amount:</label>
+            <input type="number" name="recipe[fermentable_amounts][]"><br>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+
+
+    <!-- <h4>Add a new fermentable to your recipe</h4> -->
+    <%#= f.fields_for :fermentables do |ferm| %>
+      <%#= ferm.label :name %>
+      <%#= ferm.text_field :name %>
+      <%#= ferm.label :pound_per_gallon %>
+      <%#= ferm.text_field :pound_per_gallon %>
+      <%#= ferm.label :lovibond %>
+      <%#= ferm.text_field :lovibond %>
+      <%#= ferm.label :diastatic_power %>
+      <%#= ferm.text_field :diastatic_power %>
+    <%# end %>
 
   </section><br>
 
   <section>
     <h3>Hops</h3>
 
-    <%= f.collection_check_boxes(:hop_ids, Hop.all, :id, :name) do |b| %>
+    <%= f.collection_check_boxes(:hop_ids, @hops, :id, :name) do |b| %>
       <div class="row">
         <%= b.label(class: "check_box") do %>
           <div class="col-xs-4">
             <%= b.check_box(class: "check_box") %>
             <%= b.object.name %>
+
+            <label>Amount:</label>
+            <input type="number" name="recipe[hop_amounts][]"><br>
           </div>
         <% end %>
       </div>
     <% end %>
 
-    <h4>Add a new hop variety to your recipe</h4>
-    <label>Name:</label>
-    <input type="text" name="recipe[hops_attributes][][name]">
-    <label>AA:</label>
-    <input type="text" name="recipe[hops_attributes][][alpha_acids]">
+    <!-- <h4>Add a new hop variety to your recipe</h4> -->
+    <%#= f.fields_for :hops do |ferm| %>
+      <%#= ferm.label :name %>
+      <%#= ferm.text_field :name %>
+      <%#= ferm.label :alpha_acids %>
+      <%#= ferm.text_field :alpha_acids %>
+    <%# end %>
 
   </section>
 
   <section>
     <h3>Yeasts</h3>
 
-    <%= f.collection_check_boxes(:yeast_ids, Yeast.all, :id, :variety) do |b| %>
+    <%= f.collection_check_boxes(:yeast_ids, @yeasts, :id, :variety) do |b| %>
       <div class="row">
         <%= b.label(class: "check_box") do %>
           <div class="col-xs-4">
@@ -98,11 +102,13 @@
       </div>
     <% end %><br>
 
-    <h4>Add new yeast to your recipe</h4>
-    <label>Brand:</label>
-    <input type="text" name="recipe[yeasts_attributes][][brand]">
-    <label>Variety:</label>
-    <input type="text" name="recipe[yeasts_attributes][][variety]">
+    <!-- <h4>Add new yeast to your recipe</h4> -->
+    <%#= f.fields_for :yeasts do |ferm| %>
+      <%#= ferm.label :brand %>
+      <%#= ferm.text_field :brand %>
+      <%#= ferm.label :variety %>
+      <%#= ferm.text_field :variety %>
+    <%# end %>
 
   </section>
 

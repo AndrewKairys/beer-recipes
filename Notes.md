@@ -83,5 +83,7 @@ Migrations
           -Add this to new and edit forms
 12. [] Get rid of inline css
 13. [] Bootstrap the styling
+14. [] Change efficiency attribute back to recipe
+
 Last. [] Refactor
           -Before action in controllers. Set up find method.

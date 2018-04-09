@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180405215923) do
+ActiveRecord::Schema.define(version: 20180409132141) do
 
   create_table "fermentables", force: :cascade do |t|
     t.string "name"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20180405215923) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "style_id"
+    t.integer "efficiency"
   end
 
   create_table "styles", force: :cascade do |t|
@@ -81,7 +82,6 @@ ActiveRecord::Schema.define(version: 20180405215923) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "efficiency"
     t.string "uid"
     t.string "provider"
     t.index ["email"], name: "index_users_on_email", unique: true
