@@ -3,7 +3,6 @@ class Fermentable < ApplicationRecord
   has_many :recipes, through: :recipe_fermentables
 
   validates :name, uniqueness: true
-
   validates :pound_per_gallon, presence: true
   validates :name, presence: true
   validates :lovibond, presence: true

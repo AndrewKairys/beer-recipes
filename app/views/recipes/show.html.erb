@@ -16,7 +16,7 @@
 <h4>Hops</h4>
 <% @recipe.recipe_hops.each do |recipe_hop| %>
     <ul>
-      <li><%= recipe_hop.hop.name %> | <%= recipe_hop.amount %> oz</li>
+      <li><%= recipe_hop.hop.name %> | <%= recipe_hop.amount %> oz | <%= recipe_hop.addition_time %> min</li>
     </ul>
 <% end %>
 

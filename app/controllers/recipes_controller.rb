@@ -32,24 +32,22 @@ class RecipesController < ApplicationController
     @recipe.yeasts.build
 
   end
-  #must change setting user
-  def create
-    @recipe = Recipe.new(recipe_params)
 
-    @recipe.user = current_user
-    @recipe.add_amounts(params[:recipe][:fermentable_amounts], params[:recipe][:hop_amounts])
+  def create
+    @recipe = current_user.recipes.build(recipe_params)
+    binding.pry
 
     @hops = Hop.all
     @yeasts = Yeast.all
     @fermentables = Fermentable.all
     @styles = Style.all
 
-    # @recipe.fermentables.build
-    # @recipe.hops.build
-    # @recipe.yeasts.build
-
-
     if @recipe.save
+      binding.pry
+      @recipe.add_fermentable_amounts(params[:recipe][:fermentable_amounts])
+      @recipe.add_hop_amounts(params[:recipe][:hop_amounts])
+      @recipe.add_addition_time(params[:recipe][:addition_time])
+
       redirect_to user_recipe_path(current_user, @recipe)
     else
       render :new
@@ -58,24 +56,21 @@ class RecipesController < ApplicationController
   end
 
   def edit
-    # binding.pry
     @recipe = Recipe.find(params[:id])
 
     @hops = Hop.all
     @yeasts = Yeast.all
     @fermentables = Fermentable.all
     @styles = Style.all
-    @recipe_fermentables = @recipe.recipe_fermentables
 
-    @recipe.fermentables.build
+    # @recipe.fermentables.build
     @recipe.hops.build
     @recipe.yeasts.build
   end
 
   def update
+    binding.pry
     @recipe = Recipe.find(params[:id])
-    current_user.efficiency = params[:recipe][:user][:efficiency]
-    current_user.save
 
     @hops = Hop.all
     @yeasts = Yeast.all
@@ -83,6 +78,11 @@ class RecipesController < ApplicationController
     @styles = Style.all
 
     if @recipe.update(recipe_params)
+      #***Start building these methods below***
+      # @recipe.update_fermentable_amounts(params[:recipe][:fermentable_amounts])
+      # @recipe.update_hop_amounts(params[:recipe][:hop_amounts])
+      # @recipe.update_addition_time(params[:recipe][:addition_time])
+
       redirect_to user_recipe_path(@recipe)
     else
       render :edit
@@ -106,23 +106,17 @@ class RecipesController < ApplicationController
     render :index
   end
 
-
-
   private
 
     def recipe_params
       params.require(:recipe).permit(:name,
                                      :boil_time,
-                                     :user_id,
                                      :style_id,
                                      :efficiency,
-                                     :fermentable_ids => [],
                                      :fermentables_attributes => [:name, :pound_per_gallon, :lovibond, :diastatic_power],
-                                     :hop_ids => [],
                                      :hops_attributes => [:name, :alpha_acids],
                                      :yeast_ids => [],
                                      :yeasts_attributes => [:brand, :variety]
                                    )
     end
-
 end

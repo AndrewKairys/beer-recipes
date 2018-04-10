@@ -20,13 +20,29 @@ class Recipe < ApplicationRecord
     self.all.find_all { |recipe| recipe.recipe_hops.count == 1 && recipe.recipe_fermentables.count == 1 }
   end
 
-  def add_amounts(fermentable_amounts, hop_amounts)
-    recipe_fermentables.each do |rf|
-      rf.amount = fermentable_amounts[rf.fermentable_id - 1]
-    end
+  def add_fermentable_amounts(fermentable_amounts)
+    array = fermentable_amounts.first.keep_if { |k, v| v != "" }
 
-    recipe_hops.each do |rh|
-      rh.amount = hop_amounts[rh.hop_id - 1]
+    array.each do |k,v|
+      RecipeFermentable.create(recipe_id: self.id, fermentable_id: k.to_i, amount: v.to_f)
+    end
+  end
+
+  def add_hop_amounts(hop_amounts)
+    amounts = hop_amounts.first.keep_if { |k, v| v != "" }
+
+    amounts.each do |k,v|
+      rh = RecipeHop.create(recipe_id: self.id, hop_id: k.to_i, amount: v.to_f)
+    end
+  end
+
+  def add_addition_time(addition_time)
+    array = addition_time.first.keep_if { |k, v| v != "" }
+
+    array.each do |k,v|
+      rh = recipe_hops.find_by(hop_id: k.to_i)
+      rh.addition_time = v.to_f
+      rh.save
     end
   end
 
