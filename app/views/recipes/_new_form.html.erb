@@ -29,15 +29,15 @@
   <section>
     <h3>Fermentables</h3>
 
-    <%= f.collection_check_boxes(:fermentable_ids, @fermentables, :id, :name) do |b| %>
+    <%= f.collection_check_boxes(:fermentable_ids, @fermentables.order(:name), :id, :name) do |b| %>
       <div class="row">
         <%= b.label(class: "check_box") do %>
           <div class="col-xs-4">
             <%= b.check_box(class: "check_box") %>
-            <%= b.object.name %>
+            <%= b.object.name %> |
 
             <label>Amount:</label>
-            <input type="number" name="recipe[fermentable_amounts][][<%= b.object.id %>]"><br>
+            <input type="number" name="recipe[fermentable_amounts][][<%= b.object.id %>]"> lbs<br>
           </div>
         <% end %>
       </div>
@@ -55,7 +55,7 @@
       <%= ferm.text_field :diastatic_power %>
 
       <label>Amount:</label>
-      <input type="number" name="recipe[fermentable_amounts][]"><br>
+      <input type="number" name="recipe[new_fermentable][][amount]"><br>
     <% end %>
 
   </section><br>
@@ -63,15 +63,15 @@
   <section>
     <h3>Hops</h3>
 
-    <%= f.collection_check_boxes(:hop_ids, @hops, :id, :name) do |b| %>
+    <%= f.collection_check_boxes(:hop_ids, @hops.order(:name), :id, :name) do |b| %>
       <div class="row">
         <%= b.label(class: "check_box") do %>
           <div class="col-xs-4">
             <%= b.check_box(class: "check_box") %>
-            <%= b.object.name %>
+            <%= b.object.name %> |
 
             <label>Amount:</label>
-            <input type="number" name="recipe[hop_amounts][][<%= b.object.id %>]">
+            <input type="number" name="recipe[hop_amounts][][<%= b.object.id %>]">oz
             <label>Addition Time:</label>
             <input type="number" name="recipe[addition_time][][<%= b.object.id %>]"><br>
           </div>
@@ -80,16 +80,16 @@
     <% end %>
 
     <h4>Add a new hop variety to your recipe</h4>
-    <%= f.fields_for :hops do |ferm| %>
-      <%= ferm.label :name %>
-      <%= ferm.text_field :name %>
-      <%= ferm.label :alpha_acids %>
-      <%= ferm.text_field :alpha_acids %>
+    <%= f.fields_for :hops do |hop| %>
+      <%= hop.label :name %>
+      <%= hop.text_field :name %>
+      <%= hop.label :alpha_acids %>
+      <%= hop.text_field :alpha_acids %>
 
       <label>Amount:</label>
-      <input type="number" name="recipe[hop_amounts][]">
+      <input type="number" name="recipe[new_hop][][amount]">
       <label>Addition Time:</label>
-      <input type="number" name="recipe[addition_time][]"><br>
+      <input type="number" name="recipe[new_hop][][addition_time]"><br>
     <% end %>
 
   </section>
@@ -97,11 +97,12 @@
   <section>
     <h3>Yeasts</h3>
 
-    <%= f.collection_check_boxes(:yeast_ids, @yeasts, :id, :variety) do |b| %>
+    <%= f.collection_check_boxes(:yeast_ids, @yeasts.order(:brand, :variety), :id, :variety) do |b| %>
       <div class="row">
         <%= b.label(class: "check_box") do %>
           <div class="col-xs-4">
             <%= b.check_box(class: "check_box") %>
+            <%= b.object.brand %> -
             <%= b.object.variety %>
           </div>
         <% end %>

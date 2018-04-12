@@ -8,13 +8,12 @@
 <h4>Fermentables</h4>
 <% @recipe.recipe_fermentables.each do |recipe_fermentable| %>
     <ul>
-      <!-- Make a method to show 0 lbs if amount is nil -->
       <li><%= recipe_fermentable.fermentable.name %> | <%= recipe_fermentable.amount %> lbs</li>
     </ul>
 <% end %>
 
 <h4>Hops</h4>
-<% @recipe.recipe_hops.each do |recipe_hop| %>
+<% @recipe.recipe_hops.sort_by { |rh| rh.hop.name }.each do |recipe_hop| %>
     <ul>
       <li><%= recipe_hop.hop.name %> | <%= recipe_hop.amount %> oz | <%= recipe_hop.addition_time %> min</li>
     </ul>
