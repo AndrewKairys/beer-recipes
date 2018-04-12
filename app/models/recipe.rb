@@ -78,16 +78,38 @@ class Recipe < ApplicationRecord
   end
 
   #UPDATE METHODS
-  def update_fermentable_amounts(fermentable_amounts)
-    fermentable_amounts.collect do |ferm|
-
+  def update_fermentables(fermentable_amounts, fermentable_ids, new_fermentable_amount)
+    if new_fermentable_amount != ""
+      new_recipe_fermentable = recipe_fermentables.last
     end
-    amounts = fermentable_amounts.first.keep_if { |k, v| v != "" }
 
-    amounts.each do |k,v|
-      rf = recipe_fermentables.find_by(id: k.to_i)
-      rf.amount = v.to_f
-      rf.save
+    amounts = fermentable_amounts.first.keep_if { |k, v| fermentable_ids.include?(k) }
+
+    amounts.each do |k, v|
+      recipe_fermentable = recipe_fermentables.where(fermentable_id: k.to_i).first_or_create
+      recipe_fermentable.amount = v.to_f
+      recipe_fermentable.save
+    end
+
+    delete_fermentables(fermentable_ids, new_recipe_fermentable)
+  end
+
+  def delete_fermentables(fermentable_ids, new_recipe_fermentable)
+    recipe_fermentable_ids = recipe_fermentables.collect { |rf| rf.fermentable_id }
+
+    fermentable_id_integers = fermentable_ids.collect { |id| id.to_i }
+    fermentable_id_integers.shift
+
+    if new_recipe_fermentable.nil?
+      to_delete = recipe_fermentable_ids - fermentable_id_integers
+    else
+      rfi = recipe_fermentable_ids.reject { |n| n == new_recipe_fermentable.fermentable_id }
+      to_delete = rfi - fermentable_id_integers
+    end
+
+    to_delete.each do |id|
+      rf = recipe_fermentables.find_by(fermentable_id: id)
+      rf.destroy
     end
   end
 

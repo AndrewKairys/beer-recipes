@@ -63,11 +63,11 @@ class RecipesController < ApplicationController
     @yeasts = Yeast.all
 
     @hops = Hop.all
-    # @fermentables = Fermentable.all
+    @fermentables = Fermentable.all
 
-    # @recipe.fermentables.build
+    @recipe.fermentables.build
     @recipe.hops.build
-    # @recipe.yeasts.build
+    @recipe.yeasts.build
   end
 
   def update
@@ -78,7 +78,9 @@ class RecipesController < ApplicationController
     #should have update_fermentables and add_recipe_fermentable_amount
     if @recipe.update(recipe_params)
       @recipe.update_hops(params[:recipe][:hop_amounts], params[:recipe][:addition_time], params[:recipe][:hop_ids], params[:recipe][:new_hop].first[:amount])
+      @recipe.update_fermentables(params[:recipe][:fermentable_amounts], params[:recipe][:fermentable_ids], params[:recipe][:new_fermentable].first[:amount])
 
+      @recipe.add_recipe_fermentable_amount(params[:recipe][:new_fermentable].first[:amount])
       @recipe.add_recipe_hop_amount(params[:recipe][:new_hop].first[:amount])
       @recipe.add_recipe_hop_addition_time(params[:recipe][:new_hop].first[:addition_time])
 
