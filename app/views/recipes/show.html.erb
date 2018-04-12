@@ -2,25 +2,24 @@
 
 <h3>Created By: <%= @recipe.user.name %></h3>
 
-<h4>Style</h4>
-<%= @recipe.style.name %>
+<h4>Style: <%= @recipe.style.name %></h4>
 
 <h4>Fermentables</h4>
-<% @recipe.recipe_fermentables.each do |recipe_fermentable| %>
+<% @recipe.recipe_fermentables.sort_by { |f| f.fermentable.name.downcase }.each do |recipe_fermentable| %>
     <ul>
       <li><%= recipe_fermentable.fermentable.name %> | <%= recipe_fermentable.amount %> lbs</li>
     </ul>
 <% end %>
 
 <h4>Hops</h4>
-<% @recipe.recipe_hops.sort_by { |rh| rh.hop.name }.each do |recipe_hop| %>
+<% @recipe.recipe_hops.order(:addition_time, :amount).reverse.each do |recipe_hop| %>
     <ul>
       <li><%= recipe_hop.hop.name %> | <%= recipe_hop.amount %> oz | <%= recipe_hop.addition_time %> min</li>
     </ul>
 <% end %>
 
 <h4>Yeast</h4>
-<% @recipe.recipe_yeasts.each do |recipe_yeast| %>
+<% @recipe.recipe_yeasts.sort_by { |ry| [ry.yeast.brand.downcase, ry.yeast.variety.downcase] }.each do |recipe_yeast| %>
     <ul>
       <li><%= recipe_yeast.yeast.brand %></li>
       <ul>

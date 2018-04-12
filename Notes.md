@@ -72,7 +72,8 @@ Migrations
 6. [X] Destroy method
       [X] -If a recipe is destroyed, all recipe ingredients must go as well.
 7. [] Authorization
-8. [] Use partials for recipe edit and new page
+        -Pundit or CanCanCan
+8. [X] Use partials for recipe edit and new page
 9. [X] Change ingredient attributes to join table
         -Fermentables - amount
         -Hops addition_time, amount
@@ -83,113 +84,7 @@ Migrations
           -Add this to new and edit forms
 12. [] Get rid of inline css
 13. [] Bootstrap the styling
-14. [] Change efficiency attribute back to recipe
+14. [X] Change efficiency attribute back to recipe
 
 Last. [] Refactor
           -Before action in controllers. Set up find method.
-
-
-          <%= form_for [current_user, @recipe] do |f| %>
-
-            <% if @recipe.errors.any? %>
-              <div id="error_explanation">
-                <h2>
-                  <%= pluralize(@recipe.errors.count, "error") %>
-                  prohibited this post from being saved:
-                </h2>
-
-                <ul>
-                <% @recipe.errors.full_messages.each do |msg| %>
-                  <li><%= msg %></li>
-                <% end %>
-                </ul>
-              </div>
-            <% end %>
-
-            <%= f.label "Name:" %>
-            <%= f.text_field :name %><br>
-            <%= f.label "Boil Time (min):" %>
-            <%= f.number_field :boil_time %><br></br>
-
-            <%= f.label "Style:" %>
-            <%= f.collection_select(:style_id, @styles.sort_by { |f| f.name }, :id, :name, include_blank: true) %><br>
-
-            <%= f.fields_for current_user do |ff|%>
-              <%= ff.label "Brewhouse Efficiency Percentage:" %>
-              <%= ff.number_field :efficiency %><br>
-            <% end %>
-
-            <section>
-              <h3>Fermentables</h3>
-
-              <%= f.collection_check_boxes(:fermentable_ids, @fermentables, :id, :name) do |b| %>
-                <div class="row">
-                  <%= b.label(class: "check_box") do %>
-                    <div class="col-xs-4">
-                      <%= b.check_box(class: "check_box") %>
-                      <%= b.object.name %>
-                    </div>
-                  <% end %>
-                </div>
-              <% end %><br>
-
-              <h4>Add a new fermentable to your recipe</h4>
-              <label>Name:</label>
-              <input type="text" name="recipe[fermentables_attributes][][name]">
-              <label>PPG:</label>
-              <input type="text" name="recipe[fermentables_attributes][][pound_per_gallon]">
-              <label>Lovibond:</label>
-              <input type="text" name="recipe[fermentables_attributes][][lovibond]">
-              <label>DP:</label>
-              <input type="text" name="recipe[fermentables_attributes][][diastatic_power]" >
-
-            </section>
-
-            <section>
-              <h3>Hops</h3>
-
-              <%= f.collection_check_boxes(:hop_ids, @hops, :id, :name) do |b| %>
-                <div class="row">
-                  <%= b.label(class: "check_box") do %>
-                    <div class="col-xs-4">
-                      <%= b.check_box(class: "check_box") %>
-                      <%= b.object.name %>
-                    </div>
-                  <% end %>
-                </div>
-              <% end %><br>
-
-              <h4>Add a new hop variety to your recipe</h4>
-              <label>Name:</label>
-              <input type="text" name="recipe[hops_attributes][][name]">
-              <label>AA:</label>
-              <input type="text" name="recipe[hops_attributes][][alpha_acids]">
-
-            </section>
-
-            <section>
-              <h3>Yeasts</h3>
-
-              <%= f.collection_check_boxes(:yeast_ids, @yeasts, :id, :variety) do |b| %>
-                <div class="row">
-                  <%= b.label(class: "check_box") do %>
-                    <div class="col-xs-4">
-                      <%= b.check_box(class: "check_box") %>
-                      <%= b.object.brand %> |
-                      <%= b.object.variety %>
-                    </div>
-                  <% end %>
-                </div>
-              <% end %><br>
-
-              <h4>Add new yeast to your recipe</h4>
-              <label>Brand:</label>
-              <input type="text" name="recipe[yeasts_attributes][][brand]" >
-              <label>Variety:</label>
-              <input type="text" name="recipe[yeasts_attributes][][variety]" >
-
-            </section>
-
-            <br></br>
-            <%= f.submit %>
-          <% end %>

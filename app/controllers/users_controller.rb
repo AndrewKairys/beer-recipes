@@ -5,8 +5,4 @@ class UsersController < ApplicationController
     helpers.no_recipes?
   end
 
-  def recipes_index
-
-  end
-
 end

@@ -52,6 +52,10 @@ class RecipesController < ApplicationController
 
       redirect_to user_recipe_path(current_user, @recipe)
     else
+      @recipe.fermentables.build
+      @recipe.hops.build
+      @recipe.yeasts.build
+
       render :new
     end
 
@@ -59,9 +63,9 @@ class RecipesController < ApplicationController
 
   def edit
     @recipe = Recipe.find(params[:id])
+
     @styles = Style.all
     @yeasts = Yeast.all
-
     @hops = Hop.all
     @fermentables = Fermentable.all
 
@@ -72,10 +76,12 @@ class RecipesController < ApplicationController
 
   def update
     @recipe = Recipe.find(params[:id])
+
     @styles = Style.all
     @yeasts = Yeast.all
+    @fermentables = Fermentable.all
     @hops = Hop.all
-    #should have update_fermentables and add_recipe_fermentable_amount
+
     if @recipe.update(recipe_params)
       @recipe.update_hops(params[:recipe][:hop_amounts], params[:recipe][:addition_time], params[:recipe][:hop_ids], params[:recipe][:new_hop].first[:amount])
       @recipe.update_fermentables(params[:recipe][:fermentable_amounts], params[:recipe][:fermentable_ids], params[:recipe][:new_fermentable].first[:amount])
@@ -86,6 +92,10 @@ class RecipesController < ApplicationController
 
       redirect_to user_recipe_path(@recipe)
     else
+      @recipe.fermentables.build
+      @recipe.hops.build
+      @recipe.yeasts.build
+
       render :edit
     end
   end
