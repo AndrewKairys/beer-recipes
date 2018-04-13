@@ -1,10 +1,10 @@
 class RecipesController < ApplicationController
+  before_action :load_recipe, :only => [:show, :edit, :update, :destroy]
+  before_action :load_ingredients_and_styles, :only => [:new, :create, :edit, :update]
 
   def index
     @recipes = current_user.recipes
-
-    @user = current_user
-    @recipe = Recipe.new
+    helpers.no_recipes?
   end
 
   def all_recipes
@@ -16,39 +16,21 @@ class RecipesController < ApplicationController
   end
 
   def show
-    @recipe = Recipe.find(params[:id])
   end
 
   def new
     @recipe = Recipe.new
 
-    @hops = Hop.all
-    @yeasts = Yeast.all
-    @fermentables = Fermentable.all
-    @styles = Style.all
-
     @recipe.fermentables.build
     @recipe.hops.build
     @recipe.yeasts.build
-
   end
 
   def create
     @recipe = current_user.recipes.build(recipe_params)
 
-    @hops = Hop.all
-    @yeasts = Yeast.all
-    @fermentables = Fermentable.all
-    @styles = Style.all
-
     if @recipe.save
-      @recipe.add_recipe_fermentable_amount(params[:recipe][:new_fermentable].first[:amount])
-      @recipe.add_recipe_hop_amount(params[:recipe][:new_hop].first[:amount])
-      @recipe.add_recipe_hop_addition_time(params[:recipe][:new_hop].first[:addition_time])
-
-      @recipe.add_recipe_fermentables(params[:recipe][:fermentable_amounts], params[:recipe][:fermentable_ids])
-      @recipe.add_recipe_hops(params[:recipe][:hop_amounts], params[:recipe][:hop_ids])
-      @recipe.add_addition_time(params[:recipe][:addition_time], params[:recipe][:hop_ids])
+      helpers.add_recipe_ingredients
 
       redirect_to user_recipe_path(current_user, @recipe)
     else
@@ -62,33 +44,14 @@ class RecipesController < ApplicationController
   end
 
   def edit
-    @recipe = Recipe.find(params[:id])
-
-    @styles = Style.all
-    @yeasts = Yeast.all
-    @hops = Hop.all
-    @fermentables = Fermentable.all
-
     @recipe.fermentables.build
     @recipe.hops.build
     @recipe.yeasts.build
   end
 
   def update
-    @recipe = Recipe.find(params[:id])
-
-    @styles = Style.all
-    @yeasts = Yeast.all
-    @fermentables = Fermentable.all
-    @hops = Hop.all
-
     if @recipe.update(recipe_params)
-      @recipe.update_hops(params[:recipe][:hop_amounts], params[:recipe][:addition_time], params[:recipe][:hop_ids], params[:recipe][:new_hop].first[:amount])
-      @recipe.update_fermentables(params[:recipe][:fermentable_amounts], params[:recipe][:fermentable_ids], params[:recipe][:new_fermentable].first[:amount])
-
-      @recipe.add_recipe_fermentable_amount(params[:recipe][:new_fermentable].first[:amount])
-      @recipe.add_recipe_hop_amount(params[:recipe][:new_hop].first[:amount])
-      @recipe.add_recipe_hop_addition_time(params[:recipe][:new_hop].first[:addition_time])
+      helpers.update_recipe_ingredients
 
       redirect_to user_recipe_path(@recipe)
     else
@@ -101,21 +64,16 @@ class RecipesController < ApplicationController
   end
 
   def destroy
-    @recipe = Recipe.find(params[:id])
-
     if @recipe.destroy
       flash[:notice] = "Recipe destroyed successfully"
     else
       flash[:notice] = "Recipe could not be destroyed"
     end
 
-    @recipes = current_user.recipes
-
-    render :index
+    redirect_to user_recipes_path
   end
 
   private
-
     def recipe_params
       params.require(:recipe).permit(:name,
                                      :boil_time,
@@ -126,5 +84,16 @@ class RecipesController < ApplicationController
                                      :yeast_ids => [],
                                      :yeasts_attributes => [:brand, :variety]
                                    )
+    end
+
+    def load_recipe
+      @recipe ||= Recipe.find(params[:id])
+    end
+
+    def load_ingredients_and_styles
+      @styles ||= Style.all
+      @fermentables ||= Fermentable.all
+      @hops ||= Hop.all
+      @yeasts ||= Yeast.all
     end
 end

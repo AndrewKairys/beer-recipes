@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-xs-4" style="display: inline;">
+    <%= b.check_box(class: "check_box") %> <%= b.object.name %> |
+  </div>
+
+  <div style="display: inline;">
+    <label>Amount:</label>
+    <input type="number" name="recipe[hop_amounts][][<%= b.object.id %>]" value="<%= recipe_hop_amount(b.object) %>"> oz
+    <label>Addition Time:</label>
+    <input type="number" name="recipe[addition_time][][<%= b.object.id %>]" value="<%= recipe_hop_addition_time(b.object) %>"> min<br>
+  </div>
+</div>

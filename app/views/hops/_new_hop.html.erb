@@ -1,0 +1,11 @@
+<% if hop.object.id.nil? %>
+  <%= hop.label :name %>
+  <%= hop.text_field :name %>
+  <%= hop.label :alpha_acids %>
+  <%= hop.text_field :alpha_acids %>
+
+  <label>Amount:</label>
+  <input type="number" name="recipe[new_hop][][amount]"> oz
+  <label>Addition Time:</label>
+  <input type="number" name="recipe[new_hop][][addition_time]"> min<br>
+<% end %>

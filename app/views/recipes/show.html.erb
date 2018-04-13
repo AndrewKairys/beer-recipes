@@ -28,7 +28,5 @@
     </ul>
 <% end %>
 
-<% if @recipe.user == current_user %>
-  <%= link_to "Edit Recipe", edit_user_recipe_path(current_user, @recipe) %> |
-  <%= link_to "Delete Recipe", user_recipe_path(@recipe), :method => :delete %>
-<% end %>
+<%= edit_button_if_current_user %> |
+<%= delete_button_if_current_user %>

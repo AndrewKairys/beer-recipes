@@ -21,59 +21,21 @@
   <%= f.label "Recipe Efficiency Percentage:" %>
   <%= f.number_field :efficiency %><br>
 
-  <!-- This is super ugly but it works -->
   <h3>Style</h3>
   <%= f.label "Pick a style:" %>
-  <% if params[:recipe] %>
-    <% if params[:recipe][:style_id] == "" %>
-      <div class="field_with_errors">
-        <%= f.collection_select(:style_id, styles.sort_by { |f| f.name }, :id, :name, include_blank: true) %><br>
-      </div>
-    <% else %>
-      <%= f.collection_select(:style_id, styles.sort_by { |f| f.name }, :id, :name, include_blank: true) %><br>
-    <% end %>
-  <% else %>
+  <div class="<%= div_style_class %>" style="display: inline;">
     <%= f.collection_select(:style_id, styles.sort_by { |f| f.name }, :id, :name, include_blank: true) %><br>
-  <% end %>
+  </div><br>
 
   <section>
     <h3>Fermentables</h3>
-
     <%= f.collection_check_boxes(:fermentable_ids, fermentables.sort_by { |f| f.name.downcase }, :id, :name) do |b| %>
-      <div class="row">
-        <%= b.label(class: "check_box") do %>
-          <div class="col-xs-4">
-            <%= b.check_box(class: "check_box") %>
-            <%= b.object.name %> |
-            <!-- Should probably change place of this logic -->
-            <% if recipe_fermentable = recipe.recipe_fermentables.find { |rf| rf.fermentable_id == b.object.id } %>
-              <label>Amount:</label>
-              <input type="number" name="recipe[fermentable_amounts][][<%= b.object.id %>]" value="<%= recipe_fermentable.amount %>"> lbs
-            <% else %>
-              <label>Amount:</label>
-              <input type="number" name="recipe[fermentable_amounts][][<%= b.object.id %>]"> lbs
-            <% end %>
-
-          </div>
-        <% end %>
-      </div>
+      <%= render 'fermentables/fermentables_check_box', :b => b %>
     <% end %>
 
     <h4>Add a new fermentable to your recipe</h4>
     <%= f.fields_for :fermentables do |fermentable| %>
-      <% if fermentable.object.id.nil? %>
-        <%= fermentable.label :name %>
-        <%= fermentable.text_field :name %>
-        <%= fermentable.label :pound_per_gallon %>
-        <%= fermentable.number_field :pound_per_gallon %>
-        <%= fermentable.label :lovibond %>
-        <%= fermentable.number_field :lovibond %>
-        <%= fermentable.label :diastatic_power %>
-        <%= fermentable.number_field :diastatic_power %>
-
-        <label>Amount:</label>
-        <input type="number" name="recipe[new_fermentable][][amount]"> lbs<br>
-      <% end %>
+      <%= render 'fermentables/new_fermentable', :fermentable => fermentable %>
     <% end %>
 
   </section><br>
@@ -82,73 +44,29 @@
     <h3>Hops</h3>
 
     <%= f.collection_check_boxes(:hop_ids, hops.sort_by { |f| f.name.downcase }, :id, :name) do |b| %>
-      <div class="row">
-        <%= b.label(class: "check_box") do %>
-          <div class="col-xs-4">
-            <%= b.check_box(class: "check_box") %>
-            <%= b.object.name %> |
-            <!-- Should probably change place of this logic -->
-            <% if recipe_hop = recipe.recipe_hops.find { |rh| rh.hop_id == b.object.id } %>
-              <label>Amount:</label>
-              <input type="number" name="recipe[hop_amounts][][<%= b.object.id %>]" value="<%= recipe_hop.amount %>"> oz
-              <label>Addition Time:</label>
-              <input type="number" name="recipe[addition_time][][<%= b.object.id %>]" value="<%= recipe_hop.addition_time %>"> min<br>
-            <% else %>
-              <label>Amount:</label>
-              <input type="number" name="recipe[hop_amounts][][<%= b.object.id %>]"> oz
-              <label>Addition Time:</label>
-              <input type="number" name="recipe[addition_time][][<%= b.object.id %>]"> min<br>
-            <% end %>
-
-          </div>
-        <% end %>
-      </div>
+      <%= render 'hops/hops_check_box', :b => b %>
     <% end %>
 
     <h4>Add a new hop variety to your recipe</h4>
     <%= f.fields_for :hops do |hop| %>
-      <% if hop.object.id.nil? %>
-        <%= hop.label :name %>
-        <%= hop.text_field :name %>
-        <%= hop.label :alpha_acids %>
-        <%= hop.text_field :alpha_acids %>
-
-        <label>Amount:</label>
-        <input type="number" name="recipe[new_hop][][amount]"> oz
-        <label>Addition Time:</label>
-        <input type="number" name="recipe[new_hop][][addition_time]"> min<br>
-      <% end %>
+      <%= render 'hops/new_hop', :hop => hop %>
     <% end %>
 
-  </section>
+  </section><br>
 
   <section>
     <h3>Yeasts</h3>
-
     <%= f.collection_check_boxes(:yeast_ids, yeasts.order(:brand, :variety), :id, :variety) do |b| %>
-      <div class="row">
-        <%= b.label(class: "check_box") do %>
-          <div class="col-xs-4">
-            <%= b.check_box(class: "check_box") %>
-            <%= b.object.brand %> -
-            <%= b.object.variety %>
-          </div>
-        <% end %>
-      </div>
-    <% end %><br>
+      <%= render 'yeasts/yeasts_check_box', :b => b %>
+    <% end %>
 
     <h4>Add a new yeast variety to your recipe</h4>
     <%= f.fields_for :yeasts do |yeast| %>
-      <% if yeast.object.id.nil? %>
-        <%= yeast.label :brand %>
-        <%= yeast.text_field :brand %>
-        <%= yeast.label :variety %>
-        <%= yeast.text_field :variety %>
-      <% end %>
+      <%= render 'yeasts/new_yeast', :yeast => yeast %>
     <% end %><br>
-
   </section>
 
-  <br></br>
+  <br>
+
   <%= f.submit %>
 <% end %>

@@ -15,7 +15,6 @@ class Recipe < ApplicationRecord
   accepts_nested_attributes_for :yeasts, reject_if: lambda {|attributes| attributes['variety'].blank?}
 
   validates :name, presence: true
-  # validates_associated :recipe_yeasts#maybe add more?
 
   #CLASS METHODS
   def self.smash_beers
@@ -78,7 +77,7 @@ class Recipe < ApplicationRecord
   end
 
   #UPDATE METHODS
-  #***refactor these***
+  #***refactor these?***
   def update_fermentables(fermentable_amounts, fermentable_ids, new_fermentable_amount)
     if new_fermentable_amount != ""
       new_recipe_fermentable = recipe_fermentables.last
@@ -134,8 +133,8 @@ class Recipe < ApplicationRecord
       recipe_hop.addition_time = v.to_f
       recipe_hop.save
     end
-    delete_hops(hop_ids, new_recipe_hop)
 
+    delete_hops(hop_ids, new_recipe_hop)
   end
 
   def delete_hops(hop_ids, new_recipe_hop)
@@ -155,7 +154,6 @@ class Recipe < ApplicationRecord
       rh = recipe_hops.find_by(hop_id: id)
       rh.destroy
     end
-
   end
 
 end

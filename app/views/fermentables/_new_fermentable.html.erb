@@ -1,0 +1,13 @@
+<% if fermentable.object.id.nil? %>
+  <%= fermentable.label :name %>
+  <%= fermentable.text_field :name %>
+  <%= fermentable.label :pound_per_gallon %>
+  <%= fermentable.number_field :pound_per_gallon %>
+  <%= fermentable.label :lovibond %>
+  <%= fermentable.number_field :lovibond %>
+  <%= fermentable.label :diastatic_power %>
+  <%= fermentable.number_field :diastatic_power %>
+
+  <label>Amount:</label>
+  <input type="number" name="recipe[new_fermentable][][amount]"> lbs<br>
+<% end %>
