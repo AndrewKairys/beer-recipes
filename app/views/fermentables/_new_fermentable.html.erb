@@ -1,13 +1,42 @@
 <% if fermentable.object.id.nil? %>
-  <%= fermentable.label :name %>
-  <%= fermentable.text_field :name %>
-  <%= fermentable.label :pound_per_gallon %>
-  <%= fermentable.number_field :pound_per_gallon %>
-  <%= fermentable.label :lovibond %>
-  <%= fermentable.number_field :lovibond %>
-  <%= fermentable.label :diastatic_power %>
-  <%= fermentable.number_field :diastatic_power %>
-
-  <label>Amount:</label>
-  <input type="number" name="recipe[new_fermentable][][amount]"> lbs<br>
+  <div class="row new-ingredient-attributes">
+    <div class="col-md-6 input-label">
+      <%= fermentable.label "Name:" %>
+    </div>
+    <div class="col-md-6">
+      <%= fermentable.text_field :name %>
+    </div>
+  </div>
+  <div class="row new-ingredient-attributes">
+    <div class="col-md-6 input-label">
+      <label>PPG:</label>
+    </div>
+    <div class="col-md-6">
+      <%= fermentable.number_field :pound_per_gallon %>
+    </div>
+  </div>
+  <div class="row new-ingredient-attributes">
+    <div class="col-md-6 input-label">
+      <%= fermentable.label "Lovibond:" %>
+    </div>
+    <div class="col-md-6">
+      <%= fermentable.number_field :lovibond %>
+    </div>
+  </div>
+  <div class="row new-ingredient-attributes">
+    <div class="col-md-6 input-label">
+      <label>DP:</label>
+    </div>
+    <div class="col-md-6">
+      <%= fermentable.number_field :diastatic_power %>
+    </div>
+  </div>
+  <div class="row new-ingredient-attributes">
+    <div class="col-md-6 input-label">
+      <label>Amount:</label>
+    </div>
+    <div class="col-md-6">
+      <input type="number" name="recipe[new_fermentable][][amount]"> (lbs)
+    </div>
+  </div>
 <% end %>

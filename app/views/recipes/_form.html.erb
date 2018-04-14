@@ -1,72 +1,105 @@
-<%= form_for [current_user, recipe] do |f| %>
-  <% if recipe.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(recipe.errors.count, "error") %>
-        prohibited this recipe from being saved:
-      </h2>
+<div class="container">
+  <%= form_for [current_user, recipe] do |f| %>
+    <% if recipe.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+          <%= pluralize(recipe.errors.count, "error") %>
+          prohibited this recipe from being saved:
+        </h2>
 
-      <ul>
-      <% recipe.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+        <ul>
+        <% recipe.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <section class="recipe-form">
+      <div class="recipe-header">
+          <h3>Recipe Name</h3>
+          <%= f.text_field :name %><br>
+      </div>
+
+      <hr>
+
+      <div class="row recipe-row-1">
+        <div class="col-md-6">
+          <h3 class="input-header">Style</h3>
+          <div class="col-md-6 input-label">
+          <%= f.label "Pick a style:" %>
+          </div>
+          <div class="<%= div_style_class %> col-md-6" style="display: inline;">
+            <%= f.collection_select(:style_id, styles.sort_by { |f| f.name }, :id, :name, include_blank: true) %><br>
+          </div><br>
+        </div>
+
+        <div class="col-md-6 right-column">
+          <div class="col-md-6 input-label">
+            <%= f.label "Boil Time:" %>
+          </div>
+          <div class="col-md-6">
+            <%= f.number_field :boil_time, class: "amount-input-field" %> (min)<br>
+          </div>
+
+          <div class="col-md-6 input-label">
+            <%= f.label "Efficiency:" %>
+          </div>
+          <div class="col-md-6">
+            <%= f.number_field :efficiency, class: "amount-input-field" %> (%)<br>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="recipe-form">
+      <h3 class="recipe-header">Fermentables</h3>
+      <div class="row ingredient-checkboxes">
+        <%= f.collection_check_boxes(:fermentable_ids, fermentables.sort_by { |f| f.name.downcase }, :id, :name) do |b| %>
+          <%= render 'fermentables/fermentables_check_box', :b => b %>
+        <% end %>
+      </div>
+
+      <div class="row">
+        <h4 class="new-ingredient-label">Add a new fermentable to your recipe</h4>
+        <%= f.fields_for :fermentables do |fermentable| %>
+          <%= render 'fermentables/new_fermentable', :fermentable => fermentable %>
+        <% end %>
+      </div>
+
+    </section><br>
+
+    <section class="recipe-form">
+      <h3 class="recipe-header">Hops</h3>
+      <div class="row ingredient-checkboxes">
+        <%= f.collection_check_boxes(:hop_ids, hops.sort_by { |f| f.name.downcase }, :id, :name) do |b| %>
+          <%= render 'hops/hops_check_box', :b => b %>
+        <% end %>
+      </div>
+
+      <div class="row">
+        <h4 class="new-ingredient-label">Add a new hop variety to your recipe</h4>
+        <%= f.fields_for :hops do |hop| %>
+          <%= render 'hops/new_hop', :hop => hop %>
+        <% end %>
+      </div>
+
+    </section><br>
+
+    <section class="recipe-form">
+      <h3>Yeasts</h3>
+      <%= f.collection_check_boxes(:yeast_ids, yeasts.order(:brand, :variety), :id, :variety) do |b| %>
+        <%= render 'yeasts/yeasts_check_box', :b => b %>
       <% end %>
-      </ul>
-    </div>
+
+      <h4>Add a new yeast variety to your recipe</h4>
+      <%= f.fields_for :yeasts do |yeast| %>
+        <%= render 'yeasts/new_yeast', :yeast => yeast %>
+      <% end %><br>
+    </section>
+
+    <br>
+
+    <%= f.submit %>
   <% end %>
-
-  <%= f.label "Name:" %>
-  <%= f.text_field :name %><br>
-  <%= f.label "Boil Time (min):" %>
-  <%= f.number_field :boil_time %><br>
-  <%= f.label "Recipe Efficiency Percentage:" %>
-  <%= f.number_field :efficiency %><br>
-
-  <h3>Style</h3>
-  <%= f.label "Pick a style:" %>
-  <div class="<%= div_style_class %>" style="display: inline;">
-    <%= f.collection_select(:style_id, styles.sort_by { |f| f.name }, :id, :name, include_blank: true) %><br>
-  </div><br>
-
-  <section>
-    <h3>Fermentables</h3>
-    <%= f.collection_check_boxes(:fermentable_ids, fermentables.sort_by { |f| f.name.downcase }, :id, :name) do |b| %>
-      <%= render 'fermentables/fermentables_check_box', :b => b %>
-    <% end %>
-
-    <h4>Add a new fermentable to your recipe</h4>
-    <%= f.fields_for :fermentables do |fermentable| %>
-      <%= render 'fermentables/new_fermentable', :fermentable => fermentable %>
-    <% end %>
-
-  </section><br>
-
-  <section>
-    <h3>Hops</h3>
-
-    <%= f.collection_check_boxes(:hop_ids, hops.sort_by { |f| f.name.downcase }, :id, :name) do |b| %>
-      <%= render 'hops/hops_check_box', :b => b %>
-    <% end %>
-
-    <h4>Add a new hop variety to your recipe</h4>
-    <%= f.fields_for :hops do |hop| %>
-      <%= render 'hops/new_hop', :hop => hop %>
-    <% end %>
-
-  </section><br>
-
-  <section>
-    <h3>Yeasts</h3>
-    <%= f.collection_check_boxes(:yeast_ids, yeasts.order(:brand, :variety), :id, :variety) do |b| %>
-      <%= render 'yeasts/yeasts_check_box', :b => b %>
-    <% end %>
-
-    <h4>Add a new yeast variety to your recipe</h4>
-    <%= f.fields_for :yeasts do |yeast| %>
-      <%= render 'yeasts/new_yeast', :yeast => yeast %>
-    <% end %><br>
-  </section>
-
-  <br>
-
-  <%= f.submit %>
-<% end %>
+</div>
