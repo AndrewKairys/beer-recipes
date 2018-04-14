@@ -17,6 +17,15 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
- .logout {
-   float: right;
- }
+.logout {
+  float: right;
+}
+
+body {
+  background-image: url('grey_wash_wall.png');
+
+  .alert, .notice {
+    color: white;
+    text-align: center;
+  }
+}
