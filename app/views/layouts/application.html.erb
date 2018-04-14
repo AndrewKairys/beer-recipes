@@ -13,8 +13,8 @@
       <div class="container-fluid">
         <% if user_signed_in? %>
           <ul class="nav navbar-nav">
-            <li><%= link_to "All Recipes", all_recipes_path %></li>
             <li><%= link_to "Home", user_path(current_user) %></li>
+            <li><%= link_to "All Recipes", all_recipes_path %></li>
             <li><%= link_to "Your Recipes", user_recipes_path(current_user) %></li>
             <li><%= link_to "New Recipe", new_user_recipe_path(current_user) %></li>
             <li><%= link_to "Smash Beers", recipes_smash_beers_path %></li>
@@ -35,8 +35,10 @@
       </div>
     </nav>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <% if alert || notice %>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    <% end %>
 
     <%= yield %>
 
