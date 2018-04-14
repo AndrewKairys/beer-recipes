@@ -16,7 +16,7 @@
 5. [X] OmniAuth
 6. [X] Destroy method
       [X] -If a recipe is destroyed, all recipe ingredients must go as well.
-7. [] Authorization ***WORK***
+7. [] Authorization ***Maybe don't do this***
         -Pundit or CanCanCan
 8. [X] Use partials for recipe edit and new page
 9. [X] Change ingredient attributes to join table

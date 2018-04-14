@@ -9,18 +9,23 @@
   </head>
 
   <body>
-    <nav>
-      <ul>
-        <% if user_signed_in? %>
-          <li><%= link_to "All Recipes", all_recipes_path %></li>
-          <li><%= link_to "Home", user_path(current_user) %></li>
-          <li><%= link_to "Your Recipes", user_recipes_path(current_user) %></li>
-          <li><%= link_to "New Recipe", new_user_recipe_path(current_user) %></li>
-          <li><%= link_to "Smash Beers", recipes_smash_beers_path %></li>
-          <li><%= link_to "Most Popular Styles", styles_most_popular_path %></li>
-          <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></li>
-        <% end %>
-      </ul>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+          <% if user_signed_in? %>
+            <li><%= link_to "All Recipes", all_recipes_path %></li>
+            <li><%= link_to "Home", user_path(current_user) %></li>
+            <li><%= link_to "Your Recipes", user_recipes_path(current_user) %></li>
+            <li><%= link_to "New Recipe", new_user_recipe_path(current_user) %></li>
+            <li><%= link_to "Smash Beers", recipes_smash_beers_path %></li>
+            <li><%= link_to "Most Popular Styles", styles_most_popular_path %></li>
+        </ul>
+
+            <ul class="nav navbar-nav logout">
+              <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></li>
+            </ul>
+          <% end %>
+      </div>
     </nav>
 
     <p class="notice"><%= notice %></p>
