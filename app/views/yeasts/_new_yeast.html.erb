@@ -1,6 +1,19 @@
 <% if yeast.object.id.nil? %>
-  <%= yeast.label :brand %>
-  <%= yeast.text_field :brand %>
-  <%= yeast.label :variety %>
-  <%= yeast.text_field :variety %>
+  <div class="row">
+    <div class="col-md-6 new-attribute-label">
+      <%= yeast.label "Brand:" %>
+    </div>
+    <div class="col-md-6">
+      <%= yeast.text_field :brand %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 new-attribute-label">
+      <%= yeast.label "Variety:" %>
+    </div>
+    <div class="col-md-6">
+      <%= yeast.text_field :variety %>
+    </div>
+  </div>
 <% end %>

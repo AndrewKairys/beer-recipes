@@ -1,24 +1,26 @@
 <div class="row">
-  <div class="col-md-6 check_boxes">
+  <div class="col-md-4 check_boxes">
     <%= b.check_box(class: "check_box") %> <%= b.object.name %>
   </div>
 
-  <div class="col-md-6">
-    <div class="col-md-3 new-ingredient-label">
-      <label class="input-label">Amount:</label>
+  <div class="col-md-4">
+    <div class="col-md-6 input-label">
+      <label>Amount:</label>
     </div>
 
-    <div class="col-md-3">
-      <input type="number" name="recipe[hop_amounts][][<%= b.object.id %>]" value="<%= recipe_hop_amount(b.object) %>" class="amount-input-field"> (oz)
-    </div>
-
-
-    <div class="col-md-3 new-ingredient-label">
-      <label class="input-label">Addition Time:</label>
-    </div>
-
-    <div class="col-md-3">
-      <input type="number" name="recipe[addition_time][][<%= b.object.id %>]" value="<%= recipe_hop_addition_time(b.object) %>" class="amount-input-field"> (min)<br>
+    <div class="col-md-6 hop-amount-input-div">
+      <input type="number" name="recipe[hop_amounts][][<%= b.object.id %>]" value="<%= recipe_hop_amount(b.object) %>" class="hop-amount-input"> (oz)
     </div>
   </div>
+
+  <div class="col-md-4">
+    <div class="col-md-6 input-label">
+      <label>Addition Time:</label>
+    </div>
+
+    <div class="col-md-6">
+      <input type="number" name="recipe[addition_time][][<%= b.object.id %>]" value="<%= recipe_hop_addition_time(b.object) %>" class="hop-amount-input"> (min)<br>
+    </div>
+  </div>
+
 </div>

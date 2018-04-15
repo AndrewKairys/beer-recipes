@@ -1,32 +1,38 @@
-<h1><%= @recipe.name %></h1>
+<div class="recipe-form">
+  <div class="show-recipe">
+    <h2 class="recipe-header"><%= @recipe.name %></h2>
 
-<h3>Created By: <%= @recipe.user.name %></h3>
+    <h3>Created By: <%= @recipe.user.name %></h3>
 
-<h4>Style: <%= @recipe.style.name %></h4>
+    <h3>Style: <%= @recipe.style.name %></h3>
 
-<h4>Fermentables</h4>
-<% @recipe.recipe_fermentables.sort_by { |f| f.fermentable.name.downcase }.each do |recipe_fermentable| %>
-    <ul>
-      <li><%= recipe_fermentable.fermentable.name %> | <%= recipe_fermentable.amount %> lbs</li>
-    </ul>
-<% end %>
+    <h3>Fermentables</h3>
+    <% @recipe.recipe_fermentables.sort_by { |f| f.fermentable.name.downcase }.each do |recipe_fermentable| %>
+        <ul>
+          <li><%= recipe_fermentable.fermentable.name %> | <%= recipe_fermentable.amount %> lbs</li>
+        </ul>
+    <% end %>
 
-<h4>Hops</h4>
-<% @recipe.recipe_hops.order(:addition_time, :amount).reverse.each do |recipe_hop| %>
-    <ul>
-      <li><%= recipe_hop.hop.name %> | <%= recipe_hop.amount %> oz | <%= recipe_hop.addition_time %> min</li>
-    </ul>
-<% end %>
+    <h3>Hops</h3>
+    <% @recipe.recipe_hops.order(:addition_time, :amount).reverse.each do |recipe_hop| %>
+        <ul>
+          <li><%= recipe_hop.hop.name %> | <%= recipe_hop.amount %> oz | <%= recipe_hop.addition_time %> min</li>
+        </ul>
+    <% end %>
 
-<h4>Yeast</h4>
-<% @recipe.recipe_yeasts.sort_by { |ry| [ry.yeast.brand.downcase, ry.yeast.variety.downcase] }.each do |recipe_yeast| %>
-    <ul>
-      <li><%= recipe_yeast.yeast.brand %></li>
-      <ul>
-        <li><%= recipe_yeast.yeast.variety %></li>
-      </ul>
-    </ul>
-<% end %>
- 
-<%= edit_button_if_current_user %> |
-<%= delete_button_if_current_user %>
+    <h3>Yeast</h3>
+    <% @recipe.recipe_yeasts.sort_by { |ry| [ry.yeast.brand.downcase, ry.yeast.variety.downcase] }.each do |recipe_yeast| %>
+        <ul>
+          <li><%= recipe_yeast.yeast.brand %></li>
+          <ul>
+            <li><%= recipe_yeast.yeast.variety %></li>
+          </ul>
+        </ul>
+    <% end %>
+
+    <div class="edit-delete-links">
+      <%= edit_button_if_current_user %> |
+      <%= delete_button_if_current_user %>
+    </div>
+  </div>
+</div>

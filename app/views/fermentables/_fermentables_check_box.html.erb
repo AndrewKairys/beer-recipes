@@ -4,12 +4,12 @@
   </div>
 
   <div class="col-md-6">
-    <div class="col-md-6 new-ingredient-label">
+    <div class="col-md-2 input-label">
       <label class="input-label">Amount:</label>
     </div>
 
-    <div class="col-md-6">
-      <input type="number" name="recipe[fermentable_amounts][][<%= b.object.id %>]" value="<%= recipe_fermentable_amount(b.object) %>", class="amount-input-field"> (lbs)
+    <div class="col-md-10">
+      <input type="number" name="recipe[fermentable_amounts][][<%= b.object.id %>]" value="<%= recipe_fermentable_amount(b.object) %>", class="fermentable-amount-input"> (lbs)
     </div>
   </div>
 

@@ -30,9 +30,7 @@
   text-align: center;
 }
 
-.input-label {
-  text-align: right;
-}
+
 
 
 .recipe-row-1 {
@@ -62,17 +60,11 @@
   }
 
   .check_boxes {
-    margin-left: 20px;
-    width: 40%;
+    text-align: right;
   }
 
   .amount-label {
     width: 35%;
-  }
-
-  .ingredient-checkboxes {
-    margin-right: 180px;
-    margin-left: 180px;
   }
 
   .new-ingredient-label {
@@ -82,8 +74,51 @@
   .new-ingredient-attributes {
     margin: 5px 0px;
   }
+
+  .input-label {
+    padding: 0px;
+  }
+
+  .hop-amount-input-div {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+
+  .yeast-check-box {
+    margin-left: 30%;
+  }
 }
 
-.amount-input-field {
-  width: 51%;
+.fermentable-amount-input {
+  width: 16%;
+}
+
+.hop-amount-input {
+  width: 49%;
+}
+
+.new-attribute-label {
+  text-align: right;
+}
+
+.submit-recipe-button {
+  text-align: center;
+  margin-bottom: 30px;
+
+  input {
+    background-color: #f6f4f1;
+    border-radius: 5px;
+  }
+}
+
+.edit-delete-links {
+  text-align: center;
+  a {
+    color: black;
+  }
+}
+
+.show-recipe {
+  width: 50%;
+  margin: auto;
 }

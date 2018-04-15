@@ -1,11 +1,38 @@
 <% if hop.object.id.nil? %>
-  <%= hop.label :name %>
-  <%= hop.text_field :name %>
-  <%= hop.label :alpha_acids %>
-  <%= hop.text_field :alpha_acids %>
+  <div class="row">
+    <div class="col-md-6 new-attribute-label">
+      <label>Name:</label>
+    </div>
+    <div class="col-md-6">
+      <%= hop.text_field :name %>
+    </div>
+  </div>
 
-  <label>Amount:</label>
-  <input type="number" name="recipe[new_hop][][amount]"> oz
-  <label>Addition Time:</label>
-  <input type="number" name="recipe[new_hop][][addition_time]"> min<br>
+  <div class="row">
+    <div class="col-md-6 new-attribute-label">
+      <label>Alpha Acids:</label>
+    </div>
+    <div class="col-md-6">
+    <%= hop.text_field :alpha_acids %> AA
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 new-attribute-label">
+      <label>Amount:</label>
+    </div>
+    <div class="col-md-6">
+      <input type="number" name="recipe[new_hop][][amount]"> oz
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 new-attribute-label">
+      <label>Addition Time:</label>
+    </div>
+    <div class="col-md-6">
+      <input type="number" name="recipe[new_hop][][addition_time]"> min<br>
+    </div>
+  </div>
+
 <% end %>
