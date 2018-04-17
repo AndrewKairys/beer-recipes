@@ -7,9 +7,10 @@ Rails.application.routes.draw do
   get '/all_recipes' => 'recipes#all_recipes', as: 'all_recipes'
   get '/styles/most_popular' => 'styles#most_popular'
 
-  resources :fermentables, :hops, :recipe_fermentables, :recipe_hops, :recipe_yeasts, :yeasts
+  resources :fermentables, :hops, :recipe_fermentables, :recipe_hops, :recipe_yeasts, :yeasts#delete all of these?
+
   resources :users, only: [:show] do
-    resources :recipes, only: [:show, :index, :edit, :new, :destroy, :create, :update]
+    resources :recipes, only: [:show, :index, :edit, :new, :destroy, :create, :update]#change to no only:
   end
 
 

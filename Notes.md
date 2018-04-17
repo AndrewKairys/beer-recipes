@@ -30,7 +30,8 @@
 12. [X] Get rid of inline css
 13. [X] Bootstrap the styling
 14. [X] Change efficiency attribute back to recipe
-15. [] Complete Readme
+15. [X] Complete Readme
+16. [] Style error messages
 
 Last. [X] Refactor
           -Before action in controllers. Set up find method.
