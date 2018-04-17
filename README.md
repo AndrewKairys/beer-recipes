@@ -1,24 +1,15 @@
-# README
+Beer Recipes
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+About
+This app is designed to create, show, edit, and delete beer recipes for home brewing.
 
-Things you may want to cover:
+Installation
+You can fork and clone the repo from github (https://github.com/NolanHughes/beer-recipes). Run bundle install and then 'rails s' or 'thin start --ssl' to view the app depending on whether you want your local server to run over https or http.
 
-* Ruby version
+If you want to use the sign in with Facebook feature, it will require using https and a 'FACEBOOK_KEY' and 'FACEBOOK_SECRET' that can be obtained from https://developers.facebook.com/. Save these in a .env file in the root directory and you'll be good to go.
 
-* System dependencies
+Contributing
+Bug reports and pull requests are welcome on GitHub at https://github.com/NolanHughes/beer-recipes. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+License
+The project is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

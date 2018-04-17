@@ -27,9 +27,10 @@
 11. [X] Add style model
         -Give style attribute to recipe
           -Add this to new and edit forms
-12. [] Get rid of inline css ***WORK***
-13. [] Bootstrap the styling ***WORK***
+12. [X] Get rid of inline css
+13. [X] Bootstrap the styling
 14. [X] Change efficiency attribute back to recipe
+15. [] Complete Readme
 
 Last. [X] Refactor
           -Before action in controllers. Set up find method.
