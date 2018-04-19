@@ -29,8 +29,8 @@ class RecipesController < ApplicationController
 
   def create
     @recipe = current_user.recipes.build(recipe_params)
-    @recipe.build_style(name: params[:recipe][:style][:name])
-    binding.pry
+
+    @recipe.add_new_style(params[:recipe][:style][:name])
 
     if @recipe.save
       helpers.add_recipe_ingredients

@@ -21,6 +21,14 @@ class Recipe < ApplicationRecord
     self.all.find_all { |recipe| recipe.recipe_hops.count == 1 && recipe.recipe_fermentables.count == 1 }
   end
 
+  #ADD NEW STYLE
+  def add_new_style(style_name)
+    binding.pry
+    if style_name != ""
+      self.build_style(name: style_name)
+    end
+  end
+
   #ADD ATTRIBUTES TO ALREADY CREATED INGREDIENTS
   def add_recipe_fermentables(fermentable_amounts, fermentable_ids)
     amounts = fermentable_amounts.first.keep_if { |k, v| fermentable_ids.include?(k) }
