@@ -1,2 +1,0 @@
-class YeastsController < ApplicationController
-end

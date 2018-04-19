@@ -7,7 +7,7 @@ module RecipesHelper
 
   def delete_button_if_current_user
     if @recipe.user == current_user
-      link_to("Delete Recipe", user_recipe_path(@recipe), :method => :delete).html_safe
+      link_to("Delete Recipe", user_recipe_path(current_user, @recipe), :method => :delete).html_safe
     end
   end
 

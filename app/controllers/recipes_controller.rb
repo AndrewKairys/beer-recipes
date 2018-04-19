@@ -44,9 +44,15 @@ class RecipesController < ApplicationController
   end
 
   def edit
-    @recipe.fermentables.build
-    @recipe.hops.build
-    @recipe.yeasts.build
+    recipe = Recipe.find(params[:id])
+
+    if recipe.user == current_user
+      @recipe.fermentables.build
+      @recipe.hops.build
+      @recipe.yeasts.build
+    else
+      redirect_to user_path, :alert => "That is not your recipe"
+    end
   end
 
   def update

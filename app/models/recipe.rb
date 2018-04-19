@@ -21,6 +21,33 @@ class Recipe < ApplicationRecord
     self.all.find_all { |recipe| recipe.recipe_hops.count == 1 && recipe.recipe_fermentables.count == 1 }
   end
 
+  #ADD ATTRIBUTES TO ALREADY CREATED INGREDIENTS
+  def add_recipe_fermentables(fermentable_amounts, fermentable_ids)
+    amounts = fermentable_amounts.first.keep_if { |k, v| fermentable_ids.include?(k) }
+
+    amounts.each do |k,v|
+      RecipeFermentable.create(recipe_id: self.id, fermentable_id: k.to_i, amount: v.to_f)
+    end
+  end
+
+  def add_recipe_hops(hop_amounts, hop_ids)
+    amounts = hop_amounts.first.keep_if { |k, v| hop_ids.include?(k) }
+
+    amounts.each do |k,v|
+      rh = RecipeHop.create(recipe_id: self.id, hop_id: k.to_i, amount: v.to_f)
+    end
+  end
+
+  def add_addition_time(addition_time, hop_ids)
+    times = addition_time.first.keep_if { |k, v| hop_ids.include?(k) }
+
+    times.each do |k,v|
+      rh = recipe_hops.find_by(hop_id: k.to_i)
+      rh.addition_time = v.to_f
+      rh.save
+    end
+  end
+
   #ADD ATTRIBUTES TO NEWLY CREATED INGREDIENTS
   def add_recipe_fermentable_amount(rf_amount)
     if rf_amount != ""
@@ -45,33 +72,6 @@ class Recipe < ApplicationRecord
       hop_id = Hop.all[-1].id
       rh = recipe_hops.find_by(hop_id: hop_id)
       rh.addition_time = rh_addition_time.to_f
-      rh.save
-    end
-  end
-
-  #ADD ATTRIBUTES TO ALREADY CREATED INGREDIENTS
-  def add_recipe_fermentables(fermentable_amounts, fermentable_ids)
-    amounts = fermentable_amounts.first.keep_if { |k, v| fermentable_ids.include?(k) }
-
-    amounts.each do |k,v|
-      RecipeFermentable.create(recipe_id: self.id, fermentable_id: k.to_i, amount: v.to_f)
-    end
-  end
-
-  def add_recipe_hops(hop_amounts, hop_ids)
-    amounts = hop_amounts.first.keep_if { |k, v| hop_ids.include?(k) }
-
-    amounts.each do |k,v|
-      rh = RecipeHop.create(recipe_id: self.id, hop_id: k.to_i, amount: v.to_f)
-    end
-  end
-
-  def add_addition_time(addition_time, hop_ids)
-    times = addition_time.first.keep_if { |k, v| hop_ids.include?(k) }
-
-    times.each do |k,v|
-      rh = recipe_hops.find_by(hop_id: k.to_i)
-      rh.addition_time = v.to_f
       rh.save
     end
   end
