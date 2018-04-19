@@ -23,7 +23,6 @@ class Recipe < ApplicationRecord
 
   #ADD NEW STYLE
   def add_new_style(style_name)
-    binding.pry
     if style_name != ""
       self.build_style(name: style_name)
     end
