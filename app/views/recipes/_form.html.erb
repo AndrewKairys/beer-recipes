@@ -32,6 +32,13 @@
           <div class="<%= div_style_class %> col-md-6">
             <%= f.collection_select(:style_id, styles.sort_by { |f| f.name }, :id, :name, include_blank: true) %><br>
           </div><br>
+
+          <h4 class="new-ingredient-label">Add a new style to your recipe</h4>
+          <%= f.fields_for :style do |style| %>
+            <%= style.label "Style:" %>
+            <%= style.text_field :name %>
+          <% end %><br>
+
         </div>
 
         <div class="col-md-6 right-column">

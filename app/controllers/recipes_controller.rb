@@ -24,10 +24,13 @@ class RecipesController < ApplicationController
     @recipe.fermentables.build
     @recipe.hops.build
     @recipe.yeasts.build
+    @recipe.build_style
   end
 
   def create
     @recipe = current_user.recipes.build(recipe_params)
+    @recipe.build_style(name: params[:recipe][:style][:name])
+    binding.pry
 
     if @recipe.save
       helpers.add_recipe_ingredients
