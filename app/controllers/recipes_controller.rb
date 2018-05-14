@@ -21,9 +21,7 @@ class RecipesController < ApplicationController
   def new
     @recipe = Recipe.new
 
-    @recipe.fermentables.build
-    @recipe.hops.build
-    @recipe.yeasts.build
+    build_ingredients
     @recipe.build_style
   end
 
@@ -37,9 +35,7 @@ class RecipesController < ApplicationController
 
       redirect_to user_recipe_path(current_user, @recipe)
     else
-      @recipe.fermentables.build
-      @recipe.hops.build
-      @recipe.yeasts.build
+      build_ingredients
 
       render :new
     end
@@ -50,9 +46,7 @@ class RecipesController < ApplicationController
     recipe = Recipe.find(params[:id])
 
     if recipe.user == current_user
-      @recipe.fermentables.build
-      @recipe.hops.build
-      @recipe.yeasts.build
+      build_ingredients
     else
       redirect_to user_path, :alert => "That is not your recipe"
     end
@@ -64,9 +58,7 @@ class RecipesController < ApplicationController
 
       redirect_to user_recipe_path(@recipe)
     else
-      @recipe.fermentables.build
-      @recipe.hops.build
-      @recipe.yeasts.build
+      build_ingredients
 
       render :edit
     end
@@ -104,5 +96,11 @@ class RecipesController < ApplicationController
       @fermentables ||= Fermentable.all
       @hops ||= Hop.all
       @yeasts ||= Yeast.all
+    end
+
+    def build_ingredients
+      @recipe.fermentables.build
+      @recipe.hops.build
+      @recipe.yeasts.build
     end
 end
