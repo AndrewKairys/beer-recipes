@@ -35,3 +35,10 @@
 
 Last. [X] Refactor
           -Before action in controllers. Set up find method.
+
+Javascript Notes
+Add Jquery
+Add AMS
+Make user recipe index have json backend and render via ajax get request
+Add next and previous button to recipe show page and have json backend and render via ajax get request
+Render recipe ingredients on show page with json backend and render via ajax get request
