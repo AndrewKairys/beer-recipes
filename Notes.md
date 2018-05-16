@@ -39,6 +39,6 @@ Last. [X] Refactor
 Javascript Notes
 1.  [X] Add Jquery
 2.  [X] Add AMS
-3.  [] Make user recipe index have json backend and render via ajax get request
-4.  [X] Add next button to recipe show page and have json backend and render via ajax get request
-5.  [X] Render recipe ingredients on show page with json backend and render via ajax get request
+3.  [X] Make user recipe index have json backend and render via ajax get request (Need to put JS not in view and modify serializers to be more dry.)
+4.  [X] Add next button to recipe show page
+5.  [X] Render recipe ingredients on show page on "next recipe" click with json backend and render via ajax get request (reference notes for making it better)

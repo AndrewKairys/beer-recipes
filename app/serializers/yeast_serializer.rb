@@ -1,3 +1,3 @@
 class YeastSerializer < ActiveModel::Serializer
-  attributes :brand, :variety
+  attributes :id, :brand, :variety
 end

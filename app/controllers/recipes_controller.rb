@@ -4,7 +4,7 @@ class RecipesController < ApplicationController
   def index
     @recipes = current_user.recipes
     helpers.no_recipes?
-    
+
     respond_to do |format|
       format.html { render :index }
       format.json { render json: @recipes }

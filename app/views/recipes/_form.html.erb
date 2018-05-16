@@ -34,10 +34,12 @@
           </div><br>
 
           <h4 class="new-ingredient-label">Add a new style to your recipe</h4>
-          <%= f.fields_for :style do |style| %>
-            <%= style.label "Style:" %>
-            <%= style.text_field :name %>
-          <% end %><br>
+          <div class="style-input">
+            <%= f.fields_for :style do |style| %>
+              <%= style.label "Style:" %>
+              <%= style.text_field :name %>
+            <% end %><br>
+          </div>
 
         </div>
 
@@ -96,9 +98,18 @@
 
     <section class="recipe-form">
       <h3 class="recipe-header">Yeasts</h3>
-      <%= f.collection_check_boxes(:yeast_ids, yeasts.order(:brand, :variety), :id, :variety) do |b| %>
-        <%= render 'yeasts/yeasts_check_box', :b => b %>
-      <% end %>
+      <%#= f.collection_check_boxes(:yeast_ids, yeasts.order(:brand, :variety), :id, :variety) do |b| %>
+        <%#= render 'yeasts/yeasts_check_box', :b => b %>
+      <%# end %>
+      <div id="yeast-selection">
+        <select name="recipe[yeast_ids][]" id="recipe_yeast_ids">
+          <option value=""></option>
+          <% yeasts.order(:brand, :variety).each do |yeast| %>
+            <option value="<%=yeast.id%>"><%=yeast.brand%> - <%=yeast.variety%></option>
+          <% end %>
+        </select><br>
+      </div>
+      <a id="add-yeast-button" style="color: black;">Add another yeast</a><br>
 
       <h4 class="new-ingredient-label">Add a new yeast variety to your recipe</h4>
       <%= f.fields_for :yeasts do |yeast| %>
@@ -113,3 +124,11 @@
     </div>
   <% end %>
 </div>
+
+<script>
+  $(function() {
+    $("#add-yeast-button").click(function() {
+      $("#yeast-selection").append("<select name='recipe[yeast_ids][]' id='recipe_yeast_ids'><option value=''></option><% yeasts.order(:brand, :variety).each do |yeast| %><option value='<%=yeast.id%>'><%=yeast.brand%> - <%=yeast.variety%></option><% end %></select><br>")
+    })
+  })
+</script>
