@@ -1,5 +1,4 @@
 class RecipesController < ApplicationController
-  before_action :load_recipe, :only => [:show, :edit, :update, :destroy]
   before_action :load_ingredients_and_styles, :only => [:new, :create, :edit, :update]
 
   def index
@@ -16,6 +15,8 @@ class RecipesController < ApplicationController
   end
 
   def show
+    @recipe ||= Recipe.find(params[:id])
+
     respond_to do |format|
       format.html { render :show }
       format.json { render json: @recipe }
@@ -47,9 +48,9 @@ class RecipesController < ApplicationController
   end
 
   def edit
-    recipe = Recipe.find(params[:id])
+    @recipe ||= Recipe.find(params[:id])
 
-    if recipe.user == current_user
+    if @recipe.user == current_user
       build_ingredients
     else
       redirect_to user_path, :alert => "That is not your recipe"
@@ -57,6 +58,8 @@ class RecipesController < ApplicationController
   end
 
   def update
+    @recipe ||= Recipe.find(params[:id])
+
     if @recipe.update(recipe_params)
       helpers.update_recipe_ingredients
 
@@ -69,6 +72,8 @@ class RecipesController < ApplicationController
   end
 
   def destroy
+    @recipe ||= Recipe.find(params[:id])
+
     if @recipe.destroy
       flash[:notice] = "Recipe destroyed successfully"
     else
@@ -89,10 +94,6 @@ class RecipesController < ApplicationController
                                      :yeast_ids => [],
                                      :yeasts_attributes => [:brand, :variety]
                                    )
-    end
-
-    def load_recipe
-      @recipe ||= Recipe.find(params[:id])
     end
 
     def load_ingredients_and_styles

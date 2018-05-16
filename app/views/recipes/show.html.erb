@@ -1,6 +1,6 @@
 <div class="recipe-form">
   <div class="show-recipe">
-    <h2 class="recipe-header"><%= @recipe.name %></h2>
+    <h2 class="recipe-header recipeName"><%= @recipe.name %></h2>
 
     <h3>Created By: <%= @recipe.user.name %></h3>
 
@@ -30,7 +30,7 @@
         </ul>
     <% end %>
     <!-- DELETE INLINE SYTLING -->
-    <a href="#" class="js-next" data-id="<%=@recipe.id%>" style="color: black;">Next Recipe</a>
+    <a href="#" class="js-next" data-id="<%=@recipe.id%>" data-user-id="<%=@recipe.user.id%>" style="color: black;">Next Recipe</a>
 
     <div class="edit-delete-links">
       <%= edit_button_if_current_user %>
@@ -42,13 +42,11 @@
 <script type="text/javascript" charset="utf-8">
   $(function () {
     $(".js-next").on("click", function() {
-      var nextId = parseInt($(".js-next").attr("data-id")) + 1;
-      $.get("/recipes/" + nextId + ".json", function(data) {
-        $(".productName").text(data["name"]);
-        $(".productPrice").text(data["price"]);
-        $(".productDescription").text(data["description"]);
-        $(".productInventory").text(data["inventory"]);
-        // re-set the id to current on the link
+      const userId = parseInt($(".js-next").attr("data-user-id"))
+      const nextId = parseInt($(".js-next").attr("data-id")) + 1;
+
+      $.get("/users/" + userId + "/recipes/" + nextId + ".json", function(data) {
+        $(".recipeName").text(data["name"]);
         $(".js-next").attr("data-id", data["id"]);
       });
     });
