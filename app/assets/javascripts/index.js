@@ -33,6 +33,8 @@ $(function () {
       }
 
       $(".js-next").attr("data-id", data["id"]);
+      $("#edit-link").attr("href", `/users/${userId}/recipes/${data.id}/edit`);
+      $("#delete-link").attr("href", `/users/${userId}/recipes/${data.id}`);
     });
   });
 });
