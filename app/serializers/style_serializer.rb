@@ -1,3 +1,3 @@
 class StyleSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :name
 end
