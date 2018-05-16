@@ -1,3 +1,3 @@
 class HopSerializer < ActiveModel::Serializer
-  attributes :name, :alpha_acids
+  attributes :id, :name
 end

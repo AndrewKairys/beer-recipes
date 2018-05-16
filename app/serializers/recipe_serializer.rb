@@ -1,5 +1,6 @@
 class RecipeSerializer < ActiveModel::Serializer
-  attributes :name, :boil_time, :efficiency
+  attributes :name, :style
   has_many :recipe_hops
   has_many :hops
+  belongs_to :user
 end
