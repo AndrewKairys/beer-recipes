@@ -37,7 +37,8 @@
 
     <!-- DELETE INLINE SYTLING -->
     <!-- If last recipe, change to "Final recipe" or something similar. Also add "previous recipe" button -->
-    <a href="<%=@recipe.id + 1%>" class="js-next" data-id="<%=@recipe.id%>" data-user-id="<%=@recipe.user.id%>" style="color: black;">Next Recipe</a>
+    <!-- The way href is set right now makes edit and delete buttons not work right -->
+    <a href="#" class="js-next" data-id="<%=@recipe.id%>" data-user-id="<%=@recipe.user.id%>" style="color: black;">Next Recipe</a>
 
     <div class="edit-delete-links">
       <%= edit_button_if_current_user %>
@@ -45,43 +46,3 @@
     </div>
   </div>
 </div>
-
-<script type="text/javascript" charset="utf-8">
-  $(function () {
-    $(".js-next").on("click", function() {
-      const userId = parseInt($(".js-next").attr("data-user-id"))
-      const nextId = parseInt($(".js-next").attr("data-id")) + 1;
-
-      $.get("/users/" + userId + "/recipes/" + nextId + ".json", function(data) {
-        $(".recipeName").text(data.name);
-        $(".userName").text(data.user.name);
-        $(".styleName").text(data.style.name);
-
-        const recipeFermentables = data.recipe_fermentables
-        const fermentables = data.fermentables
-        $(".fermentables").html("")
-        for (var i = 0, l = recipeFermentables.length; i < l; ++i) {
-          $(".fermentables").append("<li>" + fermentables[i].name + " | " + recipeFermentables[i].amount + " lbs | </li>");
-        }
-
-        const recipeHops = data.recipe_hops
-        const hops = data.hops
-        $(".hops").html("")
-        for (var i = 0, l = recipeHops.length; i < l; ++i) {
-          $(".hops").append("<li>" + hops[i].name + " | " + recipeHops[i].amount + " oz | " + recipeHops[i].addition_time + " min</li>");
-        }
-
-        const yeasts = data.yeasts
-        $(".yeasts").html("")
-        for (var i = 0, l = yeasts.length; i < l; ++i) {
-          $(".yeasts").append("<li>" + yeasts[i].brand + "</li>" +
-                            "<ul>" +
-                              "<li>" + yeasts[i].variety + "</li>" +
-                            "</ul>");
-        }
-
-        $(".js-next").attr("data-id", data["id"]);
-      });
-    });
-  });
-</script>
