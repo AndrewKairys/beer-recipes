@@ -25,14 +25,15 @@
       </ul>
 
     <h3>Yeast</h3>
-    <% @recipe.recipe_yeasts.sort_by { |ry| [ry.yeast.brand.downcase, ry.yeast.variety.downcase] }.each do |recipe_yeast| %>
-        <ul>
+      <ul class="yeasts">
+        <% @recipe.recipe_yeasts.sort_by { |ry| [ry.yeast.brand.downcase, ry.yeast.variety.downcase] }.each do |recipe_yeast| %>
           <li><%= recipe_yeast.yeast.brand %></li>
           <ul>
             <li><%= recipe_yeast.yeast.variety %></li>
           </ul>
-        </ul>
-    <% end %>
+        <% end %>
+      </ul>
+
     <!-- DELETE INLINE SYTLING -->
     <a href="#" class="js-next" data-id="<%=@recipe.id%>" data-user-id="<%=@recipe.user.id%>" style="color: black;">Next Recipe</a>
 
@@ -59,6 +60,15 @@
         $(".hops").html("")
         for (var i = 0, l = recipeHops.length; i < l; ++i) {
           $(".hops").append("<li>" + hops[i].name + " | " + recipeHops[i].amount + " oz | " + recipeHops[i].addition_time + " min</li>");
+        }
+
+        const yeasts = data.yeasts
+        $(".yeasts").html("")
+        for (var i = 0, l = yeasts.length; i < l; ++i) {
+          $(".yeasts").append("<li>" + yeasts[i].brand + "</li>" +
+                            "<ul>" +
+                              "<li>" + yeasts[i].variety + "</li>" +
+                            "</ul>");
         }
 
         $(".js-next").attr("data-id", data["id"]);
