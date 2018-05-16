@@ -16,7 +16,6 @@ class RecipesController < ApplicationController
   end
 
   def show
-    # render json: @recipe
     respond_to do |format|
       format.html { render :show }
       format.json { render json: @recipe }
