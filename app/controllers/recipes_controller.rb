@@ -15,7 +15,7 @@ class RecipesController < ApplicationController
   end
 
   def show
-    @recipe ||= Recipe.find(params[:id])
+    @recipe = Recipe.find(params[:id])
 
     respond_to do |format|
       format.html { render :show }

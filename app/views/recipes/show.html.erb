@@ -2,9 +2,9 @@
   <div class="show-recipe">
     <h2 class="recipe-header recipeName"><%= @recipe.name %></h2>
 
-    <h3>Created By: <%= @recipe.user.name %></h3>
+    <h3>Created By: <span class="userName"><%= @recipe.user.name %></span></h3>
 
-    <h3>Style: <%= @recipe.style.name %></h3>
+    <h3>Style: <span class="styleName"><%= @recipe.style.name %></span></h3>
 
     <h3>Fermentables</h3>
     <% @recipe.recipe_fermentables.sort_by { |f| f.fermentable.name.downcase }.each do |recipe_fermentable| %>
@@ -46,7 +46,12 @@
       const nextId = parseInt($(".js-next").attr("data-id")) + 1;
 
       $.get("/users/" + userId + "/recipes/" + nextId + ".json", function(data) {
-        $(".recipeName").text(data["name"]);
+        $(".recipeName").text(data.name);
+        $(".userName").text(data.user.name);
+        $(".styleName").text(data.style.name);
+
+        debugger
+
         $(".js-next").attr("data-id", data["id"]);
       });
     });
