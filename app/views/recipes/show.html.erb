@@ -7,11 +7,12 @@
     <h3>Style: <span class="styleName"><%= @recipe.style.name %></span></h3>
 
     <h3>Fermentables</h3>
-    <% @recipe.recipe_fermentables.sort_by { |f| f.fermentable.name.downcase }.each do |recipe_fermentable| %>
-        <ul>
+      <ul class="fermentables">
+        <% @recipe.recipe_fermentables.sort_by { |f| f.fermentable.name.downcase }.each do |recipe_fermentable| %>
           <li><%= recipe_fermentable.fermentable.name %> | <%= recipe_fermentable.amount %> lbs</li>
-        </ul>
-    <% end %>
+        <% end %>
+      </ul>
+
 
     <h3>Hops</h3>
       <ul class="hops">
@@ -35,7 +36,8 @@
       </ul>
 
     <!-- DELETE INLINE SYTLING -->
-    <a href="#" class="js-next" data-id="<%=@recipe.id%>" data-user-id="<%=@recipe.user.id%>" style="color: black;">Next Recipe</a>
+    <!-- If last recipe, change to "Final recipe" or something similar. Also add "previous recipe" button -->
+    <a href="<%=@recipe.id + 1%>" class="js-next" data-id="<%=@recipe.id%>" data-user-id="<%=@recipe.user.id%>" style="color: black;">Next Recipe</a>
 
     <div class="edit-delete-links">
       <%= edit_button_if_current_user %>
@@ -54,6 +56,13 @@
         $(".recipeName").text(data.name);
         $(".userName").text(data.user.name);
         $(".styleName").text(data.style.name);
+
+        const recipeFermentables = data.recipe_fermentables
+        const fermentables = data.fermentables
+        $(".fermentables").html("")
+        for (var i = 0, l = recipeFermentables.length; i < l; ++i) {
+          $(".fermentables").append("<li>" + fermentables[i].name + " | " + recipeFermentables[i].amount + " lbs | </li>");
+        }
 
         const recipeHops = data.recipe_hops
         const hops = data.hops

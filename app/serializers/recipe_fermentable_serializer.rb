@@ -1,3 +1,3 @@
 class RecipeFermentableSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :amount
 end
