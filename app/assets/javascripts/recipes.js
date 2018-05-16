@@ -1,4 +1,5 @@
 $(function () {
+
   $(".js-next").on("click", function() {
     const userId = parseInt($(".js-next").attr("data-user-id"))
     // This is not a good way to do things because recipe ids don't always increment by 1. (ex. recipes can get deleted)

@@ -1,7 +1,16 @@
-<h1>Here are all of your recipes, <%= current_user.name %></h1>
+<h1 data-user-id="<%= current_user.id %>">Here are all of your recipes, <%= current_user.name %></h1>
 
 <ul class="recipes">
-<% @recipes.each do |recipe| %>
-  <li><%= link_to recipe.name, user_recipe_path(current_user, recipe) %></li>
-<% end %>
 </ul>
+
+<script>
+  $(function() {
+    const userId = parseInt($("h1").attr("data-user-id"))
+
+    $.get(`/users/${userId}/recipes.json`, function(data){
+      for (var i = 0, l = data.length; i < l; ++i) {
+        $(".recipes").append("<li>" + "<a href='/users/" + data[i].user.id + "/recipes/" + data[i].id + "'>" + data[i].name + "</a>" + "</li>");
+      }
+    })
+  })
+</script>

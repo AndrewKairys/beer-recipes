@@ -13,7 +13,6 @@
         <% end %>
       </ul>
 
-
     <h3>Hops</h3>
       <ul class="hops">
         <% @recipe.recipe_hops.order(:addition_time, :amount).reverse.each do |recipe_hop| %>
@@ -43,5 +42,6 @@
       <%= edit_button_if_current_user %>
       <%= delete_button_if_current_user %>
     </div>
+    
   </div>
 </div>
