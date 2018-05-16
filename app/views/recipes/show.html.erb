@@ -14,11 +14,15 @@
     <% end %>
 
     <h3>Hops</h3>
-    <% @recipe.recipe_hops.order(:addition_time, :amount).reverse.each do |recipe_hop| %>
-        <ul>
-          <li><%= recipe_hop.hop.name %> | <%= recipe_hop.amount %> oz | <%= recipe_hop.addition_time %> min</li>
-        </ul>
-    <% end %>
+      <ul class="hops">
+        <% @recipe.recipe_hops.order(:addition_time, :amount).reverse.each do |recipe_hop| %>
+          <li>
+            <span><%= recipe_hop.hop.name %></span> |
+            <span><%= recipe_hop.amount %></span> oz |
+            <span><%= recipe_hop.addition_time %></span> min
+          </li>
+        <% end %>
+      </ul>
 
     <h3>Yeast</h3>
     <% @recipe.recipe_yeasts.sort_by { |ry| [ry.yeast.brand.downcase, ry.yeast.variety.downcase] }.each do |recipe_yeast| %>
@@ -50,7 +54,12 @@
         $(".userName").text(data.user.name);
         $(".styleName").text(data.style.name);
 
-        debugger
+        const recipeHops = data.recipe_hops
+        const hops = data.hops
+        $(".hops").html("")
+        for (var i = 0, l = recipeHops.length; i < l; ++i) {
+          $(".hops").append("<li>" + hops[i].name + " | " + recipeHops[i].amount + " oz | " + recipeHops[i].addition_time + " min</li>");
+        }
 
         $(".js-next").attr("data-id", data["id"]);
       });

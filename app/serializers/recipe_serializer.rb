@@ -1,5 +1,5 @@
 class RecipeSerializer < ActiveModel::Serializer
-  attributes :name
+  attributes :id, :name
   has_many :recipe_hops
   has_many :hops
   belongs_to :user
