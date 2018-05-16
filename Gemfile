@@ -35,12 +35,21 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Use devise for authentication
 gem 'devise'
+# Use dotenv for .env files
 gem 'dotenv-rails'
+# Omni auth for third party authentication
 gem 'omniauth'
 gem 'omniauth-facebook'
+# Use pry for debugging
 gem 'pry'
+# Use bootstrap for css styling
 gem 'bootstrap-sass', '~> 3.2.0'
+# Use jquery
+gem 'jquery-rails'
+# Use AMS
+gem 'active_model_serializers'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -58,6 +67,3 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-# gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

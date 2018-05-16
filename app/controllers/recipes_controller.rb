@@ -16,6 +16,7 @@ class RecipesController < ApplicationController
   end
 
   def show
+    render json: @recipe
   end
 
   def new
