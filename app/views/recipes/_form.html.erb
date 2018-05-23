@@ -87,6 +87,14 @@
         <% end %>
       </div>
 
+      <div id="hops-selection" class="row">
+        <% if @recipe.recipe_hops.empty? %>
+          <%= render 'hops/new_hop_dropdowns', :hops => hops, :f => f %>
+        <% else %>
+          <%= render 'hops/edit_hop_dropdowns', :hops => hops, :f => f %>
+        <% end %>
+      </div>
+
       <div class="row">
         <h4 class="new-ingredient-label">Add a new hop variety to your recipe</h4>
         <%= f.fields_for :hops do |hop| %>
@@ -125,6 +133,8 @@
   <% end %>
 </div>
 
+<!-- MOVE THIS -->
+<!-- ADD HANDLEBARS -->
 <script>
   $(function() {
     $("#add-yeast-button").click(function() {

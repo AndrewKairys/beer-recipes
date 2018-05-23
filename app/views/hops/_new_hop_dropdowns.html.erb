@@ -1,0 +1,1 @@
+<%= f.collection_select :hop_ids, hops.order(:name.downcase), :id, :name, {include_blank: true }, {:name => 'recipe[hop_ids][]'} %><br>

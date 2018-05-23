@@ -1,0 +1,3 @@
+<% @recipe.recipe_hops.each do |hop| %>
+  <%= f.collection_select :yeast_ids, hops.order(:name.downcase), :id, :name, {:selected => hop.hop_id, include_blank: true }, { name: 'recipe[hop_ids][]' } %><br>
+<% end %>
