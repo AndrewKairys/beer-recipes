@@ -5,4 +5,8 @@ class Yeast < ApplicationRecord
   validates :variety, uniqueness: true
   validates :brand, presence: true
   validates :variety, presence: true
+
+  def brand_and_variety
+    "#{brand} - #{variety}"
+  end
 end
