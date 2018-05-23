@@ -1,4 +1,4 @@
-<div id="hops-dropdown">
+<div class="hops-dropdown">
   <%= f.collection_select :hop_ids, hops.sort_by { |f| f.name.downcase }, :id, :name, {include_blank: true }, {:name => 'recipe[hop_ids][]', class: "col-md-4"} %>
 </div>
 
@@ -17,18 +17,18 @@
     <label>Addition Time:</label>
   </div>
 
-  <div class="col-md-6" id="hop-addition-time-input-div">
+  <div class="col-md-6 hop-addition-time-input-div">
     <input type="number" name="recipe[addition_time][]" value="" class="hop-amount-input"> (min)<br>
   </div>
 </div>
 
 <script>
 $(function() {
-  $("#hops-dropdown").on("change", function(data) {
+  $(".hops-dropdown").on("change", function(data) {
     let id = document.getElementById("recipe_hop_ids").options[document.getElementById("recipe_hop_ids").selectedIndex].value
 
     $(".hop-amount-input-div").html(`<input type="number" name="recipe[hop_amounts][][${id}]" value="" class="hop-amount-input"> (oz)`)
-    $("#hop-addition-time-input-div").html(`<input type="number" name="recipe[addition_time][][${id}]" value="" class="hop-amount-input"> (min)<br>`)
+    $(".hop-addition-time-input-div").html(`<input type="number" name="recipe[addition_time][][${id}]" value="" class="hop-amount-input"> (min)<br>`)
   });
 });
 </script>

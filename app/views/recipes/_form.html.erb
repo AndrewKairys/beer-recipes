@@ -95,6 +95,10 @@
         <% end %>
       </div>
 
+      <div id="hop-button-div">
+        <a id="add-hop-button" style="color: black;">Add another hop</a><br>
+      </div>
+
       <div class="row">
         <h4 class="new-ingredient-label">Add a new hop variety to your recipe</h4>
         <%= f.fields_for :hops do |hop| %>
@@ -139,6 +143,10 @@
   $(function() {
     $("#add-yeast-button").click(function() {
       $("#yeast-selection").append("<select name='recipe[yeast_ids][]' id='recipe_yeast_ids'><option value=''></option><% yeasts.order(:brand, :variety).each do |yeast| %><option value='<%=yeast.id%>'><%= yeast.brand %> - <%=yeast.variety%></option><% end %></select><br>")
+    })
+
+    $("#add-hop-button").click(function() {
+      $("#hop-selection").append("<select name='recipe[yeast_ids][]' id='recipe_yeast_ids'><option value=''></option><% yeasts.order(:brand, :variety).each do |yeast| %><option value='<%=yeast.id%>'><%= yeast.brand %> - <%=yeast.variety%></option><% end %></select><br>")
     })
   })
 </script>
