@@ -100,13 +100,13 @@
       <h3 class="recipe-header">Yeasts</h3>
 
       <div id="yeast-selection">
-        <select name="recipe[yeast_ids][]" id="recipe_yeast_ids">
-          <option value=""></option>
-          <% yeasts.order(:brand, :variety).each do |yeast| %>
-            <option value="<%=yeast.id%>"><%=yeast.brand%> - <%=yeast.variety%></option>
-          <% end %>
-        </select><br>
+        <% if @recipe.recipe_yeasts.empty? %>
+          <%= render 'yeasts/new_yeast_dropdowns', :yeasts => yeasts, :f => f %>
+        <% else %>
+          <%= render 'yeasts/edit_yeast_dropdowns', :yeasts => yeasts, :f => f %>
+        <% end %>
       </div>
+
       <div id="yeast-button-div">
         <a id="add-yeast-button" style="color: black;">Add another yeast</a><br>
       </div>
@@ -128,7 +128,7 @@
 <script>
   $(function() {
     $("#add-yeast-button").click(function() {
-      $("#yeast-selection").append("<select name='recipe[yeast_ids][]' id='recipe_yeast_ids'><option value=''></option><% yeasts.order(:brand, :variety).each do |yeast| %><option value='<%=yeast.id%>'><%=yeast.brand%> - <%=yeast.variety%></option><% end %></select><br>")
+      $("#yeast-selection").append("<select name='recipe[yeast_ids][]' id='recipe_yeast_ids'><option value=''></option><% yeasts.order(:brand, :variety).each do |yeast| %><option value='<%=yeast.id%>'><%=yeast.variety%></option><% end %></select><br>")
     })
   })
 </script>

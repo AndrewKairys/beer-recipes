@@ -1,0 +1,3 @@
+<% @recipe.recipe_yeasts.each do |yeast| %>
+  <%= f.collection_select :yeast_ids, Yeast.order(:brand, :variety), :id, :variety, {:selected => yeast.yeast_id, include_blank: true }, { name: 'recipe[yeast_ids][]' } %><br>
+<% end %>
