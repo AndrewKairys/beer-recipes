@@ -98,9 +98,7 @@
 
     <section class="recipe-form">
       <h3 class="recipe-header">Yeasts</h3>
-      <%#= f.collection_check_boxes(:yeast_ids, yeasts.order(:brand, :variety), :id, :variety) do |b| %>
-        <%#= render 'yeasts/yeasts_check_box', :b => b %>
-      <%# end %>
+
       <div id="yeast-selection">
         <select name="recipe[yeast_ids][]" id="recipe_yeast_ids">
           <option value=""></option>
@@ -109,7 +107,9 @@
           <% end %>
         </select><br>
       </div>
-      <a id="add-yeast-button" style="color: black;">Add another yeast</a><br>
+      <div id="yeast-button-div">
+        <a id="add-yeast-button" style="color: black;">Add another yeast</a><br>
+      </div>
 
       <h4 class="new-ingredient-label">Add a new yeast variety to your recipe</h4>
       <%= f.fields_for :yeasts do |yeast| %>
