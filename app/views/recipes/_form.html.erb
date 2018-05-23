@@ -81,11 +81,11 @@
 
     <section class="recipe-form">
       <h3 class="recipe-header">Hops</h3>
-      <div class="row ingredient-checkboxes">
-        <%= f.collection_check_boxes(:hop_ids, hops.sort_by { |f| f.name.downcase }, :id, :name) do |b| %>
-          <%= render 'hops/hops_check_box', :b => b %>
-        <% end %>
-      </div>
+      <!-- <div class="row ingredient-checkboxes">
+        <%#= f.collection_check_boxes(:hop_ids, hops.sort_by { |f| f.name.downcase }, :id, :name) do |b| %>
+          <%#= render 'hops/hops_check_box', :b => b %>
+        <%# end %>
+      </div> -->
 
       <div id="hops-selection" class="row">
         <% if @recipe.recipe_hops.empty? %>
