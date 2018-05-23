@@ -1,13 +1,12 @@
 <div class="hops-dropdown">
-  <%= f.collection_select :hop_ids, hops.sort_by { |f| f.name.downcase }, :id, :name, {include_blank: true }, {:name => 'recipe[hop_ids][]', class: "col-md-4"} %>
+  <%= f.collection_select :hop_ids, hops.sort_by { |f| f.name.downcase }, :id, :name, {include_blank: true }, {:name => 'recipe[hop_ids][]', :class => "col-md-4", :onchange => "updateHopIndexes(this.value, 1)"} %>
 </div>
-
 <div class="col-md-4">
   <div class="col-md-6 input-label">
     <label>Amount:</label>
   </div>
 
-  <div class="col-md-6 hop-amount-input-div">
+  <div class="col-md-6 hop-amount-input-div-1">
     <input type="number" name="recipe[hop_amounts][]" value="" class="hop-amount-input"> (oz)
   </div>
 </div>
@@ -17,18 +16,7 @@
     <label>Addition Time:</label>
   </div>
 
-  <div class="col-md-6 hop-addition-time-input-div">
+  <div class="col-md-6 hop-addition-time-input-div-1">
     <input type="number" name="recipe[addition_time][]" value="" class="hop-amount-input"> (min)<br>
   </div>
 </div>
-
-<script>
-$(function() {
-  $(".hops-dropdown").on("change", function(data) {
-    let id = document.getElementById("recipe_hop_ids").options[document.getElementById("recipe_hop_ids").selectedIndex].value
-
-    $(".hop-amount-input-div").html(`<input type="number" name="recipe[hop_amounts][][${id}]" value="" class="hop-amount-input"> (oz)`)
-    $(".hop-addition-time-input-div").html(`<input type="number" name="recipe[addition_time][][${id}]" value="" class="hop-amount-input"> (min)<br>`)
-  });
-});
-</script>
