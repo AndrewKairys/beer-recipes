@@ -38,20 +38,27 @@ class Recipe < ApplicationRecord
   end
 
   def add_recipe_hops(hop_amounts, hop_ids)
-    amounts = hop_amounts.first.keep_if { |k, v| hop_ids.include?(k) }
+    hop_amounts.delete("")
+    hop_ids.delete("")
 
-    amounts.each do |k,v|
-      rh = RecipeHop.create(recipe_id: self.id, hop_id: k.to_i, amount: v.to_f)
+    if hop_ids != [""]
+      hop_amounts.each do |k, v|
+        rh = RecipeHop.create(recipe_id: self.id, hop_id: k.keys.first.to_i, amount: k.values.first.to_f)
+      end
     end
   end
 
   def add_addition_time(addition_time, hop_ids)
-    times = addition_time.first.keep_if { |k, v| hop_ids.include?(k) }
+    addition_time.delete("")
+    hop_ids.delete("")
 
-    times.each do |k,v|
-      rh = recipe_hops.find_by(hop_id: k.to_i)
-      rh.addition_time = v.to_f
-      rh.save
+    if hop_ids != [""]
+
+      addition_time.each do |k,v|
+        rh = recipe_hops.find_by(hop_id: k.keys.first.to_i)
+        rh.addition_time = k.values.first.to_f
+        rh.save
+      end
     end
   end
 
