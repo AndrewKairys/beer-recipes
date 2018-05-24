@@ -13,20 +13,17 @@ module RecipesHelper
 
   def add_recipe_ingredients
     @recipe.add_recipe_fermentable_amount(params[:recipe][:new_fermentable].first[:amount])
-    @recipe.add_recipe_hop_amount(params[:recipe][:new_hop].first[:amount])
-    @recipe.add_recipe_hop_addition_time(params[:recipe][:new_hop].first[:addition_time])
+    @recipe.add_recipe_hop_amount(params[:recipe][:new_hop].first[:amount], params[:recipe][:new_hop].first[:addition_time])
 
     @recipe.add_recipe_fermentables(params[:recipe][:fermentable_amounts], params[:recipe][:fermentable_ids])
-    @recipe.add_recipe_hops(params[:recipe][:hop_amounts], params[:recipe][:hop_ids])
-    @recipe.add_addition_time(params[:recipe][:addition_time], params[:recipe][:hop_ids])
+    @recipe.add_recipe_hops(params[:recipe][:recipe_hop_attributes], params[:recipe][:hop_ids])
   end
 
   def update_recipe_ingredients
     @recipe.add_recipe_fermentable_amount(params[:recipe][:new_fermentable].first[:amount])
-    @recipe.add_recipe_hop_amount(params[:recipe][:new_hop].first[:amount])
-    @recipe.add_recipe_hop_addition_time(params[:recipe][:new_hop].first[:addition_time])
+    @recipe.add_recipe_hop_amount(params[:recipe][:new_hop].first[:amount], params[:recipe][:new_hop].first[:addition_time])
 
-    @recipe.update_hops(params[:recipe][:hop_amounts], params[:recipe][:addition_time], params[:recipe][:hop_ids], params[:recipe][:new_hop].first[:amount])
+    @recipe.update_hops(params[:recipe][:recipe_hop_attributes], params[:recipe][:hop_ids], params[:recipe][:new_hop].first[:amount])
     @recipe.update_fermentables(params[:recipe][:fermentable_amounts], params[:recipe][:fermentable_ids], params[:recipe][:new_fermentable].first[:amount])
   end
 

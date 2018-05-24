@@ -1,5 +1,5 @@
 <div class="hops-dropdown">
-  <%= f.collection_select :hop_ids, hops.sort_by { |f| f.name.downcase }, :id, :name, {include_blank: true }, {:name => 'recipe[hop_ids][]', :class => "col-md-4", :onchange => "updateHopIndexes(this.value, 1)"} %>
+  <%= f.collection_select :hop_ids, hops.sort_by { |f| f.name.downcase }, :id, :name, {include_blank: true }, {:name => 'recipe[hop_ids][]', :class => "col-md-4 recipe_hop_ids", :data_value => 1, :onchange => "updateHopIndexes(this.value, 1, '', '')"} %>
 </div>
 <div class="col-md-4">
   <div class="col-md-6 input-label">
@@ -7,7 +7,7 @@
   </div>
 
   <div class="col-md-6 hop-amount-input-div-1">
-    <input type="number" name="recipe[hop_amounts][]" value="" class="hop-amount-input"> (oz)
+    <input type="number" name="" value="" class="hop-amount-input"> (oz)
   </div>
 </div>
 
@@ -17,6 +17,6 @@
   </div>
 
   <div class="col-md-6 hop-addition-time-input-div-1">
-    <input type="number" name="recipe[addition_time][]" value="" class="hop-amount-input"> (min)<br>
+    <input type="number" name="" value="" class="hop-amount-input"> (min)<br>
   </div>
 </div>

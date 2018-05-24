@@ -37,7 +37,6 @@ class RecipesController < ApplicationController
 
   def create
     @recipe = current_user.recipes.build(recipe_params)
-
     @recipe.add_new_style(params[:recipe][:style][:name])
 
     if @recipe.save

@@ -37,27 +37,12 @@ class Recipe < ApplicationRecord
     end
   end
 
-  def add_recipe_hops(hop_amounts, hop_ids)
-    hop_amounts.delete("")
+  def add_recipe_hops(recipe_hop_attributes, hop_ids)
     hop_ids.delete("")
-
-    if hop_ids != [""]
-      hop_amounts.each do |k, v|
-        rh = RecipeHop.create(recipe_id: self.id, hop_id: k.keys.first.to_i, amount: k.values.first.to_f)
-      end
-    end
-  end
-
-  def add_addition_time(addition_time, hop_ids)
-    addition_time.delete("")
-    hop_ids.delete("")
-
-    if hop_ids != [""]
-
-      addition_time.each do |k,v|
-        rh = recipe_hops.find_by(hop_id: k.keys.first.to_i)
-        rh.addition_time = k.values.first.to_f
-        rh.save
+    
+    if hop_ids != []
+      recipe_hop_attributes.each do |k, v|
+        rh = RecipeHop.create(recipe_id: self.id, hop_id: k.to_i, amount: v[:amount].to_f, addition_time: v[:addition_time].to_f)
       end
     end
   end
@@ -72,19 +57,11 @@ class Recipe < ApplicationRecord
     end
   end
 
-  def add_recipe_hop_amount(rh_amount)
+  def add_recipe_hop_amount(rh_amount, rh_addition_time)
     if rh_amount != ""
       hop_id = Hop.all[-1].id
       rh = recipe_hops.find_by(hop_id: hop_id)
       rh.amount = rh_amount.to_f
-      rh.save
-    end
-  end
-
-  def add_recipe_hop_addition_time(rh_addition_time)
-    if rh_addition_time != ""
-      hop_id = Hop.all[-1].id
-      rh = recipe_hops.find_by(hop_id: hop_id)
       rh.addition_time = rh_addition_time.to_f
       rh.save
     end
@@ -128,45 +105,33 @@ class Recipe < ApplicationRecord
 
   end
 
-  def update_hops(hop_amounts, addition_time, hop_ids, new_hop_amount)
+  def update_hops(recipe_hop_attributes, hop_ids, new_hop_amount)
     if new_hop_amount != ""
       new_recipe_hop = recipe_hops.last
     end
 
-    amounts = hop_amounts.first.keep_if { |k, v| hop_ids.include?(k) }
-    times = addition_time.first.keep_if { |k, v| hop_ids.include?(k) }
-
-    amounts.each do |k, v|
-      recipe_hop = recipe_hops.where(hop_id: k.to_i).first_or_create
-      recipe_hop.amount = v.to_f
-      recipe_hop.save
-    end
-
-    times.each do |k, v|
-      recipe_hop = recipe_hops.where(hop_id: k.to_i).first_or_create
-      recipe_hop.addition_time = v.to_f
-      recipe_hop.save
+    if recipe_hop_attributes != nil
+      recipe_hop_attributes.each do |k, v|
+        recipe_hop = recipe_hops.where(hop_id: k.to_i).first_or_create
+        recipe_hop.amount = v[:amount].to_f
+        recipe_hop.addition_time = v[:addition_time].to_f
+        recipe_hop.save
+      end
     end
 
     delete_hops(hop_ids, new_recipe_hop)
   end
 
+  # Once duplicate hops can be entered, Make it so it filters by recipe_hop.id instead of hop_id
   def delete_hops(hop_ids, new_recipe_hop)
-    recipe_hop_ids = recipe_hops.collect { |rh| rh.hop_id }
-
-    hop_id_integers = hop_ids.collect { |id| id.to_i }
-    hop_id_integers.shift
-
-    if new_recipe_hop.nil?
-      to_delete = recipe_hop_ids - hop_id_integers
-    else
-      rhi = recipe_hop_ids.reject { |n| n == new_recipe_hop.hop_id }
-      to_delete = rhi - hop_id_integers
+    if new_recipe_hop != nil
+      hop_ids.push(new_recipe_hop.hop_id.to_s)
     end
 
-    to_delete.each do |id|
-      rh = recipe_hops.find_by(hop_id: id)
-      rh.destroy
+    recipe_hops.each do |recipe_hop|
+      if !hop_ids.include?(recipe_hop.hop_id.to_s)
+        recipe_hop.destroy
+      end
     end
   end
 

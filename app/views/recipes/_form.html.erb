@@ -81,11 +81,6 @@
 
     <section class="recipe-form">
       <h3 class="recipe-header">Hops</h3>
-      <!-- <div class="row ingredient-checkboxes">
-        <%#= f.collection_check_boxes(:hop_ids, hops.sort_by { |f| f.name.downcase }, :id, :name) do |b| %>
-          <%#= render 'hops/hops_check_box', :b => b %>
-        <%# end %>
-      </div> -->
 
       <div id="hops-selection" class="row">
         <% if @recipe.recipe_hops.empty? %>
@@ -94,8 +89,8 @@
           <%= render 'hops/edit_hop_dropdowns', :hops => hops, :f => f %>
         <% end %>
       </div>
-      <div id="new-hop-dropdown">
 
+      <div id="new-hop-dropdown">
       </div>
 
       <div id="hop-button-div">
@@ -142,26 +137,26 @@
 
 <!-- MOVE THIS -->
 <!-- ADD HANDLEBARS -->
-<!-- GETTING ERRORS WHEN HOP DROPDOWN IS BLANK -->
 <script>
   $(function() {
     $("#add-yeast-button").click(function() {
       $("#yeast-selection").append("<select name='recipe[yeast_ids][]' id='recipe_yeast_ids'><option value=''></option><% yeasts.order(:brand, :variety).each do |yeast| %><option value='<%=yeast.id%>'><%= yeast.brand %> - <%=yeast.variety%></option><% end %></select><br>")
     })
 
-    let hopCounter = 1
-
     $("#add-hop-button").click(function() {
-      hopCounter += 1
+      let hopCounter = parseInt($(".recipe_hop_ids").last().attr("data_value")) + 1
 
-      $("#hops-selection").append(`<div class="hops-dropdown"><select name="recipe[hop_ids][]" class="col-md-4" onchange="updateHopIndexes(this.value, ${hopCounter})" id="recipe_hop_ids"><option value=""></option><% hops.sort_by { |f| f.name.downcase }.each do |hop| %><option value='<%=hop.id%>'><%= hop.name %></option><% end %></select></div><div class="col-md-4"><div class="col-md-6 input-label"><label>Amount:</label></div><div class="col-md-6 hop-amount-input-div-${hopCounter}"><input type="number" name="recipe[hop_amounts][]" value="" class="hop-amount-input"> (oz)</div></div><div class="col-md-4"><div class="col-md-6 input-label"><label>Addition Time:</label></div><div class="col-md-6 hop-addition-time-input-div-${hopCounter}"><input type="number" name="recipe[addition_time][]" value="" class="hop-amount-input"> (min)<br></div></div>`)
+      $("#hops-selection").append(`<div class="hops-dropdown"><select name="recipe[hop_ids][]" class="col-md-4 recipe_hop_ids" data_value="${hopCounter}" onchange="updateHopIndexes(this.value, ${hopCounter}, '', '')"><option value=""></option><% hops.sort_by { |f| f.name.downcase }.each do |hop| %><option value='<%=hop.id%>'><%= hop.name %></option><% end %></select></div><div class="col-md-4"><div class="col-md-6 input-label"><label>Amount:</label></div><div class="col-md-6 hop-amount-input-div-${hopCounter}"><input type="number" name="" value="" class="hop-amount-input"> (oz)</div></div><div class="col-md-4"><div class="col-md-6 input-label"><label>Addition Time:</label></div><div class="col-md-6 hop-addition-time-input-div-${hopCounter}"><input type="number" name="" value="" class="hop-amount-input"> (min)<br></div></div>`)
     })
   })
 
-  function updateHopIndexes(id, index) {
-    $(`.hop-amount-input-div-${index}`).html(`<input type="number" name="recipe[hop_amounts][][${id}]" value="" class="hop-amount-input"> (oz)`)
-    $(`.hop-addition-time-input-div-${index}`).html(`<input type="number" name="recipe[addition_time][][${id}]" value="" class="hop-amount-input"> (min)<br>`)
+  function updateHopIndexes(id, index, amount, addition_time) {
+    if(id === "") {
+      $(`.hop-amount-input-div-${index}`).html(`<input type="number" name="" value="" class="hop-amount-input"> (oz)`)
+      $(`.hop-addition-time-input-div-${index}`).html(`<input type="number" name="" value="" class="hop-amount-input"> (min)<br>`)
+    } else {
+      $(`.hop-amount-input-div-${index}`).html(`<input type="number" name="recipe[recipe_hop_attributes][${id}][amount]" value="${amount}" class="hop-amount-input"> (oz)`)
+      $(`.hop-addition-time-input-div-${index}`).html(`<input type="number" name="recipe[recipe_hop_attributes][${id}][addition_time]" value="${addition_time}" class="hop-amount-input"> (min)<br>`)
+    }
   }
-
-
 </script>
