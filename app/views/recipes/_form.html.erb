@@ -149,12 +149,12 @@
       $("#yeast-selection").append("<select name='recipe[yeast_ids][]' id='recipe_yeast_ids'><option value=''></option><% yeasts.order(:brand, :variety).each do |yeast| %><option value='<%=yeast.id%>'><%= yeast.brand %> - <%=yeast.variety%></option><% end %></select><br>")
     })
 
-    let counter = 1
+    let hopCounter = 1
 
     $("#add-hop-button").click(function() {
-      counter += 1
+      hopCounter += 1
 
-      $("#hops-selection").append(`<div class="hops-dropdown"><select name="recipe[hop_ids][]" class="col-md-4" onchange="updateHopIndexes(this.value, ${counter})" id="recipe_hop_ids"><option value=""></option><% hops.sort_by { |f| f.name.downcase }.each do |hop| %><option value='<%=hop.id%>'><%= hop.name %></option><% end %></select></div><div class="col-md-4"><div class="col-md-6 input-label"><label>Amount:</label></div><div class="col-md-6 hop-amount-input-div-${counter}"><input type="number" name="recipe[hop_amounts][]" value="" class="hop-amount-input"> (oz)</div></div><div class="col-md-4"><div class="col-md-6 input-label"><label>Addition Time:</label></div><div class="col-md-6 hop-addition-time-input-div-${counter}"><input type="number" name="recipe[addition_time][]" value="" class="hop-amount-input"> (min)<br></div></div>`)
+      $("#hops-selection").append(`<div class="hops-dropdown"><select name="recipe[hop_ids][]" class="col-md-4" onchange="updateHopIndexes(this.value, ${hopCounter})" id="recipe_hop_ids"><option value=""></option><% hops.sort_by { |f| f.name.downcase }.each do |hop| %><option value='<%=hop.id%>'><%= hop.name %></option><% end %></select></div><div class="col-md-4"><div class="col-md-6 input-label"><label>Amount:</label></div><div class="col-md-6 hop-amount-input-div-${hopCounter}"><input type="number" name="recipe[hop_amounts][]" value="" class="hop-amount-input"> (oz)</div></div><div class="col-md-4"><div class="col-md-6 input-label"><label>Addition Time:</label></div><div class="col-md-6 hop-addition-time-input-div-${hopCounter}"><input type="number" name="recipe[addition_time][]" value="" class="hop-amount-input"> (min)<br></div></div>`)
     })
   })
 

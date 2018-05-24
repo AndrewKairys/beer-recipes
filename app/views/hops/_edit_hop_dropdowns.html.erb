@@ -1,3 +1,23 @@
 <% @recipe.recipe_hops.each do |hop| %>
-  <%= f.collection_select :yeast_ids, hops.order(:name.downcase), :id, :name, {:selected => hop.hop_id, include_blank: true }, { name: 'recipe[hop_ids][]' } %><br>
+  <%= f.collection_select :hop_ids, hops.sort_by { |f| f.name.downcase }, :id, :name, {:selected => hop.hop_id, include_blank: true }, { name: 'recipe[hop_ids][]', :class => "col-md-4" } %>
 <% end %>
+
+<div class="col-md-4">
+  <div class="col-md-6 input-label">
+    <label>Amount:</label>
+  </div>
+
+  <div class="col-md-6 hop-amount-input-div-1">
+    <input type="number" name="recipe[hop_amounts][]" value="" class="hop-amount-input"> (oz)
+  </div>
+</div>
+
+<div class="col-md-4">
+  <div class="col-md-6 input-label">
+    <label>Addition Time:</label>
+  </div>
+
+  <div class="col-md-6 hop-addition-time-input-div-1">
+    <input type="number" name="recipe[addition_time][]" value="" class="hop-amount-input"> (min)<br>
+  </div>
+</div>
