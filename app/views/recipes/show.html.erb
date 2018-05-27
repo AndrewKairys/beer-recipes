@@ -37,11 +37,13 @@
     <!-- DELETE INLINE SYTLING -->
     <!-- If last recipe, change to "Final recipe" or something similar. Also add "previous recipe" button -->
     <a href="#" class="js-next" data-id="<%=@recipe.id%>" data-user-id="<%=@recipe.user.id%>" style="color: black;">Next Recipe</a>
+    <div id="next-button-error">
+    </div>
 
     <div class="edit-delete-links">
       <%= edit_button_if_current_user %>
       <%= delete_button_if_current_user %>
     </div>
-    
+
   </div>
 </div>

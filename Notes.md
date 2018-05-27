@@ -42,4 +42,4 @@ Javascript Notes
 3.  [X] Make user recipe index have json backend and render via ajax get request (Need to put JS not in view and modify serializers to be more dry.)
 4.  [X] Add next button to recipe show page
 5.  [X] Render recipe ingredients on show page on "next recipe" click with json backend and render via ajax get request (reference notes for making it better)
-6.  [] 
+6.  [] Clicking next for your recipes works beautifully. Still need to add previous button. Clicking next for all recipes does not work. I need two seperate JS functions and/or show pages when displaying all vs. your recipes. Currently just goes through current users recipes.
