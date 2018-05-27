@@ -4,7 +4,7 @@
 
 <h4>Below is a list of all the recipes that are SMASH beers</h4>
 
-<ul class="recipes">
+<ul class="recipes-list">
   <% @smash_beers.each do |recipe| %>
     <li><%= link_to recipe.name, user_recipe_path(recipe.user, recipe) %></li>
   <% end %>

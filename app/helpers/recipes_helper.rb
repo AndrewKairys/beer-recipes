@@ -1,7 +1,7 @@
 module RecipesHelper
   def edit_button_if_current_user
    if @recipe.user == current_user
-     link_to("Edit Recipe", edit_user_recipe_path(current_user, @recipe), :id => 'edit-link').html_safe
+     link_to("Edit Recipe", edit_user_recipe_path(current_user, @recipe), :id => 'edit-link').html_safe 
    end
   end
 
