@@ -4,8 +4,6 @@ $(function () {
   fetch(`/users/${userId}/recipes.json`, { credentials: 'include' })
   .then(res => res.json())
   .then(json => {
-
-
     $(".js-next").on("click", function() {
       let recipeId = parseInt($(".js-next").attr("data-id"));
       let recipeIndex = json.findIndex(recipe => recipe.id === recipeId);

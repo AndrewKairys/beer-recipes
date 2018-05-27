@@ -12,4 +12,4 @@ If you want to use the sign in with Facebook feature, it will require using http
 Bug reports and pull requests are welcome on GitHub at https://github.com/NolanHughes/beer-recipes. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
-The project is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+  The project is available as open source under the terms of the [MIT License](https://github.com/NolanHughes/beer-recipes/blob/master/LICENSE).
