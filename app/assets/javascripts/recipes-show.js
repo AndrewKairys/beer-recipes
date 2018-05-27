@@ -1,3 +1,4 @@
+// ***DRY THIS OUT***
 $(".recipes.show").ready(function() {
   const userId = parseInt($(".js-next").attr("data-user-id"))
 
@@ -72,7 +73,7 @@ $(".recipes.show").ready(function() {
         for (var i = 0, l = yeasts.length; i < l; ++i) {
           $(".yeasts").append("<li>" + yeasts[i].brand + "</li>" + "<ul>" + "<li>" + yeasts[i].variety + "</li>" +"</ul>");
         }
-        
+
         $("#next-button-error").html("");
         $(".js-next").attr("data-id", nextRecipe["id"]);
         $("#edit-link").attr("href", `/users/${userId}/recipes/${nextRecipe.id}/edit`);
