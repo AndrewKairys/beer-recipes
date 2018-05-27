@@ -4,8 +4,9 @@ $(function () {
     const userId = parseInt($(".js-next").attr("data-user-id"))
     // This is not a good way to do things because recipe ids don't always increment by 1. (ex. recipes can get deleted)
     const nextId = parseInt($(".js-next").attr("data-id")) + 1;
-
-    $.get("/users/" + userId + "/recipes/" + nextId + ".json", function(data) {
+    fetch(`/users/${userId}/recipes/${nextId}.json`, { credentials: 'include' })
+    .then(res => res.json())
+    .then(data => {
       $(".recipeName").text(data.name);
       $(".userName").text(data.user.name);
       $(".styleName").text(data.style.name);
@@ -27,15 +28,12 @@ $(function () {
       const yeasts = data.yeasts
       $(".yeasts").html("")
       for (var i = 0, l = yeasts.length; i < l; ++i) {
-        $(".yeasts").append("<li>" + yeasts[i].brand + "</li>" +
-                          "<ul>" +
-                            "<li>" + yeasts[i].variety + "</li>" +
-                          "</ul>");
+        $(".yeasts").append("<li>" + yeasts[i].brand + "</li>" + "<ul>" + "<li>" + yeasts[i].variety + "</li>" +"</ul>");
       }
 
       $(".js-next").attr("data-id", data["id"]);
       $("#edit-link").attr("href", `/users/${userId}/recipes/${data.id}/edit`);
       $("#delete-link").attr("href", `/users/${userId}/recipes/${data.id}`);
-    });
+    })
   });
 });
