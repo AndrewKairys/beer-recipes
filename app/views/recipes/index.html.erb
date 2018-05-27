@@ -2,14 +2,16 @@
 
 <ul class="recipes">
 </ul>
-
+<!-- ***MOVE THIS*** -->
 <script>
   $(function() {
     const userId = parseInt($("h1").attr("data-user-id"))
 
-    $.get(`/users/${userId}/recipes.json`, function(data){
-      for (var i = 0, l = data.length; i < l; ++i) {
-        $(".recipes").append("<li>" + "<a href='/users/" + data[i].user.id + "/recipes/" + data[i].id + "'>" + data[i].name + "</a>" + "</li>");
+    fetch(`/users/${userId}/recipes.json`, { credentials: 'include' })
+    .then(res => res.json())
+    .then(json => {
+      for (var i = 0, l = json.length; i < l; ++i) {
+        $(".recipes").append("<li>" + "<a href='/users/" + json[i].user.id + "/recipes/" + json[i].id + "'>" + json[i].name + "</a>" + "</li>");
       }
     })
   })
