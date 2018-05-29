@@ -39,7 +39,7 @@ class Recipe < ApplicationRecord
 
   def add_recipe_hops(recipe_hop_attributes, hop_ids)
     hop_ids.delete("")
-    
+
     if hop_ids != []
       recipe_hop_attributes.each do |k, v|
         rh = RecipeHop.create(recipe_id: self.id, hop_id: k.to_i, amount: v[:amount].to_f, addition_time: v[:addition_time].to_f)
@@ -56,7 +56,8 @@ class Recipe < ApplicationRecord
       rf.save
     end
   end
-
+  
+  #***CHANGE NAME OF THIS***
   def add_recipe_hop_amount(rh_amount, rh_addition_time)
     if rh_amount != ""
       hop_id = Hop.all[-1].id
