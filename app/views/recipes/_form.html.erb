@@ -68,7 +68,7 @@
         <% if @recipe.recipe_fermentables.empty? %>
           <%= render 'fermentables/new_fermentable_dropdowns', :fermentables => fermentables, :f => f %>
         <% else %>
-          <%= render 'fermentables/edit_fermentables_dropdowns', :fermentables => fermentables, :f => f %>
+          <%= render 'fermentables/edit_fermentable_dropdowns', :fermentables => fermentables, :f => f %>
         <% end %>
       </div>
 
@@ -143,10 +143,9 @@
 <script>
   $(function() {
     $("#add-fermentable-button").click(function() {
-      debugger
       let fermentableCounter = parseInt($(".recipe_fermentable_ids").last().attr("data_value")) + 1
 
-      $("#fermentables-selection").append(`<div class="fermentables-dropdown"><select name="recipe[fermentalbe_ids][]" class="col-md-6 recipe_fermentable_ids" data_value="${fermentableCounter}" onchange="updateFermentableIndexes(this.value, ${fermentableCounter}, '')"><option value=""></option><% fermentables.sort_by { |f| f.name.downcase }.each do |fermentable| %><option value='<%=fermentable.id%>'><%= fermentable.name %></option><% end %></select></div><div class="col-md-6"><div class="col-md-6 input-label"><label>Amount:</label></div><div class="col-md-6 fermentable-amount-input-div-${fermentableCounter}"><input type="number" name="" value="" class="fermentable-amount-input"> (lbs)</div></div><br>`)
+      $("#fermentables-selection").append(`<div class="fermentables-dropdown"><select name="recipe[fermentable_ids][]" class="col-md-6 recipe_fermentable_ids" data_value="${fermentableCounter}" onchange="updateFermentableIndexes(this.value, ${fermentableCounter}, '')"><option value=""></option><% fermentables.sort_by { |f| f.name.downcase }.each do |fermentable| %><option value='<%=fermentable.id%>'><%= fermentable.name %></option><% end %></select></div><div class="col-md-6"><div class="col-md-6 input-label"><label>Amount:</label></div><div class="col-md-6 fermentable-amount-input-div-${fermentableCounter}"><input type="number" name="" value="" class="fermentable-amount-input"> (lbs)</div></div><br>`)
     })
 
     $("#add-hop-button").click(function() {

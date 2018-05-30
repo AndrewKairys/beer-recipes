@@ -1,5 +1,5 @@
 <% @recipe.recipe_hops.each_with_index do |hop, index| %>
-  <%= f.collection_select :hop_ids, hops.sort_by { |f| f.name.downcase }, :id, :name, {:selected => hop.hop_id, include_blank: true }, { name: 'recipe[hop_ids][]', :class => "col-md-4 recipe_hop_ids", :data_value => index + 1, :onchange => "updateHopIndexes(this.value, #{index + 1}, #{hop.amount}, #{hop.addition_time})" } %>
+  <%= f.collection_select :hop_ids, hops.sort_by { |h| h.name.downcase }, :id, :name, {:selected => hop.hop_id, include_blank: true }, { name: 'recipe[hop_ids][]', :class => "col-md-4 recipe_hop_ids", :data_value => index + 1, :onchange => "updateHopIndexes(this.value, #{index + 1}, #{hop.amount}, #{hop.addition_time})" } %>
   <div class="col-md-4">
     <div class="col-md-6 input-label">
       <label>Amount:</label>

@@ -70,39 +70,33 @@ class Recipe < ApplicationRecord
   end
 
   #UPDATE METHODS
-  #***refactor these?***
+  #***refactor/metaprogram these?***
   def update_fermentables(fermentable_amounts, fermentable_ids, new_fermentable_amount)
     if new_fermentable_amount != ""
       new_recipe_fermentable = recipe_fermentables.last
     end
 
-    amounts = fermentable_amounts.first.keep_if { |k, v| fermentable_ids.include?(k) }
-
-    amounts.each do |k, v|
-      recipe_fermentable = recipe_fermentables.where(fermentable_id: k.to_i).first_or_create
-      recipe_fermentable.amount = v.to_f
-      recipe_fermentable.save
+    if fermentable_amounts != nil
+      fermentable_amounts.each do |k, v|
+        recipe_fermentable = recipe_fermentables.where(fermentable_id: k.to_i).first_or_create
+        recipe_fermentable.amount = v[:amount].to_f
+        recipe_fermentable.save
+      end
     end
+
     delete_fermentables(fermentable_ids, new_recipe_fermentable)
 
   end
 
   def delete_fermentables(fermentable_ids, new_recipe_fermentable)
-    recipe_fermentable_ids = recipe_fermentables.collect { |rf| rf.fermentable_id }
-
-    fermentable_id_integers = fermentable_ids.collect { |id| id.to_i }
-    fermentable_id_integers.shift
-
-    if new_recipe_fermentable.nil?
-      to_delete = recipe_fermentable_ids - fermentable_id_integers
-    else
-      rfi = recipe_fermentable_ids.reject { |n| n == new_recipe_fermentable.fermentable_id }
-      to_delete = rfi - fermentable_id_integers
+    if new_recipe_fermentable != nil
+      fermentable_ids.push(new_recipe_fermentable.fermentable_id.to_s)
     end
 
-    to_delete.each do |id|
-      rf = recipe_fermentables.find_by(fermentable_id: id)
-      rf.destroy
+    recipe_fermentables.each do |recipe_fermentable|
+      if !fermentable_ids.include?(recipe_fermentable.fermentable_id.to_s)
+        recipe_fermentable.destroy
+      end
     end
 
   end
@@ -124,7 +118,7 @@ class Recipe < ApplicationRecord
     delete_hops(hop_ids, new_recipe_hop)
   end
 
-  # Once duplicate hops can be entered, Make it so it filters by recipe_hop.id instead of hop_id
+  # ***Once duplicate hops can be entered, Make it so it filters by recipe_hop.id instead of hop_id***
   def delete_hops(hop_ids, new_recipe_hop)
     if new_recipe_hop != nil
       hop_ids.push(new_recipe_hop.hop_id.to_s)
