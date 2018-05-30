@@ -4,6 +4,7 @@ class User < ApplicationRecord
          :omniauthable, :omniauth_providers => [:facebook]
 
   has_many :recipes
+  has_many :comments
 
   validates :email, uniqueness: true
 
