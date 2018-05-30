@@ -46,4 +46,6 @@ Javascript Notes
 7.  [] Move JS in form partial to its own js file and render with dynamically generated classes.
 8.  [] Add Handlebars and use that with js files.
 9.  [] Read notes in show page regarding next and previous buttons.
-10. [] Make use of more ES6 features (e.g. Arrow functions, Let & Const, Class, constructor functions)
+10. [] Make sure you use ES6 features as much as possible (e.g. Arrow functions, Let & Const, Class, constructor functions)
+11. [] Work on styling
+12. [] Make sure everything is as dry as possible.
