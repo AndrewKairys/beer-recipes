@@ -29,11 +29,13 @@ class Recipe < ApplicationRecord
   end
 
   #ADD ATTRIBUTES TO ALREADY CREATED INGREDIENTS
-  def add_recipe_fermentables(fermentable_amounts, fermentable_ids)
-    amounts = fermentable_amounts.first.keep_if { |k, v| fermentable_ids.include?(k) }
+  def add_recipe_fermentables(recipe_fermentable_attributes, fermentable_ids)
+    fermentable_ids.delete("")
 
-    amounts.each do |k,v|
-      RecipeFermentable.create(recipe_id: self.id, fermentable_id: k.to_i, amount: v.to_f)
+    if fermentable_ids != []
+      recipe_fermentable_attributes.each do |k, v|
+        rf = RecipeFermentable.create(recipe_id: self.id, fermentable_id: k.to_i, amount: v[:amount].to_f)
+      end
     end
   end
 
@@ -56,9 +58,8 @@ class Recipe < ApplicationRecord
       rf.save
     end
   end
-  
-  #***CHANGE NAME OF THIS***
-  def add_recipe_hop_amount(rh_amount, rh_addition_time)
+
+  def add_recipe_hop_attributes(rh_amount, rh_addition_time)
     if rh_amount != ""
       hop_id = Hop.all[-1].id
       rh = recipe_hops.find_by(hop_id: hop_id)
