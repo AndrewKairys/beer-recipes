@@ -7,32 +7,43 @@
     <h3>Style: <span class="styleName"><%= @recipe.style.name %></span></h3>
 
     <h3>Fermentables</h3>
-      <ul class="fermentables">
-        <% @recipe.recipe_fermentables.sort_by { |f| f.fermentable.name.downcase }.each do |recipe_fermentable| %>
-          <li><%= recipe_fermentable.fermentable.name %> | <%= recipe_fermentable.amount %> lbs</li>
-        <% end %>
-      </ul>
+    <ul class="fermentables">
+      <% @recipe.recipe_fermentables.sort_by { |f| f.fermentable.name.downcase }.each do |recipe_fermentable| %>
+        <li><%= recipe_fermentable.fermentable.name %> | <%= recipe_fermentable.amount %> lbs</li>
+      <% end %>
+    </ul>
 
     <h3>Hops</h3>
-      <ul class="hops">
-        <% @recipe.recipe_hops.order(:addition_time, :amount).reverse.each do |recipe_hop| %>
-          <li>
-            <span><%= recipe_hop.hop.name %></span> |
-            <span><%= recipe_hop.amount %></span> oz |
-            <span><%= recipe_hop.addition_time %></span> min
-          </li>
-        <% end %>
-      </ul>
+    <ul class="hops">
+      <% @recipe.recipe_hops.order(:addition_time, :amount).reverse.each do |recipe_hop| %>
+        <li>
+          <span><%= recipe_hop.hop.name %></span> |
+          <span><%= recipe_hop.amount %></span> oz |
+          <span><%= recipe_hop.addition_time %></span> min
+        </li>
+      <% end %>
+    </ul>
 
     <h3>Yeast</h3>
-      <ul class="yeasts">
-        <% @recipe.recipe_yeasts.sort_by { |ry| [ry.yeast.brand.downcase, ry.yeast.variety.downcase] }.each do |recipe_yeast| %>
-          <li><%= recipe_yeast.yeast.brand %></li>
-          <ul>
-            <li><%= recipe_yeast.yeast.variety %></li>
-          </ul>
-        <% end %>
-      </ul>
+    <ul class="yeasts">
+      <% @recipe.recipe_yeasts.sort_by { |ry| [ry.yeast.brand.downcase, ry.yeast.variety.downcase] }.each do |recipe_yeast| %>
+        <li><%= recipe_yeast.yeast.brand %></li>
+        <ul>
+          <li><%= recipe_yeast.yeast.variety %></li>
+        </ul>
+      <% end %>
+    </ul>
+
+    <div id="comments">
+      <% @recipe.comments.each do |comment|%>
+        <strong><%= comment.body %></strong><br>
+      <% end %>
+    </div>
+
+    <%= form_for [@recipe, @recipe.comments.build], url: comments_recipe_path(@recipe), method: :patch, html: {remote: true} do |f| %>
+      <%= f.text_field :body, class: "comment-body-input"%>
+      <%= f.submit %>
+    <% end %>
 
     <!-- ***if first recipe don't show*** -->
     <a href="#" class="js-previous" data-id="<%=@recipe.id%>" data-user-id="<%=@recipe.user.id%>">Previous Recipe</a> |

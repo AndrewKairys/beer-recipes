@@ -8,6 +8,12 @@ Rails.application.routes.draw do
   get '/recipes/smash_beers' => 'recipes#smash_beers'
   get '/all_recipes' => 'recipes#all_recipes', as: 'all_recipes'
 
+  resources :recipes do
+    member do
+      patch :comments
+    end
+  end
+
   resources :users, only: [:show] do
     resources :recipes
   end

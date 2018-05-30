@@ -2,6 +2,7 @@ class Recipe < ApplicationRecord
   belongs_to :user
   belongs_to :style
 
+  has_many :comments, :dependent => :destroy
   has_many :recipe_hops, :dependent => :destroy
   has_many :recipe_fermentables, :dependent => :destroy
   has_many :recipe_yeasts, :dependent => :destroy
