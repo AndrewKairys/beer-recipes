@@ -1,2 +1,6 @@
-$("#comments").append("<strong><%= @recipe.comments.last.body %></strong><br>")
-$(".comment-body-input").val("")
+if(<%= @recipe.comments.last.body != "" %>) {
+  $("#comments").append("<strong><%= @recipe.comments.last.body %></strong><br>")
+  $(".comment-body-input").val("")
+} else {
+  alert("Please type a comment with some content.")
+}

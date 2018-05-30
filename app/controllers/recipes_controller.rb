@@ -89,7 +89,7 @@ class RecipesController < ApplicationController
 
   def comments
     @recipe ||= Recipe.find(params[:id])
-    @recipe.comments.build(body: params[:comment][:body])
+    @recipe.comments.build(body: params[:comment][:body], user_id: current_user.id)
     @recipe.save
   end
 
