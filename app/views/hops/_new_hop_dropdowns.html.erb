@@ -1,5 +1,5 @@
 <div class="hops-dropdown">
-  <%= f.collection_select :hop_ids, hops.sort_by { |f| f.name.downcase }, :id, :name, {include_blank: true }, {:name => 'recipe[hop_ids][]', :class => "col-md-4 recipe_hop_ids", :data_value => 1, :onchange => "updateHopIndexes(this.value, 1, '', '')"} %>
+  <%= f.collection_select :hop_ids, hops.sort_by { |h| h.name.downcase }, :id, :name, {include_blank: true }, {:name => 'recipe[hop_ids][]', :class => "col-md-4 recipe_hop_ids", :data_value => 1, :onchange => "updateHopIndexes(this.value, 1, '', '')"} %>
 </div>
 <div class="col-md-4">
   <div class="col-md-6 input-label">

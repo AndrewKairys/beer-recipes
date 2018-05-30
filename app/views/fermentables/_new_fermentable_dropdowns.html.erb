@@ -1,0 +1,13 @@
+<div class="fermentables-dropdown">
+  <%= f.collection_select :fermentable_ids, fermentables.sort_by { |f| f.name.downcase }, :id, :name, {include_blank: true }, {:name => 'recipe[fermentable_ids][]', :class => "col-md-6 recipe_fermentable_ids", :data_value => 1, :onchange => "updateFermentableIndexes(this.value, 1, '')"} %>
+</div>
+
+<div class="col-md-6">
+  <div class="col-md-6 input-label">
+    <label>Amount:</label>
+  </div>
+
+  <div class="col-md-6 fermentable-amount-input-div-1">
+    <input type="number" name="" value="" class="fermentable-amount-input"> (lbs)
+  </div>
+</div>
