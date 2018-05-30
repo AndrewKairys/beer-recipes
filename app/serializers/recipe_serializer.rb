@@ -6,6 +6,7 @@ class RecipeSerializer < ActiveModel::Serializer
   has_many :yeasts
   has_many :fermentables
   has_many :recipe_fermentables
+  has_many :comments
 
   belongs_to :user
   belongs_to :style

@@ -36,9 +36,10 @@
 
     <div id="comments">
       <% @recipe.comments.each do |comment|%>
-        <strong><%= comment.body %></strong><br>
+        <strong><%= comment.body %> - Posted by: <%= comment.user.name %></strong><br>
       <% end %>
     </div>
+
 
     <%= form_for [@recipe, @recipe.comments.build], url: comments_recipe_path(@recipe), method: :patch, html: {remote: true} do |f| %>
       <%= f.text_field :body, class: "comment-body-input"%>
