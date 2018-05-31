@@ -49,3 +49,4 @@ Javascript Notes
 10. [] Make sure you use ES6 features as much as possible (e.g. Arrow functions, Let & Const, Class, constructor functions)
 11. [] Work on styling
 12. [] Make sure everything is as dry as possible.
+13. [] Fix not being able to enter decimal amounts for fermentables (maybe hops too)

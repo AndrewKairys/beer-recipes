@@ -1,22 +1,17 @@
 <!-- FERMENTABLES HANDLEBARS TEMPLATE -->
 <script id="fermentable-dropdown-template" type="text/x-handlebars-template">
   <div class="fermentables-dropdown">
-    <select name="recipe[fermentable_ids][]" class="col-md-6 recipe_fermentable_ids" data_value="{{fermentableCounter}}" onchange="updateFermentableIndexes(this.value, {{fermentableCounter}}, '')">
+    <select name="recipe[fermentable_ids][]" class="recipe_fermentable_ids" data_value="{{fermentableCounter}}" onchange="updateFermentableIndexes(this.value, {{fermentableCounter}}, '')" id="recipe_fermentable_ids">
       <option value=""></option>
       {{#each this}}
         <option value='{{this.id}}'>{{this.name}}</option>
       {{/each}}
     </select>
-  </div>
 
-  <div class="col-md-6">
-    <div class="col-md-6 input-label">
-      <label>Amount:</label>
+    <div class="fermentable-amount-input-div-{{fermentableCounter}} amount-input">
+      <input type="number" name="" value="0" class="fermentable-amount-input"> (lbs)
     </div>
-    <div class="col-md-6 fermentable-amount-input-div-{{fermentableCounter}}">
-      <input type="number" name="" value="" class="fermentable-amount-input"> (lbs)
-    </div>
-  </div><br>
+  </div>
 </script>
 
 <!-- HOP HANDLEBARS TEMPLATE -->

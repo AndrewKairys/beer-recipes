@@ -1,12 +1,9 @@
-<% @recipe.recipe_fermentables.each_with_index do |fermentable, index| %>
-  <%= f.collection_select :fermentable_ids, fermentables.sort_by { |f| f.name.downcase }, :id, :name, {:selected => fermentable.fermentable_id, include_blank: true }, { name: 'recipe[fermentable_ids][]', :class => "col-md-6 recipe_fermentable_ids", :data_value => index + 1, :onchange => "updateFermentableIndexes(this.value, #{index + 1}, #{fermentable.amount})" } %>
-  <div class="col-md-6">
-    <div class="col-md-6 input-label">
-      <label>Amount:</label>
-    </div>
+<div class="fermentables-dropdown">
+  <% @recipe.recipe_fermentables.each_with_index do |fermentable, index| %>
+    <%= f.collection_select :fermentable_ids, fermentables.sort_by { |f| f.name.downcase }, :id, :name, {:selected => fermentable.fermentable_id, include_blank: true }, { name: 'recipe[fermentable_ids][]', :class => "recipe_fermentable_ids", :data_value => index + 1, :onchange => "updateFermentableIndexes(this.value, #{index + 1}, #{fermentable.amount})" } %>
 
-    <div class="col-md-6 fermentable-amount-input-div-<%= index + 1 %>">
+    <div class="fermentable-amount-input-div-<%= index + 1 %> amount-input">
       <input type="number" name="recipe[recipe_fermentable_attributes][<%= fermentable.fermentable.id %>][amount]" value="<%= fermentable.amount %>" class="fermentable-amount-input"> (lbs)
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>
