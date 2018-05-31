@@ -43,8 +43,8 @@ Javascript Notes
 4.  [X] Add next button to recipe show page
 5.  [X] Render recipe ingredients on show page on "next recipe" click with json backend and render via ajax get request (reference notes for making it better)
 6.  [] Clicking next and previous for your recipes works beautifully. Clicking next for all recipes does not work. I need two seperate JS functions and/or show pages when displaying all vs. your recipes. Currently just goes through current users recipes.
-7.  [] Move JS in form partial to its own js file and render with dynamically generated classes.
-8.  [] Add Handlebars and use that with js files.
+7.  [X] Move JS in form partial to its own js file and render with dynamically generated classes.
+8.  [X] Add Handlebars and use that with js files.
 9.  [] Read notes in show page regarding next and previous buttons.
 10. [] Make sure you use ES6 features as much as possible (e.g. Arrow functions, Let & Const, Class, constructor functions)
 11. [] Work on styling
