@@ -7,6 +7,9 @@ Rails.application.routes.draw do
 
   get '/recipes/smash_beers' => 'recipes#smash_beers'
   get '/all_recipes' => 'recipes#all_recipes', as: 'all_recipes'
+
+  get '/fermentables' => 'fermentables#index'
+  get '/hops' => 'hops#index'
   get '/yeasts' => 'yeasts#index'
 
   resources :recipes do
