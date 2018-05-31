@@ -64,7 +64,7 @@
     <section class="recipe-form">
       <h3 class="recipe-header">Fermentables</h3>
 
-      <div id="fermentables-selection" class="row">
+      <div id="fermentable-selection" class="row">
         <% if @recipe.recipe_fermentables.empty? %>
           <%= render 'fermentables/new_fermentable_dropdowns', :fermentables => fermentables, :f => f %>
         <% else %>
@@ -88,7 +88,7 @@
     <section class="recipe-form">
       <h3 class="recipe-header">Hops</h3>
 
-      <div id="hops-selection" class="row">
+      <div id="hop-selection" class="row">
         <% if @recipe.recipe_hops.empty? %>
           <%= render 'hops/new_hop_dropdowns', :hops => hops, :f => f %>
         <% else %>
@@ -138,11 +138,4 @@
   <% end %>
 </div>
 
-<script id="yeast-dropdown-template" type="text/x-handlebars-template">
-  <select name='recipe[yeast_ids][]' id='recipe_yeast_ids'>
-    <option value=''></option>
-    {{#each this}}
-    <option value="{{this.id}}">{{this.brand}} - {{this.variety}}</option>
-    {{/each}}
-  </select><br>
-</script>
+<%= render 'recipes/handlebars_ingredients'%>
