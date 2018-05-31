@@ -1,5 +1,8 @@
 if(<%= @recipe.comments.last.body != "" %>) {
-  $.get('/users/4/recipes/22.json', function(data) {
+  const userId = parseInt($("h2").attr("data-user-id"))
+  const recipeId = parseInt($("h2").attr("data-recipe-id"))
+
+  $.get(`/users/${userId}/recipes/${recipeId}.json`, function(data) {
     function Comment(body, user) {
       this.body = body
       this.user = user

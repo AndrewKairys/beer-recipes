@@ -42,12 +42,15 @@ Javascript Notes
 3.  [X] Make user recipe index have json backend and render via ajax get request (Need to put JS not in view and modify serializers to be more dry.)
 4.  [X] Add next button to recipe show page
 5.  [X] Render recipe ingredients on show page on "next recipe" click with json backend and render via ajax get request (reference notes for making it better)
-6.  [] Clicking next and previous for your recipes works beautifully. Clicking next for all recipes does not work. I need two seperate JS functions and/or show pages when displaying all vs. your recipes. Currently just goes through current users recipes.
-7.  [X] Move JS in form partial to its own js file and render with dynamically generated classes.
-8.  [X] Add Handlebars and use that with js files.
-9.  [] Read notes in show page regarding next and previous buttons.
-10. [] Make sure you use ES6 features as much as possible (e.g. Arrow functions, Let & Const, Class, constructor functions)
-11. [] Work on styling
-12. [] Make sure everything is as dry as possible.
-13. [] Fix not being able to enter decimal amounts for fermentables (maybe hops too)
-14. [] Render new ingredient and style field with JS.
+6.  [X] Move JS in form partial to its own js file and render with dynamically generated classes.
+7.  [X] Add Handlebars and use that with js files.
+8.  [] Make sure you use ES6 features as much as possible (e.g. Arrow functions, Let & Const, Class, constructor functions)
+9.  [X] Work on styling
+10. [] Make sure everything is as dry as possible.
+
+
+Wants but not necessary
+1.  [] Clicking next and previous for your recipes works beautifully. Clicking next for all recipes does not work. I need two seperate JS functions and/or show pages when displaying all vs. your recipes. Currently just goes through current users recipes.
+2.  [] Read notes in show page regarding next and previous buttons.
+3.  [] Fix not being able to enter decimal amounts for fermentables (maybe hops too)
+4.  [] Render new ingredient and style field with JS.
