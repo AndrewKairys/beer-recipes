@@ -30,10 +30,11 @@
   width: 50%;
   margin: auto;
   text-align: center;
+}
 
-  .input-label {
-    width: 33%;
-  }
+#hop-selection {
+  margin: auto;
+  text-align: center;
 }
 
 .recipe-form {
@@ -60,7 +61,7 @@
     margin-top: 3.5em;
   }
   .amount-input-field {
-    width: 25%;
+    width: 35%;
   }
 }
 
@@ -73,7 +74,7 @@
     margin-top: 0px;
   }
 
-  .amount-input {
+  .amount-input, .time-input {
     display: inline;
   }
 
@@ -82,31 +83,11 @@
     margin-right: 0px;
   }
 
-  #yeast-button-div {
+  #yeast-button-div, #hop-button-div, #fermentable-button-div {
     text-align: center;
     a {
       color: black;
     }
-  }
-
-  #hop-button-div {
-    text-align: center;
-    a {
-      color: black;
-    }
-  }
-
-  #fermentable-button-div {
-    text-align: center;
-    a {
-      color: black;
-    }
-  }
-
-  hr {
-    margin: 20px 15px 0px;
-    border: 0;
-    border-top: 1px solid #00000040;
   }
 
   .style-input {
@@ -154,11 +135,11 @@
 }
 
 .fermentable-amount-input {
-  width: 13%;
+  width: 17%;
 }
 
 .hop-amount-input {
-  width: 49%;
+  width: 8%;
 }
 
 .new-attribute-label {

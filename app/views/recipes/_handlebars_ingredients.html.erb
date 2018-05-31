@@ -17,31 +17,21 @@
 <!-- HOP HANDLEBARS TEMPLATE -->
 <script id="hop-dropdown-template" type="text/x-handlebars-template">
   <div class="hops-dropdown">
-    <select name="recipe[hop_ids][]" class="col-md-4 recipe_hop_ids" data_value="${hopCounter}" onchange="updateHopIndexes(this.value, {{hopCounter}}, '', '')">
+    <select name="recipe[hop_ids][]" class="recipe_hop_ids" data_value="${hopCounter}" onchange="updateHopIndexes(this.value, {{hopCounter}}, '', '')">
       <option value=""></option>
       {{#each this}}
         <option value='{{this.id}}'>{{this.name}}</option>
       {{/each}}
     </select>
-  </div>
 
-  <div class="col-md-4">
-    <div class="col-md-6 input-label">
-      <label>Amount:</label>
-    </div>
-    <div class="col-md-6 hop-amount-input-div-{{hopCounter}}">
+    <div class="hop-amount-input-div-{{hopCounter}} amount-input">
       <input type="number" name="" value="" class="hop-amount-input"> (oz)
     </div>
-  </div>
 
-    <div class="col-md-4">
-      <div class="col-md-6 input-label">
-        <label>Addition Time:</label>
-      </div>
-      <div class="col-md-6 hop-addition-time-input-div-{{hopCounter}}">
-        <input type="number" name="" value="" class="hop-amount-input"> (min)<br>
-      </div>
+    <div class="hop-addition-time-input-div-{{hopCounter}} time-input">
+      <input type="number" name="" value="" class="hop-amount-input"> (min)<br>
     </div>
+  </div>
 </script>
 
 <!-- YEASTS HANDLEBARS TEMPLATE -->

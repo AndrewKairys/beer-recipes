@@ -1,22 +1,13 @@
-<% @recipe.recipe_hops.each_with_index do |hop, index| %>
-  <%= f.collection_select :hop_ids, hops.sort_by { |h| h.name.downcase }, :id, :name, {:selected => hop.hop_id, include_blank: true }, { name: 'recipe[hop_ids][]', :class => "col-md-4 recipe_hop_ids", :data_value => index + 1, :onchange => "updateHopIndexes(this.value, #{index + 1}, #{hop.amount}, #{hop.addition_time})" } %>
-  <div class="col-md-4">
-    <div class="col-md-6 input-label">
-      <label>Amount:</label>
-    </div>
+<div class="hops-dropdown">
+  <% @recipe.recipe_hops.each_with_index do |hop, index| %>
+    <%= f.collection_select :hop_ids, hops.sort_by { |h| h.name.downcase }, :id, :name, {:selected => hop.hop_id, include_blank: true }, { name: 'recipe[hop_ids][]', :class => "recipe_hop_ids", :data_value => index + 1, :onchange => "updateHopIndexes(this.value, #{index + 1}, #{hop.amount}, #{hop.addition_time})" } %>
 
-    <div class="col-md-6 hop-amount-input-div-<%= index + 1 %>">
+    <div class="hop-amount-input-div-<%= index + 1 %> amount-input">
       <input type="number" name="recipe[recipe_hop_attributes][<%= hop.hop.id %>][amount]" value="<%= hop.amount %>" class="hop-amount-input"> (oz)
     </div>
-  </div>
 
-  <div class="col-md-4">
-    <div class="col-md-6 input-label">
-      <label>Addition Time:</label>
-    </div>
-
-    <div class="col-md-6 hop-addition-time-input-div-<%= index + 1 %>">
+    <div class="hop-addition-time-input-div-<%= index + 1 %> time-input">
       <input type="number" name="recipe[recipe_hop_attributes][<%= hop.hop.id %>][addition_time]" value="<%= hop.addition_time %>" class="hop-amount-input"> (min)<br>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>
