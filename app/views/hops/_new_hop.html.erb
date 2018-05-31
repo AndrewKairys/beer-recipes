@@ -1,5 +1,5 @@
 <% if hop.object.id.nil? %>
-  <div class="row">
+  <div class="row new-ingredient-attributes">
     <div class="col-md-6 new-attribute-label">
       <label>Name:</label>
     </div>
@@ -8,30 +8,30 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row new-ingredient-attributes">
     <div class="col-md-6 new-attribute-label">
       <label>Alpha Acids:</label>
     </div>
     <div class="col-md-6">
-    <%= hop.text_field :alpha_acids %> AA
+    <%= hop.text_field :alpha_acids %> (AA)
     </div>
   </div>
 
-  <div class="row">
+  <div class="row new-ingredient-attributes">
     <div class="col-md-6 new-attribute-label">
       <label>Amount:</label>
     </div>
     <div class="col-md-6">
-      <input type="number" name="recipe[new_hop][][amount]"> oz
+      <input type="number" name="recipe[new_hop][][amount]"> (oz)
     </div>
   </div>
 
-  <div class="row">
+  <div class="row new-ingredient-attributes">
     <div class="col-md-6 new-attribute-label">
       <label>Addition Time:</label>
     </div>
     <div class="col-md-6">
-      <input type="number" name="recipe[new_hop][][addition_time]"> min<br>
+      <input type="number" name="recipe[new_hop][][addition_time]"> (min)<br>
     </div>
   </div>
 

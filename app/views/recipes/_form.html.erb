@@ -17,11 +17,9 @@
 
     <section class="recipe-form">
       <div class="recipe-header">
-          <h3>Recipe Name</h3>
+          <h3 class="recipe-title">Recipe Name</h3>
           <%= f.text_field :name %><br>
       </div>
-
-      <hr>
 
       <div class="row recipe-row-1">
         <div class="col-md-6">
@@ -44,17 +42,17 @@
         </div>
 
         <div class="col-md-6 right-column">
-          <div class="col-md-6 input-label">
+          <div class="col-md-6 input-label new-ingredient-attributes">
             <%= f.label "Boil Time:" %>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 new-ingredient-attributes">
             <%= f.number_field :boil_time, class: "amount-input-field" %> (min)<br>
           </div>
 
-          <div class="col-md-6 input-label">
+          <div class="col-md-6 input-label new-ingredient-attributes">
             <%= f.label "Efficiency:" %>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 new-ingredient-attributes">
             <%= f.number_field :efficiency, class: "amount-input-field" %> (%)<br>
           </div>
         </div>
@@ -81,7 +79,7 @@
         <%= f.fields_for :fermentables do |fermentable| %>
           <%= render 'fermentables/new_fermentable', :fermentable => fermentable %>
         <% end %>
-      </div>
+      </div><br>
 
     </section><br>
 
@@ -105,7 +103,7 @@
         <%= f.fields_for :hops do |hop| %>
           <%= render 'hops/new_hop', :hop => hop %>
         <% end %>
-      </div>
+      </div><br>
 
     </section><br>
 
