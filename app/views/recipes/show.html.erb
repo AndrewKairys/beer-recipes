@@ -34,29 +34,37 @@
       <% end %>
     </ul>
 
-    <div id="comments">
-      <% @recipe.comments.each do |comment|%>
-        <strong><%= comment.body %> - Posted by: <%= comment.user.name %></strong><br>
-      <% end %>
-    </div>
+    <footer style="text-align: center;">
+      <div id="comments-div">
+        <h3>Comments</h3>
 
+        <%= form_for [@recipe, @recipe.comments.build], url: comments_recipe_path(@recipe), method: :patch, html: {remote: true} do |f| %>
+          <%= f.text_field :body, class: "comment-body-input"%>
+          <%= f.submit %>
+        <% end %><br>
 
-    <%= form_for [@recipe, @recipe.comments.build], url: comments_recipe_path(@recipe), method: :patch, html: {remote: true} do |f| %>
-      <%= f.text_field :body, class: "comment-body-input"%>
-      <%= f.submit %>
-    <% end %>
+        <ol id="comments">
+          <% @recipe.comments.each do |comment|%>
+            <% if comment.id %>
+              <li><%= comment.body %> - Posted by: <%= comment.user.name %></li>
+            <% end %>
+          <% end %>
+        </ol>
+      </div><br>
 
-    <!-- ***if first recipe don't show*** -->
-    <a href="#" class="js-previous" data-id="<%=@recipe.id%>" data-user-id="<%=@recipe.user.id%>">Previous Recipe</a> |
-    <!-- ***if last recipe don't show*** -->
-    <a href="#" class="js-next" data-id="<%=@recipe.id%>" data-user-id="<%=@recipe.user.id%>">Next Recipe</a>
-    <div id="next-button-error">
-    </div>
+      <!-- ***if first recipe don't show*** -->
+      <a href="#" class="js-previous" data-id="<%=@recipe.id%>" data-user-id="<%=@recipe.user.id%>">Previous Recipe</a> |
+      <!-- ***if last recipe don't show*** -->
+      <a href="#" class="js-next" data-id="<%=@recipe.id%>" data-user-id="<%=@recipe.user.id%>">Next Recipe</a>
+      <div id="next-button-error">
+      </div>
 
-    <div class="edit-delete-links">
-      <%= edit_button_if_current_user %>
-      <%= delete_button_if_current_user %>
-    </div>
+      <div class="edit-delete-links">
+        <%= edit_button_if_current_user %>
+        <%= delete_button_if_current_user %>
+      </div>
+
+    </footer>
 
   </div>
-</div>
+</div><br>

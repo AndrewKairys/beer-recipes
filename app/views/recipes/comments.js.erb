@@ -4,14 +4,14 @@ if(<%= @recipe.comments.last.body != "" %>) {
       this.body = body
       this.user = user
     }
-    
+
     const comment = new Comment(data.comments.slice(-1)[0].body, data.comments.slice(-1)[0].user.name)
 
     Comment.prototype.post = function() {
       return this.body + " - Posted by: " + this.user;
     };
 
-    $("#comments").append(`<strong>${comment.post()}</strong><br>`)
+    $("#comments").append(`<li>${comment.post()}</li>`)
     $(".comment-body-input").val("")
   })
 } else {
