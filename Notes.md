@@ -50,3 +50,4 @@ Javascript Notes
 11. [] Work on styling
 12. [] Make sure everything is as dry as possible.
 13. [] Fix not being able to enter decimal amounts for fermentables (maybe hops too)
+14. [] Render new ingredient and style field with JS.
