@@ -1,4 +1,24 @@
-$(".recipes.new").ready(function() {
+$(".recipes.new, .recipes.edit").ready(function() {
+  const sort_by = function() {
+    const fields = [].slice.call(arguments)
+
+    return function(A, B) {
+      let a, b, field, result;
+      for (let i = 0, l = fields.length; i < l; i++) {
+        result = 0;
+        field = fields[i];
+
+        a = A[field].toLowerCase();
+        b = B[field].toLowerCase();
+
+        if (a < b) result = -1;
+        if (a > b) result = 1;
+        if (result !== 0) break;
+      }
+      return result;
+    }
+  }
+
   $(function() {
     $("#add-fermentable-button").click(function() {
       let fermentableCounter = parseInt($(".recipe_fermentable_ids").last().attr("data_value")) + 1
@@ -32,6 +52,19 @@ $(".recipes.new").ready(function() {
   }
 
   $("#add-yeast-button").click(function() {
-    $("#yeast-selection").append("<select name='recipe[yeast_ids][]' id='recipe_yeast_ids'><option value=''></option><% yeasts.order(:brand, :variety).each do |yeast| %><option value='<%=yeast.id%>'><%= yeast.brand %> - <%=yeast.variety%></option><% end %></select><br>")
+    fetch("/yeasts.json", { credentials: 'include' })
+    .then(res => res.json())
+    .then(yeasts => {
+      const templateScript = $("#yeast-dropdown-template").html();
+      const template = Handlebars.compile(templateScript);
+      sortYeasts(yeasts)
+      const result = template(yeasts);
+
+      $("#yeast-selection").append(result)
+    })
   })
+
+  function sortYeasts(yeasts) {
+    yeasts.sort(sort_by('brand', 'variety'))
+  }
 })

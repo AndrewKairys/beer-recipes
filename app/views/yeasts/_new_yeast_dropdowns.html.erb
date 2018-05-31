@@ -1,1 +1,1 @@
-<%= f.collection_select :yeast_ids, Yeast.order(:brand, :variety), :id, :brand_and_variety, {include_blank: true }, {:name => 'recipe[yeast_ids][]'} %><br>
+<%= f.collection_select :yeast_ids, yeasts.sort_by { |yeast| [yeast.brand.downcase, yeast.variety.downcase] }, :id, :brand_and_variety, {include_blank: true }, {:name => 'recipe[yeast_ids][]'} %><br>

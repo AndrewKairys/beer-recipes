@@ -138,8 +138,11 @@
   <% end %>
 </div>
 
-<!-- MOVE THIS -->
-<!-- ADD HANDLEBARS -->
-<script>
-  
+<script id="yeast-dropdown-template" type="text/x-handlebars-template">
+  <select name='recipe[yeast_ids][]' id='recipe_yeast_ids'>
+    <option value=''></option>
+    {{#each this}}
+    <option value="{{this.id}}">{{this.brand}} - {{this.variety}}</option>
+    {{/each}}
+  </select><br>
 </script>
