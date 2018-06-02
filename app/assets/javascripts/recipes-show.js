@@ -36,11 +36,15 @@ function loadRecipe() {
             $(".yeasts").append("<li>" + yeasts[i].brand + "</li>" + "<ul>" + "<li>" + yeasts[i].variety + "</li>" +"</ul>");
           }
 
-          const comments = nextRecipe.comments
-          $("#comments").html("")
-          for (var i = 0, l = comments.length; i < l; ++i) {
-            $("#comments").append(`<li>${comments[i].body} - Posted by: ${comments[i].user.name}</li>`);
-          }
+          fetch(`/users/${userId}/recipes/${nextRecipe.id}.json`, { credentials: 'include' })
+          .then(res => res.json())
+          .then(json => {
+            const comments = json.comments
+            $("#comments").html("")
+            for (var i = 0, l = comments.length; i < l; ++i) {
+              $("#comments").append(`<li>${comments[i].body} - Posted by: ${comments[i].user.name}</li>`);
+            }
+          })
 
           $("#next-button-error").html("");
           $(".js-next").attr("data-id", nextRecipe["id"]);
@@ -83,11 +87,15 @@ function loadRecipe() {
             $(".yeasts").append("<li>" + yeasts[i].brand + "</li>" + "<ul>" + "<li>" + yeasts[i].variety + "</li>" +"</ul>");
           }
 
-          const comments = previousRecipe.comments
-          $("#comments").html("")
-          for (var i = 0, l = comments.length; i < l; ++i) {
-            $("#comments").append(`<li>${comments[i].body} - Posted by: ${comments[i].user.name}</li>`);
-          }
+          fetch(`/users/${userId}/recipes/${previousRecipe.id}.json`, { credentials: 'include' })
+          .then(res => res.json())
+          .then(json => {
+            const comments = json.comments
+            $("#comments").html("")
+            for (var i = 0, l = comments.length; i < l; ++i) {
+              $("#comments").append(`<li>${comments[i].body} - Posted by: ${comments[i].user.name}</li>`);
+            }
+          })
 
           $("#next-button-error").html("");
           $(".js-next").attr("data-id", previousRecipe["id"]);
