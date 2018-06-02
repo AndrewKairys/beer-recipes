@@ -35,11 +35,19 @@ function loadRecipe() {
           for (var i = 0, l = yeasts.length; i < l; ++i) {
             $(".yeasts").append("<li>" + yeasts[i].brand + "</li>" + "<ul>" + "<li>" + yeasts[i].variety + "</li>" +"</ul>");
           }
+          // debugger
+          const comments = nextRecipe.comments
+          $("#comments").html("")
+          for (var i = 0, l = comments.length; i < l; ++i) {
+            // debugger
+            $("#comments").append(`<li>${comments[i].body} - Posted by: ${comments[i].user.name}</li>`);
+          }
 
           $("#next-button-error").html("");
           $(".js-next").attr("data-id", nextRecipe["id"]);
           $("#edit-link").attr("href", `/users/${userId}/recipes/${nextRecipe.id}/edit`);
           $("#delete-link").attr("href", `/users/${userId}/recipes/${nextRecipe.id}`);
+          window.history.replaceState(null, null, `/users/${userId}/recipes/${nextRecipe.id}`);
         } else {
           $("#next-button-error").html("Sorry, that is the last recipe");
         }
@@ -79,6 +87,7 @@ function loadRecipe() {
           $(".js-next").attr("data-id", previousRecipe["id"]);
           $("#edit-link").attr("href", `/users/${userId}/recipes/${previousRecipe.id}/edit`);
           $("#delete-link").attr("href", `/users/${userId}/recipes/${previousRecipe.id}`);
+          window.history.replaceState(null, null, `/users/${userId}/recipes/${previousRecipe.id}`); 
         } else {
           $("#next-button-error").html("Sorry, that is the first recipe");
         }

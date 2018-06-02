@@ -1,7 +1,8 @@
 if(<%= @recipe.comments.last.body != "" %>) {
-  const userId = parseInt($("h2").attr("data-user-id"))
-  const recipeId = parseInt($("h2").attr("data-recipe-id"))
-
+  const userId = parseInt($(".js-next").attr("data-user-id"))
+  // const recipeId = parseInt($("h2").attr("data-recipe-id"))
+  const recipeId = parseInt($(".js-next").attr("data-id"));
+  debugger
   $.get(`/users/${userId}/recipes/${recipeId}.json`, function(data) {
     function Comment(body, user) {
       this.body = body
