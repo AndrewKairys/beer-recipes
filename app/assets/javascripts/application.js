@@ -14,15 +14,3 @@
 //= require jquery_ujs
 //= require jquery-readyselector
 //= require_tree .
-
-$(document).ready(function() {
-  $('.destroy').on('click',function() {
-    $.ajax({
-      url: `/users/4/recipes/${this.id}`,
-      type: "PATCH",
-      success: function(r) {
-
-      }
-    })
-  })
-})

@@ -47,10 +47,11 @@ Javascript Notes
 8.  [] Make sure you use ES6 features as much as possible (e.g. Arrow functions, Let & Const, Class, constructor functions)
 9.  [X] Work on styling
 10. [] Make sure everything is as dry as possible.
+11. [] Get rid of remote true? (show.html.erb, line 41) This is the dumbest shit ever!!!
 
 
 Wants but not necessary
 1.  [] Clicking next and previous for your recipes works beautifully. Clicking next for all recipes does not work. I need two seperate JS functions and/or show pages when displaying all vs. your recipes. Currently just goes through current users recipes.
 2.  [] Read notes in show page regarding next and previous buttons.
-3.  [] Fix not being able to enter decimal amounts for fermentables (maybe hops too)
+3.  [] Fix the feature of not being able to enter decimal amounts for fermentables (maybe hops too)
 4.  [] Render new ingredient and style field with JS.

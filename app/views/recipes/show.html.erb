@@ -56,6 +56,7 @@
       <a href="#" class="js-previous" data-id="<%=@recipe.id%>" data-user-id="<%=@recipe.user.id%>">Previous Recipe</a> |
       <!-- ***if last recipe don't show*** -->
       <a href="#" class="js-next" data-id="<%=@recipe.id%>" data-user-id="<%=@recipe.user.id%>">Next Recipe</a>
+
       <div id="next-button-error">
       </div>
 
@@ -63,7 +64,6 @@
         <%= edit_button_if_current_user %>
         <%= delete_button_if_current_user %>
       </div>
-
     </footer>
 
   </div>

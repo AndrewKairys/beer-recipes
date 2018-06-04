@@ -95,15 +95,16 @@ class RecipesController < ApplicationController
 
   private
     def recipe_params
-      params.require(:recipe).permit(:name,
-                                     :boil_time,
-                                     :style_id,
-                                     :efficiency,
-                                     :fermentables_attributes => [:name, :pound_per_gallon, :lovibond, :diastatic_power],
-                                     :hops_attributes => [:name, :alpha_acids],
-                                     :yeast_ids => [],
-                                     :yeasts_attributes => [:brand, :variety]
-                                   )
+      params.require(:recipe).permit(
+        :name,
+        :boil_time,
+        :style_id,
+        :efficiency,
+        :fermentables_attributes => [:name, :pound_per_gallon, :lovibond, :diastatic_power],
+        :hops_attributes => [:name, :alpha_acids],
+        :yeast_ids => [],
+        :yeasts_attributes => [:brand, :variety]
+      )
     end
 
     def load_ingredients_and_styles
