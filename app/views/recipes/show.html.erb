@@ -38,10 +38,15 @@
       <div id="comments-div">
         <h3>Comments</h3>
 
-        <%= form_for [@recipe, @recipe.comments.build], url: comments_recipe_path(@recipe), method: :patch, html: {remote: true} do |f| %>
-          <%= f.text_field :body, class: "comment-body-input"%>
+        <%#= form_for [@recipe, @recipe.comments.build], url: comments_recipe_path(@recipe), method: :patch, html: {remote: true} do |f| %>
+          <%#= f.text_field :body, class: "comment-body-input"%>
+          <%#= f.submit %>
+        <!-- <%# end %><br> -->
+
+        <%= form_for [@recipe, @comment] do |f| %>
+          <%= f.text_field :body %>
           <%= f.submit %>
-        <% end %><br>
+        <% end %>
 
         <ol id="comments">
           <% @recipe.comments.each do |comment|%>

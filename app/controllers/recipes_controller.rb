@@ -21,7 +21,7 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
-
+    @comment = Comment.new
     respond_to do |format|
       format.html { render :show }
       format.json { render json: @recipe }
@@ -87,11 +87,11 @@ class RecipesController < ApplicationController
     redirect_to user_recipes_path
   end
 
-  def comments
-    @recipe ||= Recipe.find(params[:id])
-    @recipe.comments.build(body: params[:comment][:body], user_id: current_user.id)
-    @recipe.save
-  end
+  # def comments
+  #   @recipe ||= Recipe.find(params[:id])
+  #   @recipe.comments.build(body: params[:comment][:body], user_id: current_user.id)
+  #   @recipe.save
+  # end
 
   private
     def recipe_params
