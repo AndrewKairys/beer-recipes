@@ -36,21 +36,21 @@ function loadRecipe() {
              return 0;
           });
           $(".fermentables").html("")
-          for (var i = 0, l = recipeFermentables.length; i < l; ++i) {
+          for (let i = 0, l = recipeFermentables.length; i < l; ++i) {
             $(".fermentables").append("<li>" + recipeFermentables[i].fermentable.name + " | " + recipeFermentables[i].amount + " lbs </li>");
           }
 
 //RENDER HOPS WITH JQUERY
           const recipeHops = recipe.recipe_hops.sort(function (a, b) { return b.addition_time - a.addition_time});
           $(".hops").html("")
-          for (var i = 0, l = recipeHops.length; i < l; ++i) {
+          for (let i = 0, l = recipeHops.length; i < l; ++i) {
             $(".hops").append("<li>" + recipeHops[i].hop.name + " | " + recipeHops[i].amount + " oz | " + recipeHops[i].addition_time + " min</li>");
           }
 
 //RENDER YEASTS WITH JQUERY
           const yeasts = recipe.yeasts
           $(".yeasts").html("")
-          for (var i = 0, l = yeasts.length; i < l; ++i) {
+          for (let i = 0, l = yeasts.length; i < l; ++i) {
             $(".yeasts").append("<li>" + yeasts[i].brand + "</li>" + "<ul>" + "<li>" + yeasts[i].variety + "</li>" +"</ul>");
           }
 
@@ -60,7 +60,7 @@ function loadRecipe() {
           .then(json => {
             const comments = json.comments
             $("#comments").html("")
-            for (var i = 0, l = comments.length; i < l; ++i) {
+            for (let i = 0, l = comments.length; i < l; ++i) {
               $("#comments").append(`<li>${comments[i].body} - Posted by: ${comments[i].user.name}</li>`);
             }
           })

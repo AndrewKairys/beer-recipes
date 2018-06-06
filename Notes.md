@@ -44,7 +44,7 @@ Javascript Notes
 5.  [X] Render recipe ingredients on show page on "next recipe" click with json backend and render via ajax get request (reference notes for making it better)
 6.  [X] Move JS in form partial to its own js file and render with dynamically generated classes.
 7.  [X] Add Handlebars and use that with js files.
-8.  [] Make sure you use ES6 features as much as possible (e.g. Arrow functions, Let & Const, Class, constructor functions)
+8.  [X] Make sure you use ES6 features as much as possible (e.g. Arrow functions, Let & Const, Class, constructor functions)
 9.  [X] Work on styling
 10. [X] Make sure everything is as dry as possible.
 11. [X] Get rid of remote true? (show.html.erb, line 41) This is the dumbest shit ever!!!
@@ -58,3 +58,4 @@ Wants but not necessary
 5.  [] Add loading icon/don't display next/previous buttons until fetch request is finished.
 6.  [] Make less requests using active_model_seializers.
 7.  [] Organize recipes.scss for better readability/put css in separate file when appropriate.
+8.  [] Add load icon to user's recipe index.

@@ -1,5 +1,5 @@
 (function ($) {
-  var ready = $.fn.ready;
+  let ready = $.fn.ready;
   $.fn.ready = function (fn) {
     if (this.context === undefined) {
       ready(fn);
