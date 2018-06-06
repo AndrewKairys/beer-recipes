@@ -1,0 +1,7 @@
+<ol>
+  <% @recipe.comments.each do |comment|%>
+    <%# if comment.id %>
+    <li><%= comment.body %> - Posted by: <%= comment.user.name %></li>
+    <%# end %>
+  <% end %>
+</ol>

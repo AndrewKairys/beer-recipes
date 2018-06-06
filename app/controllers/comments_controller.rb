@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
     @comment = @recipe.comments.build(body: params[:comment][:body], user_id: current_user.id)
 
     if @comment.save
-      redirect_to @recipe
+      render "comments/show", :layout => false
     else
       render 'recipes/show'
     end

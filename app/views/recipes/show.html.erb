@@ -44,17 +44,14 @@
         <!-- <%# end %><br> -->
 
         <%= form_for [@recipe, @comment] do |f| %>
-          <%= f.text_field :body %>
-          <%= f.submit %>
+          <%= f.text_field :body, class: "comment-body-input" %>
+          <!-- Don't know how to disable the default of data-disable-with -->
+          <input type="submit" name="commit" value="Create Comment">
         <% end %>
 
-        <ol id="comments">
-          <% @recipe.comments.each do |comment|%>
-            <% if comment.id %>
-              <li><%= comment.body %> - Posted by: <%= comment.user.name %></li>
-            <% end %>
-          <% end %>
-        </ol>
+        <div class="comments">
+          <%= render 'comments/comments' %>
+        </div>
       </div><br>
 
       <!-- ***if first recipe don't show*** -->
