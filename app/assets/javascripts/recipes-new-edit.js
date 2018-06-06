@@ -1,5 +1,5 @@
 $(".recipes.new, .recipes.edit").ready(function() {
-  //CUSTOM SORT FUNCTION
+//CUSTOM SORT FUNCTION
   const sort_by = function() {
     const fields = [].slice.call(arguments)
 
@@ -20,7 +20,7 @@ $(".recipes.new, .recipes.edit").ready(function() {
     }
   }
 
-  //HANDLEBARS HELPERS
+//HANDLEBARS HELPERS
   Handlebars.registerHelper('fermentableCounter', function() {
     return parseInt($(".recipe_fermentable_ids").last().attr("data_value")) + 1
   })
@@ -29,7 +29,7 @@ $(".recipes.new, .recipes.edit").ready(function() {
     return parseInt($(".recipe_hop_ids").last().attr("data_value")) + 1
   })
 
-  //ONCLICK FUNCTIONS
+//ONCLICK FUNCTIONS
   $("#add-fermentable-button").click(function() {
     fetch("/fermentables.json", { credentials: 'include' })
     .then(res => res.json())
@@ -69,8 +69,8 @@ $(".recipes.new, .recipes.edit").ready(function() {
     })
   })
 
-  //SORT FUNCTIONS FOR EACH INGREDIENT CATEGORY
-  //Could be more DRY by using sortIngredients once for hops and fermentables but that make it confusing since yeasts are sorted differently
+//SORT FUNCTIONS FOR EACH INGREDIENT CATEGORY
+//Could be more DRY by using sortIngredients once for hops and fermentables but that make it confusing since yeasts are sorted differently
   function sortFermentables(fermentables) {
     fermentables.sort(sort_by('name'))
   }
