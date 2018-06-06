@@ -1,4 +1,3 @@
-// ***HANLDEBARS?****
 function updateFermentableIndexes(id, index, amount) {
   if(id === "") {
     $(`.fermentable-amount-input-div-${index}`).html(`<input type="number" name="" value="" class="fermentable-amount-input"> (lbs)`)
