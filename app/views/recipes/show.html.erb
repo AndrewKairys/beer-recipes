@@ -38,6 +38,7 @@
       <div id="comments-div">
         <h3>Comments</h3>
 
+        <!-- REMOTE TRUE -->
         <%#= form_for [@recipe, @recipe.comments.build], url: comments_recipe_path(@recipe), method: :patch, html: {remote: true} do |f| %>
           <%#= f.text_field :body, class: "comment-body-input"%>
           <%#= f.submit %>
@@ -49,9 +50,7 @@
           <input type="submit" name="commit" value="Create Comment">
         <% end %>
 
-        <!-- <div class="comments"> -->
-          <%= render 'comments/comments' %>
-        <!-- </div> -->
+        <%= render 'comments/comments' %>
       </div><br>
 
       <!-- ***if first recipe don't show*** -->

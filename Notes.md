@@ -55,3 +55,5 @@ Wants but not necessary
 2.  [] Read notes in show page regarding next and previous buttons.
 3.  [] Fix the feature of not being able to enter decimal amounts for fermentables (maybe hops too)
 4.  [] Render new ingredient and style field with JS.
+5.  [] Add loading icon/don't display next/previous buttons until fetch request is finished.
+6.  [] Make less requests using active_model_seializers.
