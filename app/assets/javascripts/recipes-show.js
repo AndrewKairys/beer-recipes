@@ -1,3 +1,4 @@
+//LOAD RECIPE BASED ON NEXT/PREVIOUS RECIPE BUTTON CLICKS
 function loadRecipe() {
   $(".recipes.show").ready(function() {
     const userId = parseInt($(".js-next").attr("data-user-id"))
@@ -6,6 +7,7 @@ function loadRecipe() {
     .then(res => res.json())
     .then(json => {
       $(".change-recipe-button").on("click", function() {
+//SET VARIABLES
         let recipeId = parseInt($(".js-next").attr("data-id"));
         let recipeIndex = json.findIndex(recipe => recipe.id === recipeId);
         let recipe
@@ -20,10 +22,12 @@ function loadRecipe() {
         }
 
         if(recipe !== undefined){
+//RENDER RECIPE ATTRIBUTES WITH JQUERY
           $(".recipeName").text(recipe.name);
           $(".userName").text(recipe.user.name);
           $(".styleName").text(recipe.style.name);
 
+//RENDER FERMENTABLES WITH JQUERY
           const recipeFermentables = recipe.recipe_fermentables.sort(function(a, b){
              const x = a.fermentable.name.toLowerCase();
              const y = b.fermentable.name.toLowerCase();
@@ -31,25 +35,26 @@ function loadRecipe() {
              if (x > y) {return 1;}
              return 0;
           });
-
           $(".fermentables").html("")
           for (var i = 0, l = recipeFermentables.length; i < l; ++i) {
             $(".fermentables").append("<li>" + recipeFermentables[i].fermentable.name + " | " + recipeFermentables[i].amount + " lbs </li>");
           }
 
+//RENDER HOPS WITH JQUERY
           const recipeHops = recipe.recipe_hops.sort(function (a, b) { return b.addition_time - a.addition_time});
-
           $(".hops").html("")
           for (var i = 0, l = recipeHops.length; i < l; ++i) {
             $(".hops").append("<li>" + recipeHops[i].hop.name + " | " + recipeHops[i].amount + " oz | " + recipeHops[i].addition_time + " min</li>");
           }
 
+//RENDER YEASTS WITH JQUERY
           const yeasts = recipe.yeasts
           $(".yeasts").html("")
           for (var i = 0, l = yeasts.length; i < l; ++i) {
             $(".yeasts").append("<li>" + yeasts[i].brand + "</li>" + "<ul>" + "<li>" + yeasts[i].variety + "</li>" +"</ul>");
           }
 
+//RENDER COMMENTS WITH JQUERY
           fetch(`/users/${userId}/recipes/${recipe.id}.json`, { credentials: 'include' })
           .then(res => res.json())
           .then(json => {
@@ -59,7 +64,7 @@ function loadRecipe() {
               $("#comments").append(`<li>${comments[i].body} - Posted by: ${comments[i].user.name}</li>`);
             }
           })
-
+//SET DATA FOR RECIPE THAT IS BEING RENDERED
           $("#change-recipe-button-error").html("");
           $(".js-next").attr("data-id", recipe["id"]);
           $("#edit-link").attr("href", `/users/${userId}/recipes/${recipe.id}/edit`);
@@ -74,7 +79,7 @@ function loadRecipe() {
   })
 }
 
-
+//ADD NEW COMMENT
 $(function() {
   $("#new_comment").on("submit", function(e) {
 
