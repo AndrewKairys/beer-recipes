@@ -46,7 +46,7 @@ Javascript Notes
 7.  [X] Add Handlebars and use that with js files.
 8.  [] Make sure you use ES6 features as much as possible (e.g. Arrow functions, Let & Const, Class, constructor functions)
 9.  [X] Work on styling
-10. [] Make sure everything is as dry as possible.
+10. [X] Make sure everything is as dry as possible.
 11. [X] Get rid of remote true? (show.html.erb, line 41) This is the dumbest shit ever!!!
 
 
@@ -57,3 +57,4 @@ Wants but not necessary
 4.  [] Render new ingredients and style field with JS.
 5.  [] Add loading icon/don't display next/previous buttons until fetch request is finished.
 6.  [] Make less requests using active_model_seializers.
+7.  [] Organize recipes.scss for better readability/put css in separate file when appropriate.
