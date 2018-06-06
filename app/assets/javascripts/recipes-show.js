@@ -6,17 +6,26 @@ function loadRecipe() {
     fetch(`/users/${userId}/recipes.json`, { credentials: 'include' })
     .then(res => res.json())
     .then(json => {
-      $(".js-next").on("click", function() {
+      $(".change-recipe-button").on("click", function() {
         let recipeId = parseInt($(".js-next").attr("data-id"));
         let recipeIndex = json.findIndex(recipe => recipe.id === recipeId);
-        let nextRecipe = json[recipeIndex + 1]
+        let recipe
+        let errorMessage
 
-        if(recipeIndex !== json.length - 1){
-          $(".recipeName").text(nextRecipe.name);
-          $(".userName").text(nextRecipe.user.name);
-          $(".styleName").text(nextRecipe.style.name);
+        if(this.classList.value.includes("js-previous")) {
+          recipe = json[recipeIndex - 1]
+          errorMessage = "Sorry, that is the first recipe"
+        } else if(this.classList.value.includes("js-next")) {
+          recipe = json[recipeIndex + 1]
+          errorMessage = "Sorry, that is the last recipe"
+        }
 
-          const recipeFermentables = nextRecipe.recipe_fermentables.sort(function(a, b){
+        if(recipe !== undefined){
+          $(".recipeName").text(recipe.name);
+          $(".userName").text(recipe.user.name);
+          $(".styleName").text(recipe.style.name);
+
+          const recipeFermentables = recipe.recipe_fermentables.sort(function(a, b){
              const x = a.fermentable.name.toLowerCase();
              const y = b.fermentable.name.toLowerCase();
              if (x < y) {return -1;}
@@ -28,20 +37,20 @@ function loadRecipe() {
             $(".fermentables").append("<li>" + recipeFermentables[i].fermentable.name + " | " + recipeFermentables[i].amount + " lbs </li>");
           }
 
-          const recipeHops = nextRecipe.recipe_hops.sort(function (a, b) { return b.addition_time - a.addition_time});
+          const recipeHops = recipe.recipe_hops.sort(function (a, b) { return b.addition_time - a.addition_time});
 
           $(".hops").html("")
           for (var i = 0, l = recipeHops.length; i < l; ++i) {
             $(".hops").append("<li>" + recipeHops[i].hop.name + " | " + recipeHops[i].amount + " oz | " + recipeHops[i].addition_time + " min</li>");
           }
 
-          const yeasts = nextRecipe.yeasts
+          const yeasts = recipe.yeasts
           $(".yeasts").html("")
           for (var i = 0, l = yeasts.length; i < l; ++i) {
             $(".yeasts").append("<li>" + yeasts[i].brand + "</li>" + "<ul>" + "<li>" + yeasts[i].variety + "</li>" +"</ul>");
           }
 
-          fetch(`/users/${userId}/recipes/${nextRecipe.id}.json`, { credentials: 'include' })
+          fetch(`/users/${userId}/recipes/${recipe.id}.json`, { credentials: 'include' })
           .then(res => res.json())
           .then(json => {
             const comments = json.comments
@@ -51,74 +60,21 @@ function loadRecipe() {
             }
           })
 
-          $("#next-button-error").html("");
-          $(".js-next").attr("data-id", nextRecipe["id"]);
-          $("#edit-link").attr("href", `/users/${userId}/recipes/${nextRecipe.id}/edit`);
-          $("#delete-link").attr("href", `/users/${userId}/recipes/${nextRecipe.id}`);
-          window.history.replaceState(null, null, `/users/${userId}/recipes/${nextRecipe.id}`);
-          $("#new_comment").attr("action", `/recipes/${nextRecipe.id}/comments`)
+          $("#change-recipe-button-error").html("");
+          $(".js-next").attr("data-id", recipe["id"]);
+          $("#edit-link").attr("href", `/users/${userId}/recipes/${recipe.id}/edit`);
+          $("#delete-link").attr("href", `/users/${userId}/recipes/${recipe.id}`);
+          window.history.replaceState(null, null, `/users/${userId}/recipes/${recipe.id}`);
+          $("#new_comment").attr("action", `/recipes/${recipe.id}/comments`)
         } else {
-          $("#next-button-error").html("Sorry, that is the last recipe");
+          //Maybe rename this id
+          $("#change-recipe-button-error").html(errorMessage);
         }
       })
-
-      $(".js-previous").on("click", function() {
-        let recipeId = parseInt($(".js-next").attr("data-id"));
-        let recipeIndex = json.findIndex(recipe => recipe.id === recipeId);
-        let previousRecipe = json[recipeIndex - 1]
-
-        if(recipeIndex !== 0){
-          $(".recipeName").text(previousRecipe.name);
-          $(".userName").text(previousRecipe.user.name);
-          $(".styleName").text(previousRecipe.style.name);
-
-          const recipeFermentables = previousRecipe.recipe_fermentables.sort(function(a, b){
-             const x = a.fermentable.name.toLowerCase();
-             const y = b.fermentable.name.toLowerCase();
-             if (x < y) {return -1;}
-             if (x > y) {return 1;}
-             return 0;
-          });
-          $(".fermentables").html("")
-          for (var i = 0, l = recipeFermentables.length; i < l; ++i) {
-            $(".fermentables").append("<li>" + recipeFermentables[i].fermentable.name + " | " + recipeFermentables[i].amount + " lbs </li>");
-          }
-
-          const recipeHops = previousRecipe.recipe_hops.sort(function (a, b) { return b.addition_time - a.addition_time});
-          $(".hops").html("")
-          for (var i = 0, l = recipeHops.length; i < l; ++i) {
-            $(".hops").append("<li>" + recipeHops[i].hop.name + " | " + recipeHops[i].amount + " oz | " + recipeHops[i].addition_time + " min</li>");
-          }
-
-          const yeasts = previousRecipe.yeasts
-          $(".yeasts").html("")
-          for (var i = 0, l = yeasts.length; i < l; ++i) {
-            $(".yeasts").append("<li>" + yeasts[i].brand + "</li>" + "<ul>" + "<li>" + yeasts[i].variety + "</li>" +"</ul>");
-          }
-
-          fetch(`/users/${userId}/recipes/${previousRecipe.id}.json`, { credentials: 'include' })
-          .then(res => res.json())
-          .then(json => {
-            const comments = json.comments
-            $("#comments").html("")
-            for (var i = 0, l = comments.length; i < l; ++i) {
-              $("#comments").append(`<li>${comments[i].body} - Posted by: ${comments[i].user.name}</li>`);
-            }
-          })
-
-          $("#next-button-error").html("");
-          $(".js-next").attr("data-id", previousRecipe["id"]);
-          $("#edit-link").attr("href", `/users/${userId}/recipes/${previousRecipe.id}/edit`);
-          $("#delete-link").attr("href", `/users/${userId}/recipes/${previousRecipe.id}`);
-          window.history.replaceState(null, null, `/users/${userId}/recipes/${previousRecipe.id}`);
-          $("#new_comment").attr("action", `/recipes/${previousRecipe.id}/comments`)
-        } else {
-          $("#next-button-error").html("Sorry, that is the first recipe");
-        }
-      })
-    });
+    })
   })
 }
+
 
 $(function() {
   $("#new_comment").on("submit", function(e) {

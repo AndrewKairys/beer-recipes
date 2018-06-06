@@ -53,12 +53,10 @@
         <%= render 'comments/comments' %>
       </div><br>
 
-      <!-- ***if first recipe don't show*** -->
-      <a href="#" class="js-previous" data-id="<%=@recipe.id%>" data-user-id="<%=@recipe.user.id%>">Previous Recipe</a> |
-      <!-- ***if last recipe don't show*** -->
-      <a href="#" class="js-next" data-id="<%=@recipe.id%>" data-user-id="<%=@recipe.user.id%>">Next Recipe</a>
+      <a href="#" class="js-previous change-recipe-button" data-id="<%=@recipe.id%>" data-user-id="<%=@recipe.user.id%>">Previous Recipe</a> |
+      <a href="#" class="js-next change-recipe-button" data-id="<%=@recipe.id%>" data-user-id="<%=@recipe.user.id%>">Next Recipe</a>
 
-      <div id="next-button-error">
+      <div id="change-recipe-button-error">
       </div>
 
       <div class="edit-delete-links">
