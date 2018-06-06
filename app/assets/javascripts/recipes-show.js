@@ -1,4 +1,3 @@
-// ***DRY THIS OUT***
 function loadRecipe() {
   $(".recipes.show").ready(function() {
     const userId = parseInt($(".js-next").attr("data-user-id"))
@@ -32,6 +31,7 @@ function loadRecipe() {
              if (x > y) {return 1;}
              return 0;
           });
+
           $(".fermentables").html("")
           for (var i = 0, l = recipeFermentables.length; i < l; ++i) {
             $(".fermentables").append("<li>" + recipeFermentables[i].fermentable.name + " | " + recipeFermentables[i].amount + " lbs </li>");
@@ -67,7 +67,6 @@ function loadRecipe() {
           window.history.replaceState(null, null, `/users/${userId}/recipes/${recipe.id}`);
           $("#new_comment").attr("action", `/recipes/${recipe.id}/comments`)
         } else {
-          //Maybe rename this id
           $("#change-recipe-button-error").html(errorMessage);
         }
       })
