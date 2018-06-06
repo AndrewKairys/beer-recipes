@@ -12,12 +12,6 @@ Rails.application.routes.draw do
   get '/hops' => 'hops#index'
   get '/yeasts' => 'yeasts#index'
 
-  # resources :recipes do
-  #   member do
-  #     patch :comments
-  #   end
-  # end
-
   resources :recipes do
     resources :comments
   end
