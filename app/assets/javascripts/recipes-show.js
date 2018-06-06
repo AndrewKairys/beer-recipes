@@ -16,18 +16,23 @@ function loadRecipe() {
           $(".userName").text(nextRecipe.user.name);
           $(".styleName").text(nextRecipe.style.name);
 
-          const recipeFermentables = nextRecipe.recipe_fermentables
-          const fermentables = nextRecipe.fermentables
+          const recipeFermentables = nextRecipe.recipe_fermentables.sort(function(a, b){
+             const x = a.fermentable.name.toLowerCase();
+             const y = b.fermentable.name.toLowerCase();
+             if (x < y) {return -1;}
+             if (x > y) {return 1;}
+             return 0;
+          });
           $(".fermentables").html("")
           for (var i = 0, l = recipeFermentables.length; i < l; ++i) {
-            $(".fermentables").append("<li>" + fermentables[i].name + " | " + recipeFermentables[i].amount + " lbs | </li>");
+            $(".fermentables").append("<li>" + recipeFermentables[i].fermentable.name + " | " + recipeFermentables[i].amount + " lbs </li>");
           }
 
-          const recipeHops = nextRecipe.recipe_hops
-          const hops = nextRecipe.hops
+          const recipeHops = nextRecipe.recipe_hops.sort(function (a, b) { return b.addition_time - a.addition_time});
+
           $(".hops").html("")
           for (var i = 0, l = recipeHops.length; i < l; ++i) {
-            $(".hops").append("<li>" + hops[i].name + " | " + recipeHops[i].amount + " oz | " + recipeHops[i].addition_time + " min</li>");
+            $(".hops").append("<li>" + recipeHops[i].hop.name + " | " + recipeHops[i].amount + " oz | " + recipeHops[i].addition_time + " min</li>");
           }
 
           const yeasts = nextRecipe.yeasts
