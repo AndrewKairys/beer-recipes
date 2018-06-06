@@ -9,7 +9,6 @@ function loadUserRecipes (){
           $(".recipes-list").append("<li>" + "<a href='/users/" + json[i].user.id + "/recipes/" + json[i].id + "'>" + json[i].name + "</a>" + "</li>");
         }
       })
-
   })
 }
 
