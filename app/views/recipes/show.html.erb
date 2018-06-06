@@ -45,13 +45,13 @@
 
         <%= form_for [@recipe, @comment] do |f| %>
           <%= f.text_field :body, class: "comment-body-input" %>
-          <!-- Don't know how to disable the default of data-disable-with -->
+          <!-- Don't know how to disable the default of data-disable-with in f.submit -->
           <input type="submit" name="commit" value="Create Comment">
         <% end %>
 
-        <div class="comments">
+        <!-- <div class="comments"> -->
           <%= render 'comments/comments' %>
-        </div>
+        <!-- </div> -->
       </div><br>
 
       <!-- ***if first recipe don't show*** -->

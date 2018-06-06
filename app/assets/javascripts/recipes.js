@@ -31,8 +31,7 @@ $(function() {
       data: $(this).serialize(),
       success: function(response){
         $("#comment_body").val("")
-        const $ol = $("div.comments ol")
-        $ol.append(response)
+        $("#comments").append(response)
       }
     })
 

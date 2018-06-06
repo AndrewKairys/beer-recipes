@@ -1,7 +1,7 @@
-<ol>
+<ol id="comments">
   <% @recipe.comments.each do |comment|%>
-    <%# if comment.id %>
+    <% if comment.id %>
     <li><%= comment.body %> - Posted by: <%= comment.user.name %></li>
-    <%# end %>
+    <% end %>
   <% end %>
 </ol>

@@ -87,12 +87,6 @@ class RecipesController < ApplicationController
     redirect_to user_recipes_path
   end
 
-  # def comments
-  #   @recipe ||= Recipe.find(params[:id])
-  #   @recipe.comments.build(body: params[:comment][:body], user_id: current_user.id)
-  #   @recipe.save
-  # end
-
   private
     def recipe_params
       params.require(:recipe).permit(
