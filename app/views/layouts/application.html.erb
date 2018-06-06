@@ -11,27 +11,10 @@
   <body class="<%= controller_name %> <%= action_name %>">
     <nav class="navbar navbar-default">
       <div class="container-fluid">
-        <!-- Refactor to two partials -->
         <% if user_signed_in? %>
-          <ul class="nav navbar-nav">
-            <li><%= link_to "Home", user_path(current_user) %></li>
-            <li><%= link_to "All Recipes", all_recipes_path %></li>
-            <li><%= link_to "Your Recipes", user_recipes_path(current_user) %></li>
-            <li><%= link_to "New Recipe", new_user_recipe_path(current_user) %></li>
-            <li><%= link_to "Smash Beers", recipes_smash_beers_path %></li>
-            <li><%= link_to "Most Popular Styles", styles_most_popular_path %></li>
-          </ul>
-          <ul class="nav navbar-nav logout">
-            <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></li>
-          </ul>
+          <%= render 'layouts/navbar_signedin'%>
         <% else %>
-          <ul class="nav navbar-nav">
-            <li><%= link_to "Sign up", new_user_registration_path %></li>
-            <li><%= link_to "Log in", new_user_session_path %></li>
-            <li><%= link_to "Log in with Facebook", user_facebook_omniauth_authorize_path %></li>
-            <li><%= link_to "Forgot your password?", new_user_password_path %></li>
-
-          </ul>
+          <%= render 'layouts/navbar_signedout'%>
         <% end %>
       </div>
     </nav>
