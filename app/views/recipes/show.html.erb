@@ -52,9 +52,11 @@
 
         <%= render 'comments/comments' %>
       </div><br>
-
-      <a href="#" class="js-previous change-recipe-button" data-id="<%=@recipe.id%>" data-user-id="<%=@recipe.user.id%>">Previous Recipe</a> |
-      <a href="#" class="js-next change-recipe-button" data-id="<%=@recipe.id%>" data-user-id="<%=@recipe.user.id%>">Next Recipe</a>
+      
+      <div id="next-previous-buttons">
+        <a href="#" class="js-previous change-recipe-button" data-id="<%=@recipe.id%>" data-user-id="<%=@recipe.user.id%>">Previous Recipe</a> |
+        <a href="#" class="js-next change-recipe-button" data-id="<%=@recipe.id%>" data-user-id="<%=@recipe.user.id%>">Next Recipe</a>
+      </div>
 
       <div id="change-recipe-button-error">
       </div>

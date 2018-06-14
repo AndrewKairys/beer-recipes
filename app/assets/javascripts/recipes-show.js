@@ -79,6 +79,8 @@ function loadRecipe() {
   })
 }
 
+loadRecipe()
+
 //ADD NEW COMMENT
 $(function() {
   $("#new_comment").on("submit", function(e) {
@@ -115,5 +117,3 @@ $(function() {
     e.preventDefault()
   })
 })
-
-loadRecipe()
